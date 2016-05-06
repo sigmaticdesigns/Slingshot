@@ -27,7 +27,7 @@ Route::controllers([
 
 Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin'], function () {
 
-	Route::group(['middleware' => config('admin.filter.auth')], function () {
+	Route::group(['middleware' => config('admin.filter.admin')], function () {
 		Route::resource('projects', 'ProjectsController', [
 			'names' => [
 				'index' => 'admin.projects.index',
