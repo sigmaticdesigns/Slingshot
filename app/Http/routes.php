@@ -25,4 +25,20 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::resource('users', 'UsersController');
+Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin'], function () {
+
+	Route::group(['middleware' => config('admin.filter.auth')], function () {
+		Route::resource('projects', 'ProjectsController', [
+			'names' => [
+				'index' => 'admin.projects.index',
+				'create' => 'admin.projects.create',
+				'store' => 'admin.projects.store',
+				'show' => 'admin.projects.show',
+				'update' => 'admin.projects.update',
+				'edit' => 'admin.projects.edit',
+				'destroy' => 'admin.projects.destroy',
+			],
+		]);
+	});
+
+});

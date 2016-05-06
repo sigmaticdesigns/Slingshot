@@ -55,3 +55,5 @@ $leftMenu->dropdown('Categories', function ($sub) {
 	$sub->route('admin.categories.index', 'All Categories', [], 1);
 	$sub->route('admin.categories.create', 'Add New', [], 2);
 }, 5, ['icon' => 'fa fa-bars']);
+
+$leftMenu->route('admin.projects.index', 'Projects', [], 7, ['icon' => 'fa fa-rocket']);
