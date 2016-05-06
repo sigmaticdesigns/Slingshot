@@ -147,10 +147,10 @@ return [
 
 	    /*PingPong*/
 
-	    \Illuminate\Routing\GeneratorServiceProvider::class,
-
 	    \Pingpong\Admin\Providers\SupportServiceProvider::class,
 	    \Pingpong\Admin\AdminServiceProvider::class,
+
+	    Pingpong\Generators\GeneratorsServiceProvider::class,
 
     ],
 
