@@ -7,7 +7,12 @@ class Project extends Model
 {
 	use SoftDeletes;
 
-    protected $fillable = [
+    const STATUS_PENDING = 'pending';
+    const STATUS_DECLINED = 'declined';
+    const STATUS_APPROVED = 'approved';
+
+
+	protected $fillable = [
 		'name',
 		'user_id',
 		'status',

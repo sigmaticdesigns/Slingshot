@@ -35,5 +35,6 @@
     <!-- add new calendar event modal -->
     @include('admin::partials.script')
     @yield('script')
+    <script src="{{ asset('/admin/admin.js') }}"></script>
 </body>
 </html>

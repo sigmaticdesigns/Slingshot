@@ -8,14 +8,14 @@
 			{{--<a href="{!! route('admin.projects.create') !!}" class="btn btn-default">Add New</a>--}}
 		</div>
 	</div>
-	<table class="table table-stripped table-bordered">
+	<table class="table table-stripped table-bordered" data-content="projects">
 		<thead>
 			<th class="text-center">#</th>
 			<th>Name</th>
 			<th>User</th>
 			<th>Status</th>
 			<th>Category</th>
-			<th>Country</th>
+			{{--<th>Country</th>--}}
 			<th>Budget</th>
 
 			<th>Created At</th>
@@ -23,13 +23,13 @@
 		</thead>
 		<tbody>
 			@foreach ($projects as $project)
-				<tr>
+				<tr data-id="{{ $project->id }}">
 					<td class="text-center">{!! $no !!}</td>
 					<td>{!! $project->name !!}</td>
 					<td>{!! $project->user->name !!}</td>
-					<td>{!! $project->status !!}</td>
+					<td data-type="status">{!! $project->status !!}</td>
 					<td>{!! $project->category->name !!}</td>
-					<td>{!! $project->country_id !!}</td>
+					{{--<td>{!! $project->country_id !!}</td>--}}
 					<td>{!! $project->budget !!}</td>
 
 					<td>{!! $project->created_at !!}</td>
@@ -39,6 +39,10 @@
 							<a href="{!! route('admin.projects.show', $project->id) !!}" class="btn btn-sm btn-default" title="View" data-toggle="tooltip"><i class="glyphicon glyphicon-eye-open"></i></a>
 							<a href="{!! route('admin.projects.edit', $project->id) !!}" class="btn btn-sm btn-default" title="Edit" data-toggle="tooltip"><i class="glyphicon glyphicon-edit"></i></a>
 							<button type="submit" class="btn btn-sm btn-default" title="Delete" data-toggle="tooltip"><i class="glyphicon glyphicon-trash"></i></button>
+                            @if (\App\Project::STATUS_PENDING == $project->status)
+                                <a href="javascript:void(0)" class="btn btn-default btn-sm ban" data-action="set-status" data-status="{!! \App\Project::STATUS_DECLINED !!}"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Decline</a>
+                                <a href="javascript:void(0)" class="btn btn-default btn-sm unban" data-action="set-status" data-status="{!! \App\Project::STATUS_APPROVED !!}"><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;Approve</a>
+                            @endif
 							{!! Form::close() !!}
 						</div>
 					</td>

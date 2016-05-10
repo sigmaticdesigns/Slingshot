@@ -23,9 +23,9 @@ class UpdateProjectRequest extends Request
     {
         return [
 			'name' => 'required',
-			'status' => 'required|in:pending,declined,active',
+			'status' => 'required|in:pending,declined,approved',
 			'category_id' => 'required',
-			'country_id' => 'required',
+//			'country_id' => 'required',
 			'budget' => 'required',
 			'description' => 'required',
 		];

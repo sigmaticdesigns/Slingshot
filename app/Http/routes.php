@@ -39,6 +39,8 @@ Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin
 				'destroy' => 'admin.projects.destroy',
 			],
 		]);
+
+		Route::post('project/set-status', 'ProjectsController@postSetStatus');
 	});
 
 });

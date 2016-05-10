@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\Http\Requests\Admin\Projects\CreateProjectRequest;
 use App\Http\Requests\Admin\Projects\UpdateProjectRequest;
+use Pingpong\Admin\Entities\Category;
 
 class ProjectsController extends Controller
 {
@@ -74,8 +75,15 @@ class ProjectsController extends Controller
     public function edit($id)
     {
         $project = Project::findOrFail($id);
-    
-        return view('admin.projects.edit', compact('project'));
+
+	    $statusList = [
+		    Project::STATUS_PENDING => Project::STATUS_PENDING,
+		    Project::STATUS_DECLINED => Project::STATUS_DECLINED,
+		    Project::STATUS_APPROVED => Project::STATUS_APPROVED
+	    ];
+	    $categoryList = Category::all(['id', 'name'])->pluck('name', 'id')->toArray();
+
+        return view('admin.projects.edit', compact('project', 'statusList', 'categoryList'));
     }
 
     /**
@@ -107,5 +115,17 @@ class ProjectsController extends Controller
     
         return redirect()->route('admin.projects.index');
     }
+
+	public function postSetStatus(Request $request)
+	{
+		$status = $request->input('status', Project::STATUS_DECLINED);
+		$id = (int) $request->input('id');
+		$project = Project::findOrFail($id);
+		$project->status = $status;
+		$project->save();
+
+		$result = ['result' => 1, 'status' => $status];
+		return response()->json($result);
+	}
 
 }

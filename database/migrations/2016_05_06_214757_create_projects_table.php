@@ -17,7 +17,7 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
 			$table->string('name');
 			$table->bigInteger('user_id')->unsigned()->index();
-			$table->string('status');
+			$table->string('status', 15);
 			$table->integer('category_id')->unsigned()->index();
 			$table->integer('country_id')->unsigned();
 			$table->decimal('budget');

@@ -26,23 +26,23 @@
 	<div class="form-group">
 	    {!! Form::label('status', 'Status:', ['class' => 'col-md-2 control-label']) !!}
 	    <div class="col-sm-9">
-	        {!! Form::text('status', null, ['class' => 'form-control']) !!}
+	        {!! Form::select('status', $statusList, null, ['class' => 'form-control']) !!}
 	    </div>
 	</div>
 
 	<div class="form-group">
-	    {!! Form::label('category_id', 'Category Id:', ['class' => 'col-md-2 control-label']) !!}
+	    {!! Form::label('category_id', 'Category:', ['class' => 'col-md-2 control-label']) !!}
 	    <div class="col-sm-9">
-	        {!! Form::text('category_id', null, ['class' => 'form-control']) !!}
+	        {!! Form::select('category_id', $categoryList, null, ['class' => 'form-control']) !!}
 	    </div>
 	</div>
 
-	<div class="form-group">
-	    {!! Form::label('country_id', 'Country Id:', ['class' => 'col-md-2 control-label']) !!}
-	    <div class="col-sm-9">
-	        {!! Form::text('country_id', null, ['class' => 'form-control']) !!}
-	    </div>
-	</div>
+	{{--<div class="form-group">--}}
+	    {{--{!! Form::label('country_id', 'Country Id:', ['class' => 'col-md-2 control-label']) !!}--}}
+	    {{--<div class="col-sm-9">--}}
+	        {{--{!! Form::text('country_id', null, ['class' => 'form-control']) !!}--}}
+	    {{--</div>--}}
+	{{--</div>--}}
 
 	<div class="form-group">
 	    {!! Form::label('budget', 'Budget:', ['class' => 'col-md-2 control-label']) !!}
