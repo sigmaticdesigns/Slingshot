@@ -40,8 +40,8 @@
 							<a href="{!! route('admin.projects.edit', $project->id) !!}" class="btn btn-sm btn-default" title="Edit" data-toggle="tooltip"><i class="glyphicon glyphicon-edit"></i></a>
 							<button type="submit" class="btn btn-sm btn-default" title="Delete" data-toggle="tooltip"><i class="glyphicon glyphicon-trash"></i></button>
                             @if (\App\Project::STATUS_PENDING == $project->status)
-                                <a href="javascript:void(0)" class="btn btn-default btn-sm ban" data-action="set-status" data-status="{!! \App\Project::STATUS_DECLINED !!}"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Decline</a>
-                                <a href="javascript:void(0)" class="btn btn-default btn-sm unban" data-action="set-status" data-status="{!! \App\Project::STATUS_APPROVED !!}"><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;Approve</a>
+                                <a href="javascript:void(0)" class="btn btn-danger btn-sm ban" data-action="set-status" data-status="{!! \App\Project::STATUS_DECLINED !!}"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Decline</a>
+                                <a href="javascript:void(0)" class="btn btn-success btn-sm unban" data-action="set-status" data-status="{!! \App\Project::STATUS_APPROVED !!}"><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;Approve</a>
                             @endif
 							{!! Form::close() !!}
 						</div>

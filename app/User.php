@@ -36,4 +36,7 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    const STATUS_ACTIVE = 'active';
+    const STATUS_BANNED = 'banned';
 }

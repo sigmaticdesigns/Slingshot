@@ -41,6 +41,7 @@ Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin
 		]);
 
 		Route::post('project/set-status', 'ProjectsController@postSetStatus');
+		Route::post('user/set-status', 'UsersController@postSetStatus');
 	});
 
 });
