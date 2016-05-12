@@ -45,3 +45,6 @@ Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin
 	});
 
 });
+
+/* Display page */
+Route::get('{page}', 'PagesController@show');

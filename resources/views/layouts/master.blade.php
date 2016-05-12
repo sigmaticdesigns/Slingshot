@@ -17,7 +17,7 @@
 		<![endif]-->
 
 		<style type="text/css">
-			body {padding-top: 60px};
+			body {padding-top: 60px}
 		</style>
 	</head>
 	<body>
@@ -28,9 +28,14 @@
         <a href="{{ url ('/auth/login') }}" class="btn btn-default"> Login </a>
         <a href="{{ url ('/auth/register') }}" class="btn btn-default"> Sign Up </a>
     @endif
+
+
 		<div class="container">
 			@yield('content')
 		</div>
+
+
+    @include('partials.footer')
 
 		<!-- jQuery -->
 		<script src="//code.jquery.com/jquery.js"></script>
