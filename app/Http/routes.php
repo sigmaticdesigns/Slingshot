@@ -25,6 +25,12 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+Route::get('profile/{id}', 'ProfileController@showProfile');
+Route::controllers([
+	'profile'     => 'ProfileController',
+]);
+
+
 Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin'], function () {
 
 	Route::group(['middleware' => config('admin.filter.admin')], function () {
