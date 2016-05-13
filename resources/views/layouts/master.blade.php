@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Laravel</title>
+		<title>SlingShot | @yield('title', 'Home')</title>
 
 		<!-- Bootstrap CSS -->
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -24,6 +24,7 @@
     @if (Auth::check())
         You're logged in as {!! Auth::user()->name !!} ({!! Auth::user()->email !!}) <br/>
         <a href="/auth/logout" class="btn btn-default"> Logout </a>
+        <a href="{{ url ('settings') }}" class="btn btn-default"> User Settings </a>
     @else
         <a href="{{ url ('/auth/login') }}" class="btn btn-default"> Login </a>
         <a href="{{ url ('/auth/register') }}" class="btn btn-default"> Sign Up </a>

@@ -11,27 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', function () {
-	return view('home');
-});
-
-
-Route::controllers([
-	'auth'     => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
-
-Route::get('profile/{id}', 'ProfileController@showProfile');
-Route::controllers([
-	'profile'     => 'ProfileController',
-]);
-
-
+/*admin panel*/
 Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin'], function () {
+
+	Route::group(['middleware' => config('admin.filter.guest')], function ()
+	{
+		Route::get('/', function () {
+			return view('welcome');
+		});
+
+		Route::resource('login', '\Pingpong\Admin\Controllers\LoginController', [
+			'only' => ['index', 'store'],
+			'names' => [
+				'index' => 'admin.login.index',
+				'store' => 'admin.login.store',
+			],
+		]);
+	});
 
 	Route::group(['middleware' => config('admin.filter.admin')], function () {
 		Route::resource('projects', 'ProjectsController', [
@@ -50,6 +46,37 @@ Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin
 		Route::post('user/set-status', 'UsersController@postSetStatus');
 	});
 
+});
+
+
+/*front*/
+
+Route::get('/', function () {
+	return view('welcome');
+});
+
+Route::get('/home', function () {
+	return view('home');
+});
+
+
+Route::controllers([
+	'auth'     => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+]);
+
+Route::get('profile/{id}', 'ProfileController@showProfile');
+Route::controllers([
+	'profile'     => 'ProfileController',
+]);
+
+
+Route::group(['middleware' => 'auth'], function()
+{
+	Route::get('settings', 'SettingsController@index');
+	Route::controllers([
+		'settings'     => 'SettingsController',
+	]);
 });
 
 /* Display page */
