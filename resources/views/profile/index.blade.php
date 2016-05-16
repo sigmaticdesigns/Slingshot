@@ -12,10 +12,21 @@
                 <td>{!! $user->id !!}</td>
             </tr>
 
+            @if ($user->avatar)
+                <tr>
+                    <td><b>Avatar</b></td>
+                    <td><img src="/img/avatar/{!! $user->avatar !!}"></td>
+                </tr>
+            @endif
+
 
             <tr>
                 <td><b>Name</b></td>
                 <td>{!! $user->name !!}</td>
+            </tr>
+            <tr>
+                <td><b>About Me</b></td>
+                <td>{!! $user->about !!}</td>
             </tr>
 
             <tr>

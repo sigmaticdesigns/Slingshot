@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 class SettingsController extends Controller
 {
@@ -84,11 +86,24 @@ class SettingsController extends Controller
 
 	public function getChangePassword()
 	{
-
+		return view('settings.password');
 	}
 
-	public function postChangePassword()
+	public function postChangePassword(Request $request)
 	{
+		$this->validate($request, [
+			'old_password' => 'required',
+			'password' => 'required|confirmed|min:6',
+		]);
+
+		$data = $request->all();
+		if (!Hash::check($data['old_password'], $this->user->password)) {
+			return redirect()->back()->withErrors(['old_password' => 'Wrong password.']);
+		}
+
+		$this->user->password = $data['password'];
+		$this->user->save();
+		return redirect()->back();
 
 	}
 
