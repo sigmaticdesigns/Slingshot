@@ -39,4 +39,21 @@ class User extends Model implements AuthenticatableContract,
 
     const STATUS_ACTIVE = 'active';
     const STATUS_BANNED = 'banned';
+
+	/**
+	 * @return bool
+	 */
+	public function deleteImage()
+	{
+		/*$file = $this->present()->image_path;
+
+		if (file_exists($file)) {
+			@unlink($file);
+
+			return true;
+		}
+		*/
+
+		return false;
+	}
 }

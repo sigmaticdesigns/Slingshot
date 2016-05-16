@@ -57,3 +57,8 @@ $leftMenu->dropdown('Categories', function ($sub) {
 }, 5, ['icon' => 'fa fa-bars']);
 
 $leftMenu->route('admin.projects.index', 'Projects', [], 7, ['icon' => 'fa fa-rocket']);
+
+$leftMenu->dropdown('Email templates', function ($sub) {
+	$sub->route('admin.letters.index', 'All templates', [], 1);
+	$sub->route('admin.letters.create', 'Add New', [], 2);
+}, 9, ['icon' => 'fa fa-envelope']);

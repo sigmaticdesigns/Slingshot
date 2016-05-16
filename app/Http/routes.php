@@ -44,6 +44,18 @@ Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin
 
 		Route::post('project/set-status', 'ProjectsController@postSetStatus');
 		Route::post('user/set-status', 'UsersController@postSetStatus');
+
+		Route::resource('letters', 'LettersController', [
+			'names' => [
+				'index' => 'admin.letters.index',
+				'create' => 'admin.letters.create',
+				'store' => 'admin.letters.store',
+				'show' => 'admin.letters.show',
+				'update' => 'admin.letters.update',
+				'edit' => 'admin.letters.edit',
+				'destroy' => 'admin.letters.destroy',
+			],
+		]);
 	});
 
 });
