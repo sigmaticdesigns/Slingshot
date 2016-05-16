@@ -7,7 +7,6 @@
             Login
             <div class="panel-nav pull-right" style="margin-top: -7px;">
                 <a href="{!! url('/auth/register') !!}" class="btn btn-default">Sign Up</a>
-                <a href="{!! url('/password/email') !!}" class="btn btn-warning">Forgot Password</a>
             </div>
         </div>
         <div class="panel-body">
@@ -27,34 +26,22 @@
 
             <div class="form-horizontal">
 
-                {!! Form::open(['files' => true, 'url' => url('/auth/login')]) !!}
+    {!! Form::open(['files' => true, 'url' => url('/password/email')]) !!}
+
 
 
                 <div class="form-group">
                     {!! Form::label('email', 'Email:', ['class' => 'col-md-2 control-label']) !!}
                     <div class="col-sm-9">
-                        {!! Form::email('email', null, ['class' => 'form-control']) !!}
+                        {!! Form::email('email', old('email'), ['class' => 'form-control']) !!}
                     </div>
                 </div>
 
-                <div class="form-group">
-                    {!! Form::label('password', 'Password:', ['class' => 'col-md-2 control-label']) !!}
-                    <div class="col-sm-9">
-                        {!! Form::password('password', ['class' => 'form-control']) !!}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    {!! Form::label('remember', 'Remember Me:', ['class' => 'col-md-2 control-label']) !!}
-                    <div class="col-sm-9">
-                        {!! Form::checkbox('remember', 1, null) !!}
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label class="col-md-2 control-label"></label>
                     <div class="col-sm-9">
-                        {!! Form::submit('Login', ['class' => 'btn btn-primary']) !!}
+                        {!! Form::submit('Send Password Reset Link', ['class' => 'btn btn-primary']) !!}
                     </div>
                 </div>
                 {!! Form::close() !!}

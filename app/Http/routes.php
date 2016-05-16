@@ -77,6 +77,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+
 Route::get('profile/{id}', 'ProfileController@showProfile');
 Route::controllers([
 	'profile'     => 'ProfileController',
