@@ -20,6 +20,9 @@ class Project extends Model
 		'country_id',
 		'budget',
 		'description',
+		'file_id',
+		'deadline',
+		'half_deadline'
 	];
 
 	/**

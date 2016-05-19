@@ -64,4 +64,14 @@ class User extends Model implements AuthenticatableContract,
 	{
 		$this->attributes['password'] = \Hash::make($password);
 	}
+
+	/**
+	 * Get all user's projects
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function projects()
+	{
+		return $this->hasMany('App\Project');
+	}
 }

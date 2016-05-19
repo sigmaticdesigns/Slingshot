@@ -90,6 +90,7 @@ Route::group(['middleware' => 'auth'], function()
 	Route::controllers([
 		'settings'     => 'SettingsController',
 	]);
+	Route::resource('projects', 'ProjectsController');
 });
 
 /* Display page */

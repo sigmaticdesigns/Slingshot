@@ -25,6 +25,7 @@
         You're logged in as {!! Auth::user()->name !!} ({!! Auth::user()->email !!}) <br/>
         <a href="/auth/logout" class="btn btn-default"> Logout </a>
         <a href="{{ url ('settings') }}" class="btn btn-default"> User Settings </a>
+        <a href="{!! route('projects.create') !!}" class="btn btn-primary">Create project</a>
     @else
         <a href="{{ url ('/auth/login') }}" class="btn btn-default"> Login </a>
         <a href="{{ url ('/auth/register') }}" class="btn btn-default"> Sign Up </a>
@@ -42,5 +43,6 @@
 		<script src="//code.jquery.com/jquery.js"></script>
 		<!-- Bootstrap JavaScript -->
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
 	</body>
 </html>
