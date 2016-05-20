@@ -47,9 +47,9 @@
 	</div>
 
 	<div class="form-group">
-	    {!! Form::label('file_id', 'File Id:', ['class' => 'col-md-2 control-label']) !!}
+	    {!! Form::label('file_id', 'Campaign image:', ['class' => 'col-md-2 control-label']) !!}
 	    <div class="col-sm-9">
-	        {!! Form::text('file_id', null, ['class' => 'form-control']) !!}
+	        {!! Form::file('file_id') !!}
 	    </div>
 	</div>
 
@@ -64,7 +64,7 @@
 	</div>
 
 	<div class="form-group">
-	    {!! Form::label('half_deadline', 'Half Deadline:', ['class' => 'col-md-2 control-label']) !!}
+	    {!! Form::label('half_deadline', 'Deadline for getting 50%:', ['class' => 'col-md-2 control-label']) !!}
 	    <div class="col-sm-9 input-group date" id='datepicker2'>
 	        {!! Form::text('half_deadline', null, ['class' => 'form-control']) !!}
             <span class="input-group-addon">

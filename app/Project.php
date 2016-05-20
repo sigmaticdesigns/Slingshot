@@ -44,4 +44,12 @@ class Project extends Model
 	{
 		return $this->belongsTo('Pingpong\Admin\Entities\Category');
 	}
+
+	/**
+	 * Get all of the projects's files.
+	 */
+	public function files()
+	{
+		return $this->morphMany('App\File', 'fileable');
+	}
 }
