@@ -59,7 +59,11 @@ class ProjectsController extends Controller
 	    $data['status'] = Project::STATUS_PENDING;
 	    $project = Project::create($data);
 
-        return redirect()->route('projects.index');
+	    \Session::flash('success.message', "Project has been successfully created.");
+	    if ($request->ajax()) {
+		    return response()->json(['success' => true, 'redirect' => route('projects.index')]);
+	    }
+	    return redirect()->route('projects.index');
     }
 
     /**
@@ -101,7 +105,8 @@ class ProjectsController extends Controller
 
         $project->update($request->all());
 
-        return redirect()->route('projects.index');
+	    \Session::flash('success.message', "Project has been successfully updated.");
+	    return redirect()->route('projects.index');
     }
 
     /**

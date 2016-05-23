@@ -80,8 +80,13 @@ class SettingsController extends Controller
 		    $user->update($request->all());
 	    }
 
-	    \Session::flash('success.message', "Your Settings has been successfully updated.");
-	    return redirect()->back()->withInput();
+	    if ($request->ajax()) {
+		    return response()->json(['success' => true, 'message' => "Your Settings has been successfully updated."]);
+	    }
+	    else {
+		    \Session::flash('success.message', "Your Settings has been successfully updated.");
+		    return redirect()->back()->withInput();
+	    }
     }
 
 	public function getChangePassword()
@@ -103,6 +108,11 @@ class SettingsController extends Controller
 
 		$this->user->password = $data['password'];
 		$this->user->save();
+
+		\Session::flash('success.message', "Your password has been successfully changed.");
+		if ($request->ajax()) {
+			return response()->json(['success' => true, 'redirect' => url('settings')]);
+		}
 		return redirect()->back();
 
 	}
