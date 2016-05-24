@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\File;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -11,6 +12,9 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\Http\Requests\Projects\CreateProjectRequest;
 use App\Http\Requests\Projects\UpdateProjectRequest;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Str;
+
 
 class ProjectsController extends Controller
 {
@@ -55,6 +59,27 @@ class ProjectsController extends Controller
     public function store(CreateProjectRequest $request)
     {
         $data = $request->all();
+//	    file upload
+//	    TODO: move to file uploader
+	    if (\Input::hasFile('file'))
+	    {
+		    $image = Input::file('file');
+		    $filename  = Str::slug($data['name'], '_') . '_' . time() . '.' . $image->getClientOriginalExtension();
+		    $dirName = public_path('img/uploads/' . date("Y") . '/' . date("m"). '/'. date("d"));
+		    if (!\Illuminate\Support\Facades\File::exists($dirName)) {
+			    \Illuminate\Support\Facades\File::makeDirectory($dirName, 0755, true);
+		    }
+		    $path = $dirName . '/' . $filename;
+//		    $img = Image::make($path);
+		    // crop image
+		    \Image::make($image->getRealPath())->crop(100, 100, 25, 25)->save($path);
+		    $file = File::create([
+			    'type'  => 'image',
+			    'filename' => $filename,
+			    'path'  => $path
+		    ]);
+		    $data['file_id'] = $file->id;
+	    }
 	    $data['user_id'] = $this->user->id;
 	    $data['status'] = Project::STATUS_PENDING;
 	    $project = Project::create($data);

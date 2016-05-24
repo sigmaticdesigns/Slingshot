@@ -11,7 +11,7 @@
 
 <div class="form-horizontal">
 
-    {!! Form::open(['files' => true, 'url' => url('/auth/register')]) !!}
+    {!! Form::open(['files' => true, 'url' => url('/auth/register'), 'data-no-ajax' => true]) !!}
 
 	<div class="form-group">
 	    {!! Form::label('name', 'Name:', ['class' => 'col-md-2 control-label']) !!}

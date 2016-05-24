@@ -26,7 +26,7 @@
 
             <div class="form-horizontal">
 
-    {!! Form::open(['files' => true, 'url' => url('/password/email')]) !!}
+    {!! Form::open(['files' => true, 'url' => url('/password/email'), 'data-no-ajax' => true]) !!}
 
 
 

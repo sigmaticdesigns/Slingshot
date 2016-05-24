@@ -5,6 +5,11 @@ $(function() {
     $(document).on('submit', 'form', function (e) {
         var $form = $(this);
 
+        /*login and register is working with redirect*/
+        if ($form.data('no-ajax')) {
+            return true;
+        }
+
         /* Check if form is already validated return true */
         if ($form.data('validated')) {
             return true;
@@ -21,8 +26,12 @@ $(function() {
         $.ajax({
             url: $form.attr("action"),
             type: $form.attr("method"),
-            data: $form.serialize(),
+            data: new FormData(this),
+            //data: $form.serialize(),
             dataType: "json",
+            cache: false,
+            contentType: false,
+            processData: false,
             success: function (response) {
                 removeAllErrors();
 
