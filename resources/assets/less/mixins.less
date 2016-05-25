@@ -1,0 +1,39 @@
+.clearfix {
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1160px;
+  min-width: 900px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.no-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.make-column(1){
+  width: @column;
+  margin-right: @column-margin;
+}
+
+
+.make-column(3){
+  width: @column*3 + @column-margin*2;
+  margin-right: @column-margin;
+}
+
+.footer-title {
+  font-size: @font-size + 2;
+  text-transform: uppercase;
+  color: @gray--light;
+}
