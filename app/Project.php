@@ -46,10 +46,26 @@ class Project extends Model
 	}
 
 	/**
+	 * Get main projects's image
+	 */
+	public function image()
+	{
+		return $this->belongsTo('App\File', 'file_id');
+	}
+
+	/**
 	 * Get all of the projects's files.
 	 */
 	public function files()
 	{
 		return $this->morphMany('App\File', 'fileable');
+	}
+
+	/**
+	 * filter only active approved projects
+	 */
+	public function scopeActive($query)
+	{
+		return $query->where('status', self::STATUS_APPROVED);
 	}
 }

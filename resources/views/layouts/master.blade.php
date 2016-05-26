@@ -31,12 +31,11 @@
                 You're logged in as {!! Auth::user()->name !!} ({!! Auth::user()->email !!}) <br/>
                 <a href="/auth/logout" class="user-menu__itemt"> Logout </a>
                 <a href="{{ url ('settings') }}" class="user-menu__item"> User Settings </a>
-                <a href="{!! route('projects.create') !!}" class="user-menu__btn btn">Create a project</a>
             @else
                 <a href="{{ url ('/auth/register') }}" class="user-menu__item">Sign up</a>
                 <a href="{{ url ('/auth/login') }}" class="user-menu__item">Log in</a>
-                <a href="{!! route('projects.create') !!}" class="user-menu__btn btn">Create a project</a>
             @endif
+                <a href="{!! route('user.projects.create') !!}" class="user-menu__btn btn">Create a project</a>
         </div>
     </div>
 </header>

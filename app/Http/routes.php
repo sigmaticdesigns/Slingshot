@@ -63,9 +63,7 @@ Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin
 
 /*front*/
 
-Route::get('/', function () {
-	return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Route::get('/home', function () {
 	return view('home');

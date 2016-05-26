@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Project;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +18,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::active()->with('image')->latest()->take(6)->get();
+		$categoryList = Category::orderBy('name')->get();
+
+        return view('home', compact('projects', 'categoryList'));
     }
 
     /**

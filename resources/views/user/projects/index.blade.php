@@ -3,7 +3,7 @@
 @section('content')
   <div class="panel panel-default">
 	<div class="panel-heading">
-		All Projects
+		My Projects
 		<div class="panel-nav pull-right" style="margin-top: -7px;">
 			<a href="{!! route('user.projects.create') !!}" class="btn btn-default">Add New</a>
 		</div>

@@ -26,8 +26,8 @@ class CreateProjectRequest extends Request
 			'category_id' => 'required',
 			'budget' => 'required',
 			'description' => 'required',
-			'body' => 'required',
-			'file_id' => 'required',
+//			'body' => 'required',
+			'file' => 'required',
 			'deadline' => 'required',
 			'half_deadline' => 'required',
 		];
