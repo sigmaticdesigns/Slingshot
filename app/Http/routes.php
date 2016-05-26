@@ -93,5 +93,10 @@ Route::group(['middleware' => 'auth'], function()
 	Route::resource('projects', 'ProjectsController');
 });
 
+Route::group(['middleware' => 'auth', 'prefix' => 'user', 'namespace' => 'User'], function()
+{
+	Route::resource('projects', 'ProjectsController');
+});
+
 /* Display page */
 Route::get('{page}', 'PagesController@show');
