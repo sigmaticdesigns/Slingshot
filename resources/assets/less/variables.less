@@ -12,8 +12,19 @@
 @gray--darkest:   #2a2a2a;
 
 @color-main:          #8db34b;
-@color-main--darker:  #9ed53f;
+@color-main--lighten:  #9ed53f;
 @color-secondary:     #372921;
+@danger:              #f86956;
+@danger--light:       #ffeaea;
+
+@color-link:      #27a0ff;
+@color-social-fb: #3b5998;
+
+//forms
+
+@field-border:            @gray--lighten;
+@field-border--invalid:   @danger;
+@field-invalid:           @danger--light;
 
 
 //------------------------------------------------------------------------------
@@ -36,3 +47,25 @@
 
 @column: 22.5%;
 @column-margin: 3.5%;
+
+//------------------------------------------------------------------------------
+//  Data picker variables
+//------------------------------------------------------------------------------
+
+
+@border-radius:                       .4em;
+@background:                          #fff;
+@color:                               @gray--dark;
+@background-hover:                    'transparent';
+@color-hover:                         @gray--darkest;
+@nav-color:                           @color;
+@nav-color-hover:                     @color-main;
+@not-in-month:                        @gray--lighten;
+@not-in-month-hover:                  #999;
+@disabled:                            #333;
+@selected:                            @color;
+@selected-background:                 @color-main;
+@not-in-month-selected-background:    @danger--light;
+@day-of-week:                         @not-in-month-hover;
+@today-background:                    @gray--light;
+@today-color:                         @color;

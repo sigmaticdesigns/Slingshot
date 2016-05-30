@@ -65,9 +65,7 @@ Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/home', function () {
-	return view('home');
-});
+Route::get('/home', 'HomeController@index');
 
 
 Route::controllers([
@@ -95,6 +93,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user', 'namespace' => 'User']
 {
 	Route::resource('projects', 'ProjectsController');
 });
+
+Route::resource('projects', 'ProjectsController');
 
 /* Display page */
 Route::get('{page}', 'PagesController@show');

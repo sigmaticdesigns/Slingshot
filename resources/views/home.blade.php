@@ -26,20 +26,23 @@
                     <a href="" class="campaigns__filtre-item">Trending</a>
                     <a href="" class="campaigns__filtre-item">Ending soon</a>
                 </div>
-                <a href="" class="campaigns__filtre-item campaigns__filtre-item--see-all">See all</a>
+                <a href="{!! route('projects.index') !!}" class="campaigns__filtre-item campaigns__filtre-item--see-all">See all</a>
             </div>
             <div class="campaigns__list">
 
 
+                @if ($projects->count())
                 @foreach($projects as $project)
 
 
                 <article class="campaign-card">
-                    <a href="" class="campaign-card__link"></a>
+                    <a href="{!! route('projects.show', $project->id) !!}" class="campaign-card__link"></a>
+                    {{--@if ($project->image)--}}
                     <div class="campaign-card__img"><img src="{!! $project->image->path !!}" alt="" width="256" height="187"></div>
+                    {{--@endif--}}
                     <div class="campaign-card__wrap">
                         <div class="campaign-card__category">{!! $project->category->name !!}</div>
-                        <h2 class="campaign-card__title"><a href="">{!! $project->name !!}</a></h2>
+                        <h2 class="campaign-card__title"><a href="{!! route('projects.show', $project->id) !!}">{!! $project->name !!}</a></h2>
                         <p class="campaign-card__content">{!! $project->description !!}</p>
                         <div class="campaign-card__status">
                             <div class="campaign-card__container">
@@ -50,7 +53,7 @@
                                 <div class="campaign-card__bar-scale"></div>
                             </div>
                             <div class="campaign-card__container">
-                                <div class="campaign-card__location">Berlin, DE</div>
+                                {{--<div class="campaign-card__location">Berlin, DE</div>--}}
                                 <div class="campaign-card__timer">25 days left</div>
                             </div>
                         </div>
@@ -58,6 +61,7 @@
                 </article>
 
                 @endforeach
+                @endif
 
 
 
@@ -82,8 +86,8 @@
         <div class="new-project__wrap">
             <h1 class="new-project__title">Ready To Promote Your New Project?</h1>
             <p class="new-project__content">The European languages are members of the same family. Their separate existence is a myth.</p>
-            <a href="" class="new-project__btn new-project__btn--explore btn">Explore a project</a>
-            <a href="" class="new-project__btn new-project__btn--create btn">Create a project</a>
+            <a href="" class="btn btn--explore">Explore a project</a>
+            <a href="{!! route('user.projects.create') !!}" class="btn btn--create-new">Create a project</a>
         </div>
     </section>
 

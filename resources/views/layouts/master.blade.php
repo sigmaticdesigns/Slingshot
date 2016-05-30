@@ -22,21 +22,41 @@
         <nav class="main-nav">
             <ul class="main-nav__list">
                 <li class="main-nav__item"><a href="">How it works</a></li>
-                <li class="main-nav__item"><a href="">Projects</a></li>
+                <li class="main-nav__item"><a href="{!! route('projects.index') !!}">Projects</a></li>
                 <li class="main-nav__item"><a href="">About us</a></li>
             </ul>
         </nav>
-        <div class="user-menu">
-            @if (Auth::check())
-                You're logged in as {!! Auth::user()->name !!} ({!! Auth::user()->email !!}) <br/>
-                <a href="/auth/logout" class="user-menu__itemt"> Logout </a>
-                <a href="{{ url ('settings') }}" class="user-menu__item"> User Settings </a>
-            @else
+
+
+
+        <div class="page-header__to-right">
+        @if (Auth::check())
+        <a href="{!! route('user.projects.create') !!}" class="btn btn--create">Create a project</a>
+        <div class="user">
+            <div class="user__name">{!! Auth::user()->name !!}</div>
+            <div class="user__img"><img src="img/img-user.jpg" width="28" height="28" alt=""></div>
+            <ul class="drop-list">
+                {{--<li class="drop-list__item"><a href="" class="drop-list__item-link">Messages</a></li>--}}
+                <li class="drop-list__item"><a href="{{ url ('settings') }}" class="drop-list__item-link">Settings</a></li>
+                <li class="drop-list__item"><a href="" class="drop-list__item-link">Edit profile</a></li>
+                <li class="drop-list__item"><a href="{{ url ('/user/projects') }}" class="drop-list__item-link">My projects</a></li>
+                <li class="drop-list__item"><a href="{{ url('settings/change-password') }}" class="drop-list__item-link">Change Password</a></li>
+                <li class="drop-list__item"><a href="{{ url ('/auth/logout') }}" class="drop-list__item-link">Log out</a></li>
+            </ul>
+        </div>
+
+        @else
+
+            <div class="user-menu">
                 <a href="{{ url ('/auth/register') }}" class="user-menu__item">Sign up</a>
                 <a href="{{ url ('/auth/login') }}" class="user-menu__item">Log in</a>
-            @endif
-                <a href="{!! route('user.projects.create') !!}" class="user-menu__btn btn">Create a project</a>
+            </div>
+            <a href="{!! route('user.projects.create') !!}" class="btn btn--create">Create a project</a>
+
+        @endif
         </div>
+
+
     </div>
 </header>
 <main>

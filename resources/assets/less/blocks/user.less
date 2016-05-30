@@ -1,0 +1,72 @@
+
+//logged user block
+
+.user {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  font-size: 0;
+  padding-bottom: 24px;
+  padding-top: 20px;
+  cursor: pointer;
+
+  &__name {
+    display: inline-block;
+    vertical-align: top;
+    font-size: @font-size + 5;
+    line-height: 30px;
+    color: @color-main;
+    padding-left: 10px;
+    padding-right: 15px;
+    width: 160px;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__img {
+    display: inline-block;
+    vertical-align: top;
+    width: 28px;
+    height: 28px;
+    border-radius: 2px;
+    margin-right: 23px;
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border: 6px solid transparent;
+      border-top: 6px solid @color-main;
+      bottom: 28px;
+      right: 0px;
+    }
+
+    &:after {
+      border-top: 6px solid white;
+      bottom: 30px;
+    }
+  }
+
+  &:hover {
+    .drop-list {
+      display: block;
+    }
+
+    .user__img:before,
+    .user__img:after {
+      border-top-color: transparent;
+      border-bottom: 6px solid @color-main;
+      bottom: 35px;
+    }
+
+    .user__img:after {
+      border-top-color: transparent;
+      border-bottom: 6px solid white;
+      bottom: 33px;
+    }
+  }
+}

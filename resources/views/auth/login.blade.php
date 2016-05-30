@@ -1,69 +1,47 @@
 @extends('layouts.master')
 
 @section('content')
+    <div class="form-block">
+        <h1 class="form-block__title">Log in</h1>
+        {!! Form::open(['files' => true, 'url' => url('/auth/login'), 'data-no-ajax' => true, 'class' => 'fields-group']) !!}
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Login
-            <div class="panel-nav pull-right" style="margin-top: -7px;">
-                <a href="{!! url('/auth/register') !!}" class="btn btn-default">Sign Up</a>
-                <a href="{!! url('/password/email') !!}" class="btn btn-warning">Forgot Password</a>
-            </div>
-        </div>
-        <div class="panel-body">
-
-
-
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <div class="form-horizontal">
-
-                {!! Form::open(['files' => true, 'url' => url('/auth/login'), 'data-no-ajax' => true]) !!}
+            {!! Form::email(
+                'email',
+                null,
+                [
+                    'placeholder' => 'email@...',
+                    'class' => 'fields-group__field' . ($errors->first('email') ? ' fields-group__field--invalid' : '')
+                ]
+            ) !!}
 
 
-                <div class="form-group">
-                    {!! Form::label('email', 'Email:', ['class' => 'col-md-2 control-label']) !!}
-                    <div class="col-sm-9">
-                        {!! Form::email('email', null, ['class' => 'form-control']) !!}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    {!! Form::label('password', 'Password:', ['class' => 'col-md-2 control-label']) !!}
-                    <div class="col-sm-9">
-                        {!! Form::password('password', ['class' => 'form-control']) !!}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    {!! Form::label('remember', 'Remember Me:', ['class' => 'col-md-2 control-label']) !!}
-                    <div class="col-sm-9">
-                        {!! Form::checkbox('remember', 1, null) !!}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-md-2 control-label"></label>
-                    <div class="col-sm-9">
-                        {!! Form::submit('Login', ['class' => 'btn btn-primary']) !!}
-                    </div>
-                </div>
-                {!! Form::close() !!}
+            <div class="fields-group__error">
+                @if($errors->first('email'))
+                    {!! Form::label('email', $errors->first('email'), ['style' => 'display:block']) !!}
+                @endif
             </div>
 
 
+            {!! Form::password('password', ['placeholder' => "Password", 'class' => 'fields-group__field' . ($errors->first('password') ? ' fields-group__field--invalid' : '')]) !!}
+
+            <div class="fields-group__error">
+                @if($errors->first('password'))
+                    {!! Form::label('password', $errors->first('password'), ['style' => 'display:block']) !!}
+                @endif
+            </div>
 
 
-        </div>
+            {!! Form::submit('LOG IN', ['class' => 'btn btn--form-submit']) !!}
+            <div class="fields-group__wrap">
+                <div class="fields-group__input-wrap">
+                    {!! Form::checkbox('remember', 1, null, ['class' => 'fields-group__checkbox']) !!}
+                    {!! Form::label('remember', 'Remember Me:', ['class' => 'fields-group__label']) !!}
+                </div>
+                <a href="{!! url('/password/email') !!}" class="fields-group__link">Forgot your password?</a>
+            </div>
+        {!! Form::close() !!}
+        <div class="form-block__footer">New to Sling-Shot? <a href="{!! url('/auth/register') !!}" class="form-block__link">Sign up!</a></div>
     </div>
+
 
 @stop
