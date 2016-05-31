@@ -37,4 +37,3 @@ $(document).ready(function(){
     else {$(".fields-group__counter").html(cnt);}
   });
 });
-
