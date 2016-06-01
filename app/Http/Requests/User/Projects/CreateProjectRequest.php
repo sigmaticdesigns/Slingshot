@@ -22,14 +22,14 @@ class CreateProjectRequest extends Request
     public function rules()
     {
         return [
-			'name' => 'required',
+			'name' => 'required|max:255',
 			'category_id' => 'required',
-			'budget' => 'required',
-			'description' => 'required',
-//			'body' => 'required',
-			'file' => 'required',
-			'deadline' => 'required',
-			'half_deadline' => 'required',
+			'budget' => 'required|numeric|min:1',
+			'description' => 'required|max:255',
+			'body' => 'required',
+			'file' => 'required|image',
+			'deadline' => 'required|date|after:today',
+			'half_deadline' => 'required|date|after:today|before:deadline',
 		];
     }
 

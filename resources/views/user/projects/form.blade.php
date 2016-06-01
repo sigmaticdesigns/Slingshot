@@ -10,6 +10,9 @@
 			{!! Form::file('file') !!}
 		</label>
 	</div>
+    <div class="fields-group__error">
+        {!! Form::label('file', '') !!}
+    </div>
 
 	{!! Form::text('name', null, ['class' => 'fields-group__field', 'placeholder' => 'Project name']) !!}
 	<div class="fields-group__error">
@@ -17,14 +20,15 @@
 	</div>
 
 	<div class="fields-group__text-wrap">
-		{!! Form::textarea('description', null, ['class' => 'fields-group__field fields-group__field--short-desc', 'placeholder' => 'Short description', 'cols' => 30, 'rows' => 10, 'maxlength' => 135]) !!}
+		{!! Form::textarea('description', null, ['class' => 'fields-group__field fields-group__field--short-desc', 'placeholder' => 'Short description', 'cols' => 30, 'rows' => 10, 'maxlength' => 135, 'id' => 'description']) !!}
 		<div class="fields-group__symbols">
 			<span class="fields-group__counter">33</span>/135
 		</div>
-		<div class="fields-group__error">
-			{!! Form::label('description', '') !!}
-		</div>
 	</div>
+    <div class="fields-group__error">
+        {!! Form::label('description', '') !!}
+    </div>
+
 
 	<div class="fields-group__select-wrap">
 		{!! Form::select('category_id', $categoryList, null, ['class' => 'fields-group__select', 'placeholder' => 'Choose project category']) !!}
@@ -33,12 +37,12 @@
 		{!! Form::label('category_id', '') !!}
 	</div>
 
-	{!! Form::text('deadline', null, ['class' => 'fields-group__field fields-group__field--date', 'placeholder' => "Project deadline date"]) !!}
+	{!! Form::text('deadline', null, ['class' => 'fields-group__field fields-group__field--date', 'placeholder' => "Project deadline date", 'data-pmu-format' => 'm/d/Y']) !!}
 	<div class="fields-group__error">
 		{!! Form::label('deadline', '') !!}
 	</div>
 
-	{!! Form::text('half_deadline', null, ['class' => 'fields-group__field fields-group__field--date', 'placeholder' => "Deadline for getting 50%"]) !!}
+	{!! Form::text('half_deadline', null, ['class' => 'fields-group__field fields-group__field--date', 'placeholder' => "Deadline for getting 50%", 'data-pmu-format' => 'm/d/Y']) !!}
 	<div class="fields-group__error">
 		{!! Form::label('half_deadline', '') !!}
 	</div>
@@ -54,6 +58,10 @@
 		{!! Form::label('body', '') !!}
 	</div>
 
-	{!! Form::submit('Create project', ['class' => 'btn btn--form-submit']) !!}
+    @if (isset($model))
+        {!! Form::submit('Update project', ['class' => 'btn btn--form-submit']) !!}
+    @else
+        {!! Form::submit('Create project', ['class' => 'btn btn--form-submit']) !!}
+    @endif
 {!! Form::close() !!}
 

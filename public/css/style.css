@@ -748,6 +748,11 @@ input::-ms-clear
     width: 0;
     height: 0;
 }
+select::-ms-expand
+{
+    border: none;
+    background-color: transparent;
+}
 .container
 {
     min-width: 900px;

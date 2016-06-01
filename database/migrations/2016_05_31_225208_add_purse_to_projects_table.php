@@ -13,8 +13,8 @@ class AddPurseToProjectsTable extends Migration
     public function up()
     {
         Schema::table('projects', function(Blueprint $table) {
-			$table->decimal('purse');
-			$table->text('body');
+			$table->decimal('purse')->default(0)->after('budget');
+			$table->text('body')->after('description')->nullable();
 
         });
     }

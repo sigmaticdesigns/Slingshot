@@ -17,9 +17,10 @@ $(function() {
 
         /* Remove all errors */
         var removeAllErrors = function() {
-            $('.has-error', $form).removeClass('has-error');
-            $('.text-danger', $form).remove();
-            $('.bad', $form).removeClass('bad').addClass('not-bad');
+            //$('.has-error', $form).removeClass('has-error');
+            //$('.text-danger', $form).remove();
+            //$('.bad', $form).removeClass('bad').addClass('not-bad');
+            $('label[for]').hide();
         }
 
         /* Set request */
@@ -64,9 +65,13 @@ $(function() {
                     {
                         var $field = $('[name="' + key + '"]', $form);
 
-                        if ($field.length >= 1) {
-                            $field.after($('<span />').html(value[0]).addClass('text-danger')).siblings('.not-bad').removeClass('not-bad').addClass('bad');
-                            $field.closest('div').addClass('has-error');
+                        if ($field.length >= 1)
+                        {
+                            var $label = $('label[for=' + key + "]");
+                            $label.html(value[0]);
+                            $label.show();
+                            //$field.after($('<span />').html(value[0]).addClass('text-danger')).siblings('.not-bad').removeClass('not-bad').addClass('bad');
+                            //$field.closest('div').addClass('has-error');
                         }
                         //else {
                             errorMessages.push(value[0]);
@@ -82,4 +87,31 @@ $(function() {
 
         e.preventDefault();
     });
+
+    if ($('div[data-content="project-form"]').length) {
+        initProjectForm();
+    }
 });
+
+
+function initProjectForm()
+{
+    //data pickers
+    $('input[name=deadline]').pickmeup();
+    $('input[name=half_deadline]').pickmeup();
+
+    var maxCount = 135;
+
+    $(".fields-group__counter").html(maxCount);
+
+    $("#description").keyup(function() {
+        var shortDesc = this.value.length;
+
+        if (this.value.length > maxCount) {
+            this.value = this.value.substr(0, maxCount);
+        }
+        var cnt = (maxCount - shortDesc);
+        if(cnt <= 0){$(".fields-group__counter").html('0');}
+        else {$(".fields-group__counter").html(cnt);}
+    });
+}

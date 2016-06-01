@@ -1,5 +1,6 @@
 <?php namespace App;
    
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -20,6 +21,7 @@ class Project extends Model
 		'country_id',
 		'budget',
 		'description',
+		'body',
 		'file_id',
 		'deadline',
 		'half_deadline'
@@ -30,7 +32,24 @@ class Project extends Model
 	 *
 	 * @var array
 	 */
-	protected $dates = ['deleted_at'];
+	protected $dates = ['deleted_at', 'deadline'];
+
+	/**
+	 * Get funding progress in percent
+	*/
+	public function progress()
+	{
+		$result = 0;
+		if ($this->purse > 0) {
+			$result = intval(round($this->purse / ($this->budget / 100)));
+		}
+		return $result;
+	}
+
+	public function daysLeft()
+	{
+		return $this->deadline->diffInDays(Carbon::now());
+	}
 
 	/**
 	 * Get the user that owns the project.
@@ -42,7 +61,7 @@ class Project extends Model
 
 	public function category()
 	{
-		return $this->belongsTo('Pingpong\Admin\Entities\Category');
+		return $this->belongsTo('App\Category');
 	}
 
 	/**

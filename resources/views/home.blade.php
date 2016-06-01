@@ -47,14 +47,14 @@
                         <div class="campaign-card__status">
                             <div class="campaign-card__container">
                                 <div class="campaign-card__sum">${!! $project->budget !!}</div>
-                                <div class="campaign-card__percent">45%</div>
+                                <div class="campaign-card__percent">{!! $project->progress() !!}%</div>
                             </div>
                             <div class="campaign-card__bar">
-                                <div class="campaign-card__bar-scale"></div>
+                                <div class="campaign-card__bar-scale" style="width: {!! $project->progress() !!}%"></div>
                             </div>
                             <div class="campaign-card__container">
                                 {{--<div class="campaign-card__location">Berlin, DE</div>--}}
-                                <div class="campaign-card__timer">25 days left</div>
+                                <div class="campaign-card__timer">{!! $project->daysLeft() !!} days left</div>
                             </div>
                         </div>
                     </div>

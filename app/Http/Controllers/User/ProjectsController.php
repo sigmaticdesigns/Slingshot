@@ -8,6 +8,7 @@ use App\User;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use App\Project;
@@ -65,7 +66,8 @@ class ProjectsController extends Controller
 		{
 			$image = Input::file('file');
 			$filename  = Str::slug($data['name'], '_') . '_' . time() . '.' . $image->getClientOriginalExtension();
-			$dirName = public_path('static/uploads/' . date("Y") . '/' . date("m"). '/'. date("d"));
+			$publicDirName = '/static/uploads/' . date("Y") . '/' . date("m"). '/'. date("d");
+			$dirName = public_path($publicDirName);
 			if (!\Illuminate\Support\Facades\File::exists($dirName)) {
 				\Illuminate\Support\Facades\File::makeDirectory($dirName, 0755, true);
 			}
@@ -76,15 +78,18 @@ class ProjectsController extends Controller
 			$file = FileModel::create([
 				'type'  => 'image',
 				'filename' => $filename,
-				'path'  => $path
+				'path'  => $publicDirName . '/' . $filename
 			]);
 			$data['file_id'] = $file->id;
 		}
 		$data['user_id'] = $this->user->id;
 		$data['status'] = Project::STATUS_PENDING;
+
+	    $data['deadline'] = Carbon::createFromFormat("m/d/Y", $data['deadline']);
+	    $data['half_deadline'] = Carbon::createFromFormat("m/d/Y", $data['half_deadline']);
 		$project = Project::create($data);
 
-		\Session::flash('success.message', "Project has been successfully created.");
+		\Session::flash('success.message', "Project has been successfully created. And waiting for approving.");
 		if ($request->ajax()) {
 			return response()->json(['success' => true, 'redirect' => route('user.projects.index')]);
 		}
