@@ -17,7 +17,7 @@ $(function() {
 
         /* Remove all errors */
         var removeAllErrors = function() {
-            //$('.has-error', $form).removeClass('has-error');
+            $('.fields-group__field--invalid', $form).removeClass('fields-group__field--invalid');
             //$('.text-danger', $form).remove();
             //$('.bad', $form).removeClass('bad').addClass('not-bad');
             $('label[for]').hide();
@@ -70,6 +70,7 @@ $(function() {
                             var $label = $('label[for=' + key + "]");
                             $label.html(value[0]);
                             $label.show();
+                            $field.addClass('fields-group__field--invalid');
                             //$field.after($('<span />').html(value[0]).addClass('text-danger')).siblings('.not-bad').removeClass('not-bad').addClass('bad');
                             //$field.closest('div').addClass('has-error');
                         }

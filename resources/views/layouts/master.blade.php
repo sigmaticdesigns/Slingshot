@@ -37,10 +37,10 @@
             <div class="user__img"><img src="img/img-user.jpg" width="28" height="28" alt=""></div>
             <ul class="drop-list">
                 {{--<li class="drop-list__item"><a href="" class="drop-list__item-link">Messages</a></li>--}}
-                <li class="drop-list__item"><a href="{{ url ('settings') }}" class="drop-list__item-link">Settings</a></li>
-                <li class="drop-list__item"><a href="" class="drop-list__item-link">Edit profile</a></li>
+                <li class="drop-list__item"><a href="{{ url ('user/settings') }}" class="drop-list__item-link">Settings</a></li>
+                <li class="drop-list__item"><a href="{{ url ('user/settings/about-me') }}" class="drop-list__item-link">Edit profile</a></li>
                 <li class="drop-list__item"><a href="{{ url ('/user/projects') }}" class="drop-list__item-link">My projects</a></li>
-                <li class="drop-list__item"><a href="{{ url('settings/change-password') }}" class="drop-list__item-link">Change Password</a></li>
+                <li class="drop-list__item"><a href="{{ url('user/settings/change-password') }}" class="drop-list__item-link">Change Password</a></li>
                 <li class="drop-list__item"><a href="{{ url ('/auth/logout') }}" class="drop-list__item-link">Log out</a></li>
             </ul>
         </div>

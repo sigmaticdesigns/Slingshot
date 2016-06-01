@@ -80,18 +80,14 @@ Route::controllers([
 ]);
 
 
-Route::group(['middleware' => 'auth'], function()
+Route::group(['middleware' => 'auth', 'prefix' => 'user', 'namespace' => 'User'], function()
 {
+	Route::resource('projects', 'ProjectsController');
+
 	Route::get('settings', 'SettingsController@index');
 	Route::controllers([
 		'settings'     => 'SettingsController',
 	]);
-//	Route::resource('projects', 'ProjectsController');
-});
-
-Route::group(['middleware' => 'auth', 'prefix' => 'user', 'namespace' => 'User'], function()
-{
-	Route::resource('projects', 'ProjectsController');
 });
 
 Route::get('projects/list', 'ProjectsController@getList');

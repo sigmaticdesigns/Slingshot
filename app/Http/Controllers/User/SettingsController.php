@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\User;
 use Illuminate\Auth\Guard;
@@ -28,7 +28,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return view('settings.index');
+        return view('user.settings.index');
     }
 
 
@@ -91,7 +91,7 @@ class SettingsController extends Controller
 
 	public function getChangePassword()
 	{
-		return view('settings.password');
+		return view('user.settings.password');
 	}
 
 	public function postChangePassword(Request $request)
@@ -103,7 +103,12 @@ class SettingsController extends Controller
 
 		$data = $request->all();
 		if (!Hash::check($data['old_password'], $this->user->password)) {
-			return redirect()->back()->withErrors(['old_password' => 'Wrong password.']);
+			if ($request->ajax()) {
+				return response()->json(['old_password' => ['Incorrect password.']], 422);
+			}
+			else {
+				return redirect()->back()->withErrors(['old_password' => 'Wrong password.']);
+			}
 		}
 
 		$this->user->password = $data['password'];
@@ -111,7 +116,7 @@ class SettingsController extends Controller
 
 		\Session::flash('success.message', "Your password has been successfully changed.");
 		if ($request->ajax()) {
-			return response()->json(['success' => true, 'redirect' => url('settings')]);
+			return response()->json(['success' => true, 'redirect' => url('user/settings')]);
 		}
 		return redirect()->back();
 
@@ -119,12 +124,12 @@ class SettingsController extends Controller
 
 	public function getAboutMe()
 	{
-		return view('settings.about');
+		return view('user.settings.about');
 	}
 
 	public function getAvatar()
 	{
-		return view('settings.avatar');
+		return view('user.settings.avatar');
 	}
 
 
