@@ -31,7 +31,7 @@
 
         @endforeach
     @else
-        <div>Nothing not found</div>
+        <div style="font-size: 18px;">Nothing found</div>
     @endif
 
 </div>

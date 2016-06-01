@@ -74,7 +74,7 @@ class ProjectsController extends Controller
 			$path = $dirName . '/' . $filename;
 //		    $img = Image::make($path);
 			// crop image
-			\Image::make($image->getRealPath())->crop(256, 187, 25, 25)->save($path);
+			\Image::make($image->getRealPath())->fit(256, 187)->save($path);
 			$file = FileModel::create([
 				'type'  => 'image',
 				'filename' => $filename,

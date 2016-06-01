@@ -27,7 +27,7 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-	    $projects = Project::active()->latest()->paginate(2);
+	    $projects = Project::active()->latest()->paginate(20);
 
 	    $showPagination = true;
 
