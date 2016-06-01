@@ -86,7 +86,7 @@ Route::group(['middleware' => 'auth'], function()
 	Route::controllers([
 		'settings'     => 'SettingsController',
 	]);
-	Route::resource('projects', 'ProjectsController');
+//	Route::resource('projects', 'ProjectsController');
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => 'user', 'namespace' => 'User'], function()
@@ -94,7 +94,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user', 'namespace' => 'User']
 	Route::resource('projects', 'ProjectsController');
 });
 
+Route::get('projects/list', 'ProjectsController@getList');
 Route::resource('projects', 'ProjectsController');
+
 
 /* Display page */
 Route::get('{page}', 'PagesController@show');

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 
+use App\Category;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use App\Project;
-
+use Illuminate\Support\Facades\Input;
 
 
 class ProjectsController extends Controller
@@ -26,12 +27,53 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-	    $projects = Project::active()->latest()->paginate(20);
+	    $projects = Project::active()->latest()->paginate(2);
 
-        $no = $projects->firstItem();
+	    $showPagination = true;
 
-        return view('projects.index', compact('projects', 'no'));
+	    $categoryList = Category::orderBy('name')->get();
+
+        return view('projects.index', compact('projects', 'showPagination', 'categoryList'));
     }
+
+	public function getList()
+	{
+		$projectsModel = Project::active();
+
+		if (Input::has('category_id')) {
+			$categoryId = intval(Input::get('category_id'));
+			$projectsModel->where('category_id', $categoryId);
+		}
+		if (Input::has('sort'))
+		{
+			switch (Input::get('sort'))
+			{
+				case 'popular':
+					$projectsModel->orderBy('created_at', 'desc');
+					break;
+				case 'trending':
+					$projectsModel->orderBy('purse', 'desc');
+					break;
+				case 'ending':
+					$projectsModel->orderBy('deadline');
+					break;
+				case 'recommended':
+					$projectsModel->orderByRaw("RAND()");
+					break;
+			}
+		}
+		if ('projects' == Input::get('ref')) {
+			$projects = $projectsModel->paginate(20);
+			$showPagination = true;
+		}
+		else {
+			$projects = $projectsModel->take(6)->get();
+			$showPagination = false;
+		}
+
+		$returnHTML = view('projects.list', compact('projects', 'showPagination'))->render();
+		return response()->json( array('success' => true, 'html' => $returnHTML) );
+	}
 
 
 
