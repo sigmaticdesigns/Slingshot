@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Input;
 class ProjectsController extends Controller
 {
 
-	protected $perPage = 20;
+	protected $perPage = 9;
 
 	public function __construct()
 	{

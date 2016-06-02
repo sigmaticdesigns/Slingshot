@@ -19,7 +19,7 @@ class PagesTableSeeder extends Seeder
 		    'category_id'   => 1,
 		    'title'     => 'About us',
 		    'slug'      => Str::slug('About us'),
-		    'body'      => 'About us page content',
+		    'body'      => 'SlingShot helps artists, musicians, filmmakers, designers, and other creators find the resources and support they need to make their ideas a reality. To date, tens of thousands of creative projects — big and small — have come to life with the support of the SlingShot community. ',
 	    ]);
 
 	    Article::create([

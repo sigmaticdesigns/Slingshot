@@ -34,7 +34,11 @@
         <a href="{!! route('user.projects.create') !!}" class="btn btn--create">Create a project</a>
         <div class="user">
             <div class="user__name">{!! Auth::user()->name !!}</div>
-            <div class="user__img"><img src="img/img-user.jpg" width="28" height="28" alt=""></div>
+            <div class="user__img">
+                @if(Auth::user()->avatar)
+                    <img src="{{ \App\User::find(Auth::user()->id)->avatar() }}" width="28" height="28" alt="">
+                @endif
+            </div>
             <ul class="drop-list">
                 {{--<li class="drop-list__item"><a href="" class="drop-list__item-link">Messages</a></li>--}}
                 <li class="drop-list__item"><a href="{{ url ('user/settings') }}" class="drop-list__item-link">Settings</a></li>

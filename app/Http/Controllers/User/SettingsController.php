@@ -64,16 +64,33 @@ class SettingsController extends Controller
     public function postUpdate(Request $request)
     {
         $user = User::findOrFail($this->user->id);
-	    if (\Input::hasFile('avatar')) {
+	    if (\Input::hasFile('avatar'))
+		{
 		    $user->deleteImage();
 
 		    $image = Input::file('avatar');
-		    $filename = $user->id . '.'. $image->getClientOriginalExtension();
-		    $path = public_path('img/avatar/' . $filename);
+		    $filenameBig = $user->id. '_300' . '.'. $image->getClientOriginalExtension();
+		    $filenameSmall = $user->id . '_28' . '.'. $image->getClientOriginalExtension();
+
+			$publicDirName = '/static/uploads/avatar/' . date("Y") . '/' . date("m"). '/'. date("d");
+			$dirName = public_path($publicDirName);
+			if (!\Illuminate\Support\Facades\File::exists($dirName)) {
+				\Illuminate\Support\Facades\File::makeDirectory($dirName, 0755, true);
+			}
+
+			$pathBig = $dirName . '/' . $filenameBig;
+			$pathSmall = $dirName . '/' . $filenameSmall;
 
 //		    TODO: do crop
-		    \Image::make($image->getRealPath())->resize(200, 200)->save($path);
-		    $user->avatar = $filename;
+		    \Image::make($image->getRealPath())->fit(300, 300)->save($pathBig);
+		    \Image::make($image->getRealPath())->fit(28, 28)->save($pathSmall);
+		    $user->avatar = json_encode(
+				[
+					'path'	=> $publicDirName,
+					's'		=> $filenameSmall,
+					'b'		=> $filenameBig
+				]
+			);
 		    $user->save();
 	    }
 	    else {

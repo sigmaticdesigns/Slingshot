@@ -15,6 +15,15 @@
                 <td>{!! $project->id !!}</td>
             </tr>
 
+            @if ($project->image)
+            <tr>
+                <td><b>Image</b></td>
+                <td>
+                    <img src="{!! $project->image->path !!}" alt="" width="256" height="187">
+                </td>
+            </tr>
+            @endif
+
 			
             <tr>
                 <td><b>Name</b></td>
@@ -32,17 +41,33 @@
                 <td><b>Category</b></td>
                 <td>{!! $project->category->name !!}</td>
             </tr>			
+            {{--<tr>--}}
+                {{--<td><b>Country_id</b></td>--}}
+                {{--<td>{!! $project->country_id !!}</td>--}}
+            {{--</tr>			--}}
             <tr>
-                <td><b>Country_id</b></td>
-                <td>{!! $project->country_id !!}</td>
-            </tr>			
-            <tr>
-                <td><b>Budget</b></td>
+                <td><b>Funding goal</b></td>
                 <td>{!! $project->budget !!}</td>
-            </tr>			
+            </tr>
             <tr>
-                <td><b>Description</b></td>
+                <td><b>Pledged</b></td>
+                <td>{!! $project->purse !!}</td>
+            </tr>
+            <tr>
+                <td><b>Short Description</b></td>
                 <td>{!! $project->description !!}</td>
+            </tr>
+            <tr>
+                <td><b>Full Description</b></td>
+                <td>{!! $project->body !!}</td>
+            </tr>
+            <tr>
+                <td><b>Deadline</b></td>
+                <td>{!! $project->deadline !!}</td>
+            </tr>
+            <tr>
+                <td><b>Deadline for getting 50%</b></td>
+                <td>{!! $project->half_deadline !!}</td>
             </tr>
 
             <tr>

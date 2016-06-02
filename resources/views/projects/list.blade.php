@@ -6,9 +6,9 @@
 
             <article class="campaign-card">
                 <a href="{!! route('projects.show', $project->id) !!}" class="campaign-card__link"></a>
-                {{--@if ($project->image)--}}
+                @if ($project->image)
                 <div class="campaign-card__img"><img src="{!! $project->image->path !!}" alt="" width="256" height="187"></div>
-                {{--@endif--}}
+                @endif
                 <div class="campaign-card__wrap">
                     <div class="campaign-card__category">{!! $project->category->name !!}</div>
                     <h2 class="campaign-card__title"><a href="{!! route('projects.show', $project->id) !!}">{!! $project->name !!}</a></h2>

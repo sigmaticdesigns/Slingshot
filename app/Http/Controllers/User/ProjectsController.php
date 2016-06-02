@@ -61,27 +61,7 @@ class ProjectsController extends Controller
     {
 		$data = $request->all();
 //	    file upload
-//	    TODO: move to file uploader
-		if (Input::hasFile('file'))
-		{
-			$image = Input::file('file');
-			$filename  = Str::slug($data['name'], '_') . '_' . time() . '.' . $image->getClientOriginalExtension();
-			$publicDirName = '/static/uploads/' . date("Y") . '/' . date("m"). '/'. date("d");
-			$dirName = public_path($publicDirName);
-			if (!\Illuminate\Support\Facades\File::exists($dirName)) {
-				\Illuminate\Support\Facades\File::makeDirectory($dirName, 0755, true);
-			}
-			$path = $dirName . '/' . $filename;
-//		    $img = Image::make($path);
-			// crop image
-			\Image::make($image->getRealPath())->fit(256, 187)->save($path);
-			$file = FileModel::create([
-				'type'  => 'image',
-				'filename' => $filename,
-				'path'  => $publicDirName . '/' . $filename
-			]);
-			$data['file_id'] = $file->id;
-		}
+		$data['file_id'] = $this->_uploadFile($data);
 		$data['user_id'] = $this->user->id;
 		$data['status'] = Project::STATUS_PENDING;
 
@@ -133,10 +113,24 @@ class ProjectsController extends Controller
     public function update(UpdateProjectRequest $request, $id)
     {       
         $project = Project::findOrFail($id);
+		if ($project->user_id != $this->user->id) {
+			return response()->json(['success' => false, 'redirect' => route('user.projects.index')]);
+		}
+		$data = $request->all();
+//	    file upload
+		$data['file_id'] = $this->_uploadFile($data, $project->file_id);
+//		$data['user_id'] = $this->user->id;
+		$data['status'] = Project::STATUS_PENDING;
 
-        $project->update($request->all());
 
-        return redirect()->route('user.projects.index');
+		$project->update($data);
+
+		\Session::flash('success.message', "Project has been successfully updated. And waiting for approving.");
+		if ($request->ajax()) {
+			return response()->json(['success' => true, 'redirect' => route('user.projects.index')]);
+		}
+
+		return redirect()->route('user.projects.index');
     }
 
     /**
@@ -153,5 +147,32 @@ class ProjectsController extends Controller
     
         return redirect()->route('user.projects.index');
     }
+
+	private function _uploadFile($data, $default = null)
+	{
+		$result = $default;
+//	    TODO: move to file uploader
+		if (Input::hasFile('file'))
+		{
+			$image = Input::file('file');
+			$filename  = Str::slug($data['name'], '_') . '_' . time() . '.' . $image->getClientOriginalExtension();
+			$publicDirName = '/static/uploads/' . date("Y") . '/' . date("m"). '/'. date("d");
+			$dirName = public_path($publicDirName);
+			if (!\Illuminate\Support\Facades\File::exists($dirName)) {
+				\Illuminate\Support\Facades\File::makeDirectory($dirName, 0755, true);
+			}
+			$path = $dirName . '/' . $filename;
+//		    $img = Image::make($path);
+			// crop image
+			\Image::make($image->getRealPath())->fit(256, 187)->save($path);
+			$file = FileModel::create([
+				'type'  => 'image',
+				'filename' => $filename,
+				'path'  => $publicDirName . '/' . $filename
+			]);
+			$result = $file->id;
+		}
+		return $result;
+	}
 
 }

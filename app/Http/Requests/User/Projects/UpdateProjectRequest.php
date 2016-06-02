@@ -22,14 +22,12 @@ class UpdateProjectRequest extends Request
     public function rules()
     {
         return [
-			'name' => 'required',
+			'name' => 'required|max:255',
 			'category_id' => 'required',
-			'budget' => 'required',
-			'description' => 'required',
+//			'budget' => 'required|numeric|min:1',
+			'description' => 'required|max:255',
 			'body' => 'required',
-			'file_id' => 'required',
-			'deadline' => 'required',
-			'half_deadline' => 'required',
+			'file' => 'required|image',
 		];
     }
 

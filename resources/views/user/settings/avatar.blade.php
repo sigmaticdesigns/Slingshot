@@ -2,48 +2,29 @@
 
 @section('content')
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Change profile picture
+    <div class="form-block">
+        <h1 class="form-block__title">Change profile picture</h1>
 
-        </div>
-        <div class="panel-body">
+            {!! Form::model(Auth::user(), ['method' => 'POST', 'files' => true, 'url' => url('user/settings/update'), 'class' => 'fields-group']) !!}
 
-
-
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <div class="form-horizontal">
-
-                {!! Form::model(Auth::user(), ['method' => 'POST', 'files' => true, 'url' => url('settings/update')]) !!}
-                <div class="form-group">
                     @if (Auth::user()->avatar)
                         <img src="/img/avatar/{{ Auth::user()->avatar }}">
                     @endif
+
+                <div class="fields-group__img-box">
+                    <label class="fields-group__upload">
+                        <span class="btn btn--upload">Upload Profile Picture</span>
+                        {!! Form::file('avatar') !!}
+                    </label>
                 </div>
-                <div class="form-group">
-
-                    {!! Form::label('avatar', 'Profile Picture:') !!}
-                    {!! Form::file('avatar', ['class' => 'form-control']) !!}
-                    {!! $errors->first('avatar', '<div class="text-danger">:message</div>') !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
+                <div class="fields-group__error">
+                    {!! Form::label('avatar', '') !!}
                 </div>
 
-                {!! Form::close() !!}
-            </div>
+
+                {!! Form::submit('Update', ['class' => 'btn btn--form-submit']) !!}
 
 
-        </div>
+            {!! Form::close() !!}
     </div>
 @stop

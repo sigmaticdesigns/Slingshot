@@ -37,20 +37,24 @@
 		{!! Form::label('category_id', '') !!}
 	</div>
 
-	{!! Form::text('deadline', null, ['class' => 'fields-group__field fields-group__field--date', 'placeholder' => "Project deadline date", 'data-pmu-format' => 'm/d/Y']) !!}
-	<div class="fields-group__error">
-		{!! Form::label('deadline', '') !!}
-	</div>
+	@if (!isset($model))
 
-	{!! Form::text('half_deadline', null, ['class' => 'fields-group__field fields-group__field--date', 'placeholder' => "Deadline for getting 50%", 'data-pmu-format' => 'm/d/Y']) !!}
-	<div class="fields-group__error">
-		{!! Form::label('half_deadline', '') !!}
-	</div>
+		{!! Form::text('deadline', null, ['class' => 'fields-group__field fields-group__field--date', 'placeholder' => "Project deadline date", 'data-pmu-format' => 'm/d/Y']) !!}
+		<div class="fields-group__error">
+			{!! Form::label('deadline', '') !!}
+		</div>
 
-	{!! Form::text('budget', null, ['class' => 'fields-group__field', 'placeholder' => "Funding goal"]) !!}
-	<div class="fields-group__error">
-		{!! Form::label('budget', '') !!}
-	</div>
+		{!! Form::text('half_deadline', null, ['class' => 'fields-group__field fields-group__field--date', 'placeholder' => "Deadline for getting 50%", 'data-pmu-format' => 'm/d/Y']) !!}
+		<div class="fields-group__error">
+			{!! Form::label('half_deadline', '') !!}
+		</div>
+
+		{!! Form::text('budget', null, ['class' => 'fields-group__field', 'placeholder' => "Funding goal"]) !!}
+		<div class="fields-group__error">
+			{!! Form::label('budget', '') !!}
+		</div>
+
+	@endif
 
 
 	{!! Form::textarea('body', null, ['class' => 'fields-group__field fields-group__field--full-desc', 'cols' => "30", 'rows' => "10", 'placeholder' => "Project full description"]) !!}
