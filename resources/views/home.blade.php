@@ -35,7 +35,10 @@
         </div>
         <div class="campaigns-sidebar">
             <div class="campaign-search">
-                <input type="text" name="campaign-search" class="campaign-search__field" placeholder="Search campaign">
+                <form action="{!! route('projects.index') !!}" method="get" data-no-ajax="true">
+                    <input type="text" name="search" class="campaign-search__field" placeholder="Search campaign">
+                    <button type="submit" class="campaign-search__btn"></button>
+                </form>
             </div>
             <div class="campaigns-category">
                 <ul class="campaigns-category__list">

@@ -1478,17 +1478,20 @@ select::-ms-expand
     border: 1px solid #e7e7e7;
     border-radius: 2px;
 }
-.campaign-search:after
+.campaign-search__btn
 {
     position: absolute;
     top: 12px;
     right: 12px;
+
+    display: block;
 
     width: 24px;
     height: 24px;
 
     content: '';
 
+    border: none;
     background: url('../img/ico-search.svg') no-repeat;
 }
 .campaigns-category__list

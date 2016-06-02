@@ -16,6 +16,7 @@ class PagesTableSeeder extends Seeder
 	    Article::create([
 		    'type'  => 'page',
 		    'user_id'   => 1,
+		    'category_id'   => 1,
 		    'title'     => 'About us',
 		    'slug'      => Str::slug('About us'),
 		    'body'      => 'About us page content',
@@ -24,6 +25,7 @@ class PagesTableSeeder extends Seeder
 	    Article::create([
 		    'type'  => 'page',
 		    'user_id'   => 1,
+		    'category_id'   => 1,
 		    'title'     => 'How it works',
 		    'slug'      => Str::slug('How it works'),
 		    'body'      => 'How it works page content',
@@ -32,6 +34,7 @@ class PagesTableSeeder extends Seeder
 	    Article::create([
 		    'type'  => 'page',
 		    'user_id'   => 1,
+		    'category_id'   => 1,
 		    'title'     => 'Privacy Policy',
 		    'slug'      => Str::slug('Privacy Policy'),
 		    'body'      => 'Privacy Policy page content',
@@ -40,9 +43,38 @@ class PagesTableSeeder extends Seeder
 	    Article::create([
 		    'type'  => 'page',
 		    'user_id'   => 1,
+		    'category_id'   => 1,
 		    'title'     => 'Terms of Use',
 		    'slug'      => Str::slug('Terms of Use'),
 		    'body'      => 'Terms of Use page content',
+	    ]);
+
+	    Article::create([
+		    'type'  => 'page',
+		    'user_id'   => 1,
+		    'category_id'   => 2,
+		    'title'     => 'FAQ',
+		    'slug'      => Str::slug('FAQ'),
+		    'body'      => '<b>What are the basics?</b>b>
+<br>
+A project is a finite work with a clear goal that you’d like to bring to life. Think albums, books, or films.
+<br>
+The funding goal is the amount of money that a creator needs to complete their project.
+<br>
+Funding on Kickstarter is all-or-nothing. No one will be charged for a pledge towards a project unless it reaches its funding goal. This way, creators always have the budget they scoped out before moving forward.
+
+A creator is the person or team behind the project idea, working to bring it to life.
+
+Backers are folks who pledge money to join creators in bringing projects to life.',
+	    ]);
+
+	    Article::create([
+		    'type'  => 'page',
+		    'user_id'   => 1,
+		    'category_id'   => 2,
+		    'title'     => 'Creator Handbook',
+		    'slug'      => Str::slug('Creator Handbook'),
+		    'body'      => 'Your project can be anything that you want to create and share with others. It could be a book, a film, a piece of hardware... pretty much anything you dream up can find a home on Kickstarter. Just keep your project focused, with a clear end goal, and you’ll be good.',
 	    ]);
     }
 }

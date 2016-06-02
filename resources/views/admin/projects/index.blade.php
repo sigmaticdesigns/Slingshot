@@ -3,7 +3,11 @@
 @section('content')
   <div class="panel panel-default">
 	<div class="panel-heading">
-		All Projects
+        @if(Illuminate\Support\Facades\Input::has('q'))
+            Search by Project's name:  {{Illuminate\Support\Facades\Input::get('q')}}
+        @else
+            All Projects
+        @endif
 		<div class="panel-nav pull-right" style="margin-top: -7px;">
 			{{--<a href="{!! route('admin.projects.create') !!}" class="btn btn-default">Add New</a>--}}
 		</div>

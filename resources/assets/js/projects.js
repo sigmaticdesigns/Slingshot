@@ -71,6 +71,9 @@ Listing = {
     _filter: function(data)
     {
         data.ref = Listing._ref;
+        if ($('input[name=search]').val()) {
+            data.search = $('input[name=search]').val();
+        }
         $.get(Listing._uri, data, Listing._display, 'json');
     },
     _display: function(data)

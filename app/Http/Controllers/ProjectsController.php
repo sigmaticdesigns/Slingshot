@@ -29,7 +29,15 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-	    $projects = Project::active()->latest()->paginate($this->perPage);
+	    if (Input::has('search')) {
+		    $query = Input::get('search');
+		    $projects = Project::active()->where('name', 'like', "%$query%")->latest()->paginate($this->perPage);
+	    }
+	    else {
+		    $projects = Project::active()->latest()->paginate($this->perPage);
+	    }
+
+
 
 	    $showPagination = true;
 
@@ -63,6 +71,10 @@ class ProjectsController extends Controller
 					$projectsModel->orderByRaw("RAND()");
 					break;
 			}
+		}
+		if (Input::has('search')) {
+			$query = Input::get('search');
+			$projectsModel->where('name', 'like', "%$query%");
 		}
 		if ('projects' == Input::get('ref')) {
 			$projects = $projectsModel->paginate($this->perPage);

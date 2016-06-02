@@ -14,7 +14,18 @@ class CategoriesTableSeeder extends Seeder
             'Art',
 	        'Comics',
 	        'Craft',
-	        'Design'
+	        'Dance',
+	        'Design',
+	        'Fashion',
+	        'Film & Video',
+	        'Food',
+	        'Games',
+	        'Journalism',
+	        'Music',
+	        'Photography',
+	        'Publishing',
+	        'Technology',
+	        'Theater',
         ];
 
         foreach ($categories as $category) {

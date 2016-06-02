@@ -20,7 +20,7 @@ class OptionsTableSeeder extends Seeder
             ),
             array(
                 'key' => 'site.description',
-                'value' => 'My Site.',
+                'value' => 'Funding platform.',
             ),
             array(
                 'key' => 'site.keywords',
@@ -32,11 +32,23 @@ class OptionsTableSeeder extends Seeder
             ),
             array(
                 'key' => 'facebook.link',
-                'value' => 'https://www.facebook.com/pingponglabs',
+                'value' => 'https://www.facebook.com/slingshot',
             ),
             array(
                 'key' => 'twitter.link',
-                'value' => 'https://twitter.com/pingponglabs',
+                'value' => 'https://twitter.com/slingshot',
+            ),
+            array(
+                'key' => 'google.link',
+                'value' => 'https://google.com',
+            ),
+            array(
+                'key' => 'instargam.link',
+                'value' => 'https://www.instagram.com/',
+            ),
+            array(
+                'key' => 'linkedin.link',
+                'value' => 'https://www.linkedin.com/in/eugene-goian-a19a1659',
             ),
             array(
                 'key' => 'post.permalink',

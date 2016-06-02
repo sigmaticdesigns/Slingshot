@@ -10,7 +10,7 @@
                     <a href="" class="campaigns__filtre-item" data-value="trending">Trending</a>
                     <a href="" class="campaigns__filtre-item" data-value="ending">Ending soon</a>
                 </div>
-                <a href="" class="campaigns__filtre-item campaigns__filtre-item--see-all">See all</a>
+                <a href="{!! route('projects.index') !!}" class="campaigns__filtre-item campaigns__filtre-item--see-all">See all</a>
             </div>
 
             <div data-content="projects-list" data-ref="projects">
@@ -19,7 +19,10 @@
         </div>
         <div class="campaigns-sidebar">
             <div class="campaign-search">
-                <input type="text" name="campaign-search" class="campaign-search__field" placeholder="Search campaign">
+                <form action="{!! route('projects.index') !!}" method="get" data-no-ajax="true">
+                    {!! Form::text('search', Illuminate\Support\Facades\Input::get('search'), ['class' => "campaign-search__field", 'placeholder' => "Search campaign"]) !!}
+                    <button type="submit" class="campaign-search__btn"></button>
+                </form>
             </div>
             <div class="campaigns-category">
                 <ul class="campaigns-category__list">

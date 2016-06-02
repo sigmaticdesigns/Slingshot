@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\Http\Requests\Admin\Projects\CreateProjectRequest;
 use App\Http\Requests\Admin\Projects\UpdateProjectRequest;
+use Illuminate\Support\Facades\Input;
 use Pingpong\Admin\Entities\Category;
 
 class ProjectsController extends Controller
@@ -24,7 +25,14 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $projects = Project::latest()->paginate(20);
+
+	    if (Input::has('q')) {
+		    $query = Input::get('q');
+		    $projects = Project::where('name', 'like', "%$query%")->latest()->paginate(20);
+	    }
+	    else {
+		    $projects = Project::latest()->paginate(20);
+	    }
 
         $no = $projects->firstItem();
 

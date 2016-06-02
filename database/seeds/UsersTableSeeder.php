@@ -25,13 +25,25 @@ class UsersTableSeeder extends Seeder
 	    User::create([
 		    'email' => 'user2@slingshot.com',
 		    'password' => 'secret',
-		    'name' => 'Ian Gilan',
+		    'name' => 'Ian Gillan',
 	    ]);
 
 	    User::create([
 		    'email' => 'user3@slingshot.com',
 		    'password' => 'secret',
 		    'name' => 'John Snow',
+	    ]);
+
+	    User::create([
+		    'email' => 'user4@slingshot.com',
+		    'password' => 'secret',
+		    'name' => 'Peter Gabriel',
+	    ]);
+
+	    User::create([
+		    'email' => 'user5@slingshot.com',
+		    'password' => 'secret',
+		    'name' => 'Ian Anderson',
 	    ]);
     }
 }
