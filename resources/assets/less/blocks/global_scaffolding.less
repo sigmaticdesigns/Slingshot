@@ -23,6 +23,18 @@ body {
   font-family: @font-family;
   font-size: @font-size;
   font-weight: @font--normal;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+header,
+footer {
+  flex-shrink: 0;
 }
 
 a {
@@ -66,6 +78,7 @@ input::-ms-clear {
 select::-ms-expand {
   background-color: transparent;
   border: none;
+  padding-right: 5px;
 }
 
 .container {

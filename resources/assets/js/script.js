@@ -37,3 +37,14 @@ $(document).ready(function(){
     else {$(".fields-group__counter").html(cnt);}
   });
 });
+
+//ckEditor
+/*
+CKEDITOR.replace("full-desc", {'filebrowserBrowseUrl':'/vendor/ckeditor/kcfinder/browse.php?type=files',
+  'filebrowserImageBrowseUrl':'/ckeditor/kcfinder/browse.php?type=images',
+  'filebrowserFlashBrowseUrl':'/ckeditor/kcfinder/browse.php?type=flash',
+  'filebrowserUploadUrl':'/ckeditor/kcfinder/upload.php?type=files',
+  'filebrowserImageUploadUrl':'/ckeditor/kcfinder/upload.php?type=images',
+  'filebrowserFlashUploadUrl':'/ckeditor/kcfinder/upload.php?type=flash'
+});
+*/
