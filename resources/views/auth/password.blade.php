@@ -2,55 +2,25 @@
 
 @section('content')
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Login
-            <div class="panel-nav pull-right" style="margin-top: -7px;">
-                <a href="{!! url('/auth/register') !!}" class="btn btn-default">Sign Up</a>
-            </div>
-        </div>
-        <div class="panel-body">
-
-
-
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+    <div class="form-block">
+        <h1 class="form-block__title">Forgot your password?</h1>
+        {!! Form::open(['files' => true, 'url' => url('/password/email'), 'data-no-ajax' => true, 'class' => 'fields-group']) !!}
+        {!! Form::email(
+                'email',
+                old('email'),
+                [
+                    'placeholder' => 'email@...',
+                    'class' => 'fields-group__field' . ($errors->first('email') ? ' fields-group__field--invalid' : '')
+                ]
+            ) !!}
+        <div class="fields-group__error">
+            @if($errors->first('email'))
+                {!! Form::label('email', $errors->first('email'), ['style' => 'display:block']) !!}
             @endif
-
-            <div class="form-horizontal">
-
-    {!! Form::open(['files' => true, 'url' => url('/password/email'), 'data-no-ajax' => true]) !!}
-
-
-
-                <div class="form-group">
-                    {!! Form::label('email', 'Email:', ['class' => 'col-md-2 control-label']) !!}
-                    <div class="col-sm-9">
-                        {!! Form::email('email', old('email'), ['class' => 'form-control']) !!}
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label class="col-md-2 control-label"></label>
-                    <div class="col-sm-9">
-                        {!! Form::submit('Send Password Reset Link', ['class' => 'btn btn-primary']) !!}
-                    </div>
-                </div>
-                {!! Form::close() !!}
-            </div>
-
-
-
-
         </div>
+
+        {!! Form::submit('Send Password Reset Link', ['class' => 'btn btn--form-submit']) !!}
+        {!! Form::close() !!}
     </div>
 
 @stop

@@ -42,7 +42,6 @@
                     @foreach($categoryList as $category)
                     <li class="campaigns-category__item"><a href="/category/{!! $category->slug !!}" data-id="{!! $category->id !!}">{!! $category->name !!}</a></li>
                     @endforeach
-                    {{--<li class="campaigns-category__item campaigns-category__item--active"><a href="">Comics</a></li>--}}
                 </ul>
             </div>
         </div>
@@ -51,7 +50,7 @@
         <div class="new-project__wrap">
             <h1 class="new-project__title">Ready To Promote Your New Project?</h1>
             <p class="new-project__content">The European languages are members of the same family. Their separate existence is a myth.</p>
-            <a href="" class="btn btn--explore">Explore a project</a>
+            <a href="{!! route('projects.index') !!}" class="btn btn--explore">Explore a project</a>
             <a href="{!! route('user.projects.create') !!}" class="btn btn--create-new">Create a project</a>
         </div>
     </section>

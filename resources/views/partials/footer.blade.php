@@ -8,11 +8,11 @@
         <div class="footer-social">
             <div class="footer-social__title">Follow us</div>
             <div class="footer-social__wrap">
-                <a href="" class="footer-social__btn footer-social__btn--fb">Facebook</a>
-                <a href="" class="footer-social__btn footer-social__btn--tw">Twitter</a>
-                <a href="" class="footer-social__btn footer-social__btn--google">Google plus</a>
-                <a href="" class="footer-social__btn footer-social__btn--insta">Instargam</a>
-                <a href="" class="footer-social__btn footer-social__btn--in">Linkedin</a>
+                <a href="{!! option('facebook.link') !!}" class="footer-social__btn footer-social__btn--fb">Facebook</a>
+                <a href="{!! option('twitter.link') !!}" class="footer-social__btn footer-social__btn--tw">Twitter</a>
+                <a href="{!! option('google.link') !!}" class="footer-social__btn footer-social__btn--google">Google plus</a>
+                <a href="{!! option('instargam.link') !!}" class="footer-social__btn footer-social__btn--insta">Instargam</a>
+                <a href="{!! option('linkedin.link') !!}" class="footer-social__btn footer-social__btn--in">Linkedin</a>
             </div>
         </div>
         <div class="footer-payment">
@@ -27,7 +27,7 @@
         <div class="footer-menu__about">
             <div class="footer-menu__title">About us</div>
             <ul class="footer-menu__list">
-                @foreach(\App\Page::menu() as $page)
+                @foreach(\App\Page::menu(1) as $page)
                     <a href="{{ url($page->slug) }}">{!! $page->title !!}</a><br>
                     <li class="footer-menu__item">
                         <a href="{{ url($page->slug) }}">{!! $page->title !!}</a>
@@ -39,15 +39,12 @@
         <div class="footer-menu__help">
             <div class="footer-menu__title">Help</div>
             <ul class="footer-menu__list">
-                <li class="footer-menu__item"><a href="">FAQ</a></li>
-                <li class="footer-menu__item"><a href="">Our Rules</a></li>
-                <li class="footer-menu__item"><a href="">Creator Handbook</a></li>
-                <li class="footer-menu__item"><a href="">Campus New!</a></li>
-                <li class="footer-menu__item"><a href="">Trust &amp; Safety</a></li>
-                <li class="footer-menu__item"><a href="">Support</a></li>
-                <li class="footer-menu__item"><a href="">Terms of Use</a></li>
-                <li class="footer-menu__item"><a href="">Privacy Policy</a></li>
-                <li class="footer-menu__item"><a href="">Cookie Policy</a></li>
+                @foreach(\App\Page::menu(2) as $page)
+                    <a href="{{ url($page->slug) }}">{!! $page->title !!}</a><br>
+                    <li class="footer-menu__item">
+                        <a href="{{ url($page->slug) }}">{!! $page->title !!}</a>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>

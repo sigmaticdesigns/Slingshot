@@ -28,6 +28,8 @@
 		{!! $errors->first('category_id', '<div class="text-danger">:message</div>') !!}
 	</div>
 	@else
+        {!! Form::label('category_id', 'Display Block:') !!}
+        {!! Form::select('category_id', [1 => 'About Us', 2 => 'Help'], null, ['class' => 'form-control']) !!}
 	{!! Form::hidden('type', 'page') !!}
 	@endif
 	<div class="form-group">
@@ -35,11 +37,11 @@
 		{!! Form::textarea('body', null, ['class' => 'form-control', 'id' => 'ckeditor']) !!}
 		{!! $errors->first('body', '<div class="text-danger">:message</div>') !!}
 	</div>
-	<div class="form-group">
-		{!! Form::label('image', 'Image:') !!}
-		{!! Form::file('image', ['class' => 'form-control']) !!}
-		{!! $errors->first('image', '<div class="text-danger">:message</div>') !!}
-	</div>
+	{{--<div class="form-group">--}}
+		{{--{!! Form::label('image', 'Image:') !!}--}}
+		{{--{!! Form::file('image', ['class' => 'form-control']) !!}--}}
+		{{--{!! $errors->first('image', '<div class="text-danger">:message</div>') !!}--}}
+	{{--</div>--}}
 	@if(isset($model))
 	<div class="form-group">
 		@if($model->image)

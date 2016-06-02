@@ -13,8 +13,8 @@ class Page extends Model
 	 */
 	protected $table = 'articles';
 
-	public function scopeMenu($query)
+	public function scopeMenu($query, $category = 1)
 	{
-		return $query->where('type', 'page')->select(['title', 'slug'])->get();
+		return $query->where('type', 'page')->where('category_id', $category)->select(['title', 'slug'])->get();
 	}
 }

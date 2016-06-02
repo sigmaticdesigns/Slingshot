@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Input;
 class ProjectsController extends Controller
 {
 
+	protected $perPage = 20;
+
 	public function __construct()
 	{
 
@@ -27,7 +29,7 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-	    $projects = Project::active()->latest()->paginate(20);
+	    $projects = Project::active()->latest()->paginate($this->perPage);
 
 	    $showPagination = true;
 
@@ -63,7 +65,7 @@ class ProjectsController extends Controller
 			}
 		}
 		if ('projects' == Input::get('ref')) {
-			$projects = $projectsModel->paginate(20);
+			$projects = $projectsModel->paginate($this->perPage);
 			$showPagination = true;
 		}
 		else {

@@ -21,9 +21,9 @@
         <div class="logo"><a href="/"><span>SLING</span>-SHOT</a></div>
         <nav class="main-nav">
             <ul class="main-nav__list">
-                <li class="main-nav__item"><a href="">How it works</a></li>
+                <li class="main-nav__item"><a href="{!! url('how-it-works') !!}">How it works</a></li>
                 <li class="main-nav__item"><a href="{!! route('projects.index') !!}">Projects</a></li>
-                <li class="main-nav__item"><a href="">About us</a></li>
+                <li class="main-nav__item"><a href="{!! url('about-us') !!}">About us</a></li>
             </ul>
         </nav>
 

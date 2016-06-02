@@ -124,6 +124,21 @@
 			{!! Form::text('twitter.link', option('twitter.link'), ['class' => 'form-control']) !!}
 			{!! $errors->first('twitter.link', '<div class="text-danger">:message</div>') !!}
 		</div>
+        <div class="form-group">
+            {!! Form::label('google.link', 'Google plus Link:') !!}
+            {!! Form::text('google.link', option('google.link'), ['class' => 'form-control']) !!}
+            {!! $errors->first('google.link', '<div class="text-danger">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('instargam.link', 'Instargam Link:') !!}
+            {!! Form::text('instargam.link', option('instargam.link'), ['class' => 'form-control']) !!}
+            {!! $errors->first('instargam.link', '<div class="text-danger">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('linkedin.link', 'Linkedin Link:') !!}
+            {!! Form::text('linkedin.link', option('linkedin.link'), ['class' => 'form-control']) !!}
+            {!! $errors->first('linkedin.link', '<div class="text-danger">:message</div>') !!}
+        </div>
 		<div class="form-group">
 			{!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
 		</div>

@@ -25,6 +25,8 @@
 			<th>Author</th>
 			@if( ! isOnPages())
 			<th>Category</th>
+            @else
+                <th>Section</th>
 			@endif
 			<th>Created At</th>
 			<th class="text-center">Action</th>
@@ -37,6 +39,8 @@
 				<td>{!! $article->user->name !!}</td>
 				@if( ! isOnPages())
 				<td>{!! $article->category ? $article->category->name : null !!}</td>
+                @else
+                    <td>{!! 1 == $article->category_id ? 'About Us' : 'Help' !!}</td>
 				@endif
 				<td>{!! $article->created_at !!}</td>
 				<td class="text-center">

@@ -41,17 +41,5 @@
 
 <div class="paginator">
     {!! $projects !!}
-
-    <div class="paginator__wrap">
-        <span class="paginator__arrow paginator__arrow--prev paginator__arrow--disabled">&laquo;</span>
-
-        <a href="" class="paginator__item  paginator__item--current">1</a>
-        <a href="" class="paginator__item">2</a>
-        <a href="" class="paginator__item">3</a>
-        <a href="" class="paginator__item">4</a>
-        <a href="" class="paginator__item">5</a>
-
-        <a href=""><span class="paginator__arrow paginator__arrow--next">&raquo;</span></a>
-    </div>
 </div>
 @endif
