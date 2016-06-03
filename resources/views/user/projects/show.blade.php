@@ -21,9 +21,15 @@
                 <td>{!! $project->name !!}</td>
             </tr>			
             <tr>
-                <td><b>Category_id</b></td>
-                <td>{!! $project->category_id !!}</td>
-            </tr>			
+                <td><b>Category</b></td>
+                <td>{!! $project->category->name !!}</td>
+            </tr>
+            <tr>
+                <td><b>image</b></td>
+                <td>
+                    <img src="{!! $project->image->path !!}" alt="" width="256" height="187">
+                </td>
+            </tr>
             <tr>
                 <td><b>Budget</b></td>
                 <td>{!! $project->budget !!}</td>
@@ -43,9 +49,9 @@
             <tr>
                 <td><b>Deadline</b></td>
                 <td>{!! $project->deadline !!}</td>
-            </tr>			
+            </tr>
             <tr>
-                <td><b>Half_deadline</b></td>
+                <td><b>Deadline for getting 50%</b></td>
                 <td>{!! $project->half_deadline !!}</td>
             </tr>
 

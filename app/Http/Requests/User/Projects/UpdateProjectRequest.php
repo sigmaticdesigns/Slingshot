@@ -27,7 +27,7 @@ class UpdateProjectRequest extends Request
 //			'budget' => 'required|numeric|min:1',
 			'description' => 'required|max:255',
 			'body' => 'required',
-			'file' => 'required|image',
+//			'file' => 'required|image',
 		];
     }
 
