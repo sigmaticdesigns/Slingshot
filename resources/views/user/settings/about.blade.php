@@ -9,7 +9,7 @@
 
             {!! Form::model(Auth::user(), ['method' => 'POST', 'files' => true, 'url' => url('user/settings/update'), 'class' => 'fields-group']) !!}
 
-                {!! Form::textarea('about', null, ['class' => 'fields-group__field fields-group__field--full-desc', 'placeholder' => 'About Me', 'cols' => 30, 'rows' => 20, 'maxlength' => 135,]) !!}
+                {!! Form::textarea('about', null, ['class' => 'fields-group__field fields-group__field--full-desc', 'placeholder' => 'About Me', 'cols' => 30, 'rows' => 20]) !!}
                 <div class="fields-group__error">
                     {!! Form::label('about', '') !!}
                 </div>

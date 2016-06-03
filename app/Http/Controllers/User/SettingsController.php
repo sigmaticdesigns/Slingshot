@@ -92,6 +92,10 @@ class SettingsController extends Controller
 				]
 			);
 		    $user->save();
+		    \Session::flash('success.message', "Your profile picture has been successfully updated.");
+		    if ($request->ajax()) {
+			    return response()->json(['success' => true, 'redirect' => url('user/settings')]);
+		    }
 	    }
 	    else {
 		    $user->update($request->all());
