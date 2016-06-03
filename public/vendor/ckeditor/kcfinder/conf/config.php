@@ -23,7 +23,7 @@ $_CONFIG = array(
 
     'disabled' => false,
     'uploadURL' => "upload",
-    'uploadDir' => "z:/home/slingshot.md/www/upload/",
+    'uploadDir' => "/web/w/slingshot/public/static/uploads",
     'theme' => "default",
 
     'types' => array(

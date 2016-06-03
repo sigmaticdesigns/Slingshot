@@ -57,7 +57,7 @@
 	@endif
 
 
-	{!! Form::textarea('body', null, ['class' => 'fields-group__field fields-group__field--full-desc', 'cols' => "30", 'rows' => "10", 'placeholder' => "Project full description"]) !!}
+	{!! Form::textarea('body', null, ['class' => 'fields-group__field fields-group__field--full-desc', 'cols' => "30", 'rows' => "10", 'placeholder' => "Project full description", 'id' => 'wysiwyg']) !!}
 	<div class="fields-group__error">
 		{!! Form::label('body', '') !!}
 	</div>
@@ -69,3 +69,7 @@
     @endif
 {!! Form::close() !!}
 
+
+    @section('script')
+        {!! HTML::script('vendor/ckeditor/ckeditor.js') !!}
+    @stop

@@ -4567,6 +4567,15 @@ function initProjectForm()
         if(cnt <= 0){$(".fields-group__counter").html('0');}
         else {$(".fields-group__counter").html(cnt);}
     });
+
+    CKEDITOR.replace("wysiwyg", {
+        'filebrowserBrowseUrl':'/vendor/ckeditor/kcfinder/browse.php?type=files',
+        'filebrowserImageBrowseUrl':'/vendor/ckeditor/kcfinder/browse.php?type=images',
+        'filebrowserFlashBrowseUrl':'/ckeditor/kcfinder/browse.php?type=flash',
+        'filebrowserUploadUrl':'/vendor/ckeditor/kcfinder/upload.php?type=files',
+        'filebrowserImageUploadUrl':'/vendor/ckeditor/kcfinder/upload.php?type=images',
+        'filebrowserFlashUploadUrl':'/vendor/ckeditor/kcfinder/upload.php?type=flash'
+    });
 }
 /**
  * Created by esabbath on 6/1/16.

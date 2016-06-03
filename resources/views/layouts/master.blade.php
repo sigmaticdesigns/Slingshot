@@ -86,8 +86,9 @@
 <!-- Bootstrap JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
+@yield('script')
 <script src="{{ asset('/js/all.js') }}"></script>
+
 
 @include('partials.errors')
 
