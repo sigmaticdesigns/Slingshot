@@ -22,7 +22,7 @@ $_CONFIG = array(
 // GENERAL SETTINGS
 
     'disabled' => false,
-    'uploadURL' => "upload",
+    'uploadURL' => "/static/uploads",
     'uploadDir' => "/web/w/slingshot/public/static/uploads",
     'theme' => "default",
 
@@ -46,8 +46,8 @@ $_CONFIG = array(
     'jpegQuality' => 90,
     'thumbsDir' => ".thumbs",
 
-    'maxImageWidth' => 0,
-    'maxImageHeight' => 0,
+    'maxImageWidth' => 500,
+    'maxImageHeight' => 1000,
 
     'thumbWidth' => 100,
     'thumbHeight' => 100,
@@ -57,7 +57,7 @@ $_CONFIG = array(
 
 // DISABLE / ENABLE SETTINGS
 
-    'denyZipDownload' => false,
+    'denyZipDownload' => true,
     'denyUpdateCheck' => false,
     'denyExtensionRename' => false,
 

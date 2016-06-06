@@ -34,7 +34,9 @@
                         {!! $project->description !!}
                     </td>
 					<td>
+                        @if ($project->image)
                         <img src="{!! $project->image->path !!}" alt="" width="256" height="187">
+                        @endif
                     </td>
 					<td>{!! $project->deadline !!}</td>
 
