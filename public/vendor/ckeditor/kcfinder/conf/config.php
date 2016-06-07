@@ -15,6 +15,13 @@
 /* IMPORTANT!!! Do not comment or remove uncommented settings in this file
    even if you are using session configuration.
    See http://kcfinder.sunhater.com/install for setting descriptions */
+$publicDir = substr(__DIR__, 0, strrpos(__DIR__, '/public/')+strlen('/public'));
+$subDir = '/static/uploads/editor/' . date("Y/m/d/");
+
+$fullPath = $publicDir . $subDir;
+if (!is_dir($fullPath)) {
+	mkdir($fullPath, 0755, true);
+}
 
 $_CONFIG = array(
 
@@ -22,8 +29,8 @@ $_CONFIG = array(
 // GENERAL SETTINGS
 
     'disabled' => false,
-    'uploadURL' => "/static/uploads",
-    'uploadDir' => "/web/w/slingshot/public/static/uploads",
+    'uploadURL' => $subDir,
+    'uploadDir' => $fullPath,
     'theme' => "default",
 
     'types' => array(
@@ -43,10 +50,10 @@ $_CONFIG = array(
 // IMAGE SETTINGS
 
     'imageDriversPriority' => "imagick gmagick gd",
-    'jpegQuality' => 90,
+    'jpegQuality' => 100,
     'thumbsDir' => ".thumbs",
 
-    'maxImageWidth' => 500,
+    'maxImageWidth' => 600,
     'maxImageHeight' => 1000,
 
     'thumbWidth' => 100,
