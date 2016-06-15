@@ -70,6 +70,19 @@ class User extends Model implements AuthenticatableContract,
 		return $result;
 	}
 
+	public function image()
+	{
+		$result = '';
+		if ($this->avatar) {
+			$imgData = json_decode($this->avatar);
+			if ($imgData)
+			{
+				$result = $imgData->path . '/' . $imgData->b;
+			}
+		}
+		return $result;
+	}
+
 	/**
 	 * Set the password to be hashed when saved
 	 */

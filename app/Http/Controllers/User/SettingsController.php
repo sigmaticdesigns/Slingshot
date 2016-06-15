@@ -82,7 +82,7 @@ class SettingsController extends Controller
 			$pathSmall = $dirName . '/' . $filenameSmall;
 
 //		    TODO: do crop
-		    \Image::make($image->getRealPath())->fit(300, 300)->save($pathBig);
+		    \Image::make($image->getRealPath())->fit(258, 258)->save($pathBig);
 		    \Image::make($image->getRealPath())->fit(28, 28)->save($pathSmall);
 		    $user->avatar = json_encode(
 				[
