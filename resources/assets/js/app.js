@@ -92,6 +92,9 @@ $(function() {
     if ($('div[data-content="project-form"]').length) {
         initProjectForm();
     }
+    if ($('input[name=avatar]').length) {
+        initImageUploadForm('avatar', 258, 258, 'Your Profile Picture');
+    }
 });
 
 
@@ -116,8 +119,51 @@ function initProjectForm()
         else {$(".fields-group__counter").html(cnt);}
     });
 
+    initImageUploadForm('file', 256, 187, 'Your project picture');
+
     CKEDITOR.replace("wysiwyg", {
         'filebrowserImageUploadUrl':'/vendor/ckeditor/kcfinder/upload.php?type=images',
         'filebrowserFlashUploadUrl':'/vendor/ckeditor/kcfinder/upload.php?type=flash'
     });
+}
+
+function initImageUploadForm(fileFieldId, imgWidth, imgHeight, alt)
+{
+    var uploadBtn = document.getElementById(fileFieldId);
+    var imgBox = document.querySelector(".fields-group__img-box");
+    var imgClose = document.querySelector(".fields-group__img-close");
+    var imgToUpload;
+
+    function elemCreate(elType){
+        var element = document.createElement(elType);
+        if (arguments.length>1){
+            var props = [].slice.call(arguments,1), key = props.shift();
+            while (key){
+                element.setAttribute(key,props.shift());
+                key = props.shift();
+            }
+        }
+        return element;
+    }
+
+    uploadBtn.addEventListener("change", function(){
+        imgBox.style.display = "block";
+        if (document.body.contains(imgToUpload)) {
+            imgBox.removeChild(imgToUpload);
+        }
+
+        imgToUpload = elemCreate("img",
+            "width", imgWidth,
+            "height", imgHeight,
+            "alt", alt);
+        imgToUpload.src = window.URL.createObjectURL(this.files[0]);
+        imgToUpload.height = imgHeight;
+        imgBox.appendChild(imgToUpload);
+    });
+
+    imgClose.addEventListener("click", function() {
+        imgBox.style.display = "none";
+        imgBox.removeChild(imgToUpload);
+    });
+
 }

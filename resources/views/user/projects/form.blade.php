@@ -4,15 +4,21 @@
 		{!! Form::open(['files' => true, 'route' => 'user.projects.store', 'class' => 'fields-group']) !!}
 	@endif
 
-	<div class="fields-group__img-box">
-		<label class="fields-group__upload">
-			<span class="btn btn--upload">Upload project image</span>
-			{!! Form::file('file') !!}
-		</label>
-	</div>
+
+
+    <label class="fields-group__upload">
+        <span class="btn btn--upload">Upload project image</span>
+        {!! Form::file('file', ['id' => 'file']) !!}
+    </label>
     <div class="fields-group__error">
         {!! Form::label('file', '') !!}
     </div>
+
+    <div class="fields-group__img-box" style="width: 256px;height: 187px;">
+        <span class="fields-group__img-close">+</span>
+    </div>
+
+
 
 	{!! Form::text('name', null, ['class' => 'fields-group__field', 'placeholder' => 'Project name']) !!}
 	<div class="fields-group__error">

@@ -68,6 +68,7 @@ class ProjectsController extends Controller
 	    $data['deadline'] = Carbon::createFromFormat("m/d/Y", $data['deadline']);
 	    $data['half_deadline'] = Carbon::createFromFormat("m/d/Y", $data['half_deadline']);
 		$project = Project::create($data);
+	    $data['file_id'] = $this->_uploadFile($data, null, $project);
 
 		\Session::flash('success.message', "Project has been successfully created. And waiting for approving.");
 		if ($request->ajax()) {
@@ -122,8 +123,9 @@ class ProjectsController extends Controller
 //		$data['user_id'] = $this->user->id;
 		$data['status'] = Project::STATUS_PENDING;
 
-
 		$project->update($data);
+
+	    $this->_uploadFile($data, null, $project);
 
 		\Session::flash('success.message', "Project has been successfully updated. And waiting for approving.");
 		if ($request->ajax()) {
@@ -148,7 +150,7 @@ class ProjectsController extends Controller
         return redirect()->route('user.projects.index');
     }
 
-	private function _uploadFile($data, $default = null)
+	private function _uploadFile($data, $default = null, $project = null)
 	{
 		$result = $default;
 //	    TODO: move to file uploader
@@ -156,6 +158,10 @@ class ProjectsController extends Controller
 		{
 			$image = Input::file('file');
 			$filename  = Str::slug($data['name'], '_') . '_' . time() . '.' . $image->getClientOriginalExtension();
+			if ($project) {
+				$filename  = Str::slug($data['name'], '_') . '_big_' . time() . '.' . $image->getClientOriginalExtension();
+			}
+
 			$publicDirName = '/static/uploads/' . date("Y") . '/' . date("m"). '/'. date("d");
 			$dirName = public_path($publicDirName);
 			if (!\Illuminate\Support\Facades\File::exists($dirName)) {
@@ -164,12 +170,26 @@ class ProjectsController extends Controller
 			$path = $dirName . '/' . $filename;
 //		    $img = Image::make($path);
 			// crop image
-			\Image::make($image->getRealPath())->fit(256, 187)->save($path);
-			$file = FileModel::create([
+			if ($project) {
+				\Image::make($image->getRealPath())->fit(555, 297)->save($path);
+			}
+			else {
+				\Image::make($image->getRealPath())->fit(256, 187)->save($path);
+			}
+
+			$data = [
 				'type'  => 'image',
 				'filename' => $filename,
 				'path'  => $publicDirName . '/' . $filename
-			]);
+			];
+
+
+			if ($project) {
+				$file = $project->files()->create($data);
+			}
+			else {
+				$file = FileModel::create($data);
+			}
 			$result = $file->id;
 		}
 		return $result;

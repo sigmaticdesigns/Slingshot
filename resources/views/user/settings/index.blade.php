@@ -19,11 +19,11 @@
                 <div class="profile__edit">
                     <ul class="profile__info">
                         <li class="profile__info-item profile__info-item--name">{!! Auth::user()->name !!}</li>
-                        <li class="profile__info-item">Country</li>
-                        <li class="profile__info-item">City</li>
-                        <li class="profile__info-item">Postal code</li>
+                        {{--<li class="profile__info-item">Country</li>--}}
+                        {{--<li class="profile__info-item">City</li>--}}
+                        {{--<li class="profile__info-item">Postal code</li>--}}
                         <li class="profile__info-item">{!! Auth::user()->email !!}</li>
-                        <li class="profile__info-item">Laguage - English</li>
+                        {{--<li class="profile__info-item">Laguage - English</li>--}}
                     </ul>
                     <a href="{{ url('user/settings/about-me') }}" class="btn btn--profile">Edit profile</a>
                 </div>

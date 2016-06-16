@@ -120,4 +120,42 @@
       background-color: @color-main--lighten;
     }
   }
+
+  &--add-project {
+    width: 200px;
+    float: right;
+    margin-top: 10px;
+
+    &:hover {
+      background-color: @color-main--lighten;
+    }
+  }
+
+  &--preview {
+    display: block;
+    margin-bottom: 5px;
+
+    &:hover {
+      background-color: @color-main--lighten;
+    }
+  }
+
+  &--edit {
+    display: block;
+    margin-bottom: 5px;
+    background-color: @color-secondary;
+
+    &:hover {
+      background-color: lighten(@color-secondary, 20%);
+    }
+  }
+
+  &--delete {
+    display: block;
+    background-color: @danger;
+
+    &:hover {
+      background-color: darken(@danger, 20%);
+    }
+  }
 }

@@ -43,5 +43,5 @@ elixir(function(mix) {
 });
 
 elixir(function(mix) {
-    mix.scripts(['toastr.js', 'vendor/slick.js', 'vendor/jquery.pickmeup.js', 'app.js', 'projects.js', 'script.js'], 'public/js/all.js');
+    mix.scripts(['toastr.js', 'vendor/slick.js', 'vendor/jquery.pickmeup.js', 'app.js', 'projects.js', 'project.js', 'script.js'], 'public/js/all.js');
 });

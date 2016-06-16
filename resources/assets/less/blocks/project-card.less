@@ -1,0 +1,98 @@
+.project-card {
+  float: left;
+  .make-column(2);
+  margin-right: 0;
+
+  &__title {
+    color: #000;
+    font-size: @font-size--h1 - 10;
+    margin-bottom: 10px;
+    min-height: 100px;
+  }
+
+  &__owner {
+    font-size: @font-size + 7;
+    color: #000;
+    margin-bottom: 30px;
+  }
+
+  &__wrap {
+    .clearfix;
+    margin-top: 28px;
+  }
+
+  &__remind {
+    cursor: pointer;
+    float: left;
+    line-height: 40px;
+    font-size: @font-size + 2;
+    color: @gray;
+    margin-right: 1%;
+
+    &:hover {
+      .project-card__remind-star {
+        fill: @color-star;
+      }
+    }
+  }
+
+  &__remind-star {
+    fill: @gray;
+
+    &--active {
+      fill: @color-star;
+    }
+  }
+
+  &__social {
+    float: left;
+    font-size: 0;
+    min-width: 194px;
+  }
+
+  &__social-btn {
+    display: inline-block;
+    vertical-align: top;
+    width: 39px;
+    height: 39px;
+    margin-right: 5%;
+    background-image: url("../img/spritesheet.png");
+    background-repeat: no-repeat;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &--fb {
+      background-position: -79px -3px;
+
+      &:hover {
+        background-position: -124px -3px;
+      }
+    }
+
+    &--tw {
+      background-position: -767px -3px;
+
+      &:hover {
+        background-position: -812px -3px;
+      }
+    }
+
+    &--google {
+      background-position: -169px -3px;
+
+      &:hover {
+        background-position: -214px -3px;
+      }
+    }
+
+    &--in {
+      background-position: -411px -3px;
+
+      &:hover {
+        background-position: -456px -3px;
+      }
+    }
+  }
+}
