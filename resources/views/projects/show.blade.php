@@ -112,7 +112,7 @@
                     </div>
 
                     {{--Backers--}}
-                    <div class="tab tab--backers" data-content="backers">
+                    <div class="tab tab--backers" data-content="backers" style="display:none;">
                         <div class="backers">
                             <div class="backers__item">
                                 <div class="backers__item-block">
