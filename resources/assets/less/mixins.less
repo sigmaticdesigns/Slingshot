@@ -9,7 +9,7 @@
 
 .container {
   margin: 0 auto;
-  max-width: 1160px;
+  max-width: 1172px;
   min-width: 900px;
   padding-left: 10px;
   padding-right: 10px;
@@ -23,6 +23,11 @@
 
 .make-column(1){
   width: @column;
+  margin-right: @column-margin;
+}
+
+.make-column(2){
+  width: @column*2 + @column-margin;
   margin-right: @column-margin;
 }
 
