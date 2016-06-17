@@ -1,0 +1,104 @@
+.pay {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba( 0, 0, 0, 0.3);
+  z-index: 10;
+
+  &__container {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    margin-left: -214px;
+    width: 428px;
+    padding-left: 24px;
+    padding-right: 25px;
+    padding-top: 18px;
+    padding-bottom: 25px;
+    background-color: #fff;
+    border-radius: 7px;
+  }
+
+  &__title {
+    font-size: @font-size--h1 - 10;
+    color: #000;
+    margin-bottom: 20px;
+  }
+
+  &__option-wrap {
+    margin-bottom: 10px;
+  }
+
+  &__option {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
+  &__option-label {
+    display: inline-block;
+    vertical-align: middle;
+    width: 51px;
+    height: 32px;
+    background-image: url("../img/spritesheet.png");
+    background-repeat: no-repeat;
+
+    &--paypal {
+      background-position: -634px -3px;
+    }
+
+    &--master {
+      background-position: -577px -3px;
+    }
+  }
+
+  &__summ {
+    margin-top: 50px;
+    font-size: 0;
+  }
+
+  &__summ-field {
+    width: 45%;
+    height: 45px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: @font-size + 5;
+    margin-right: 10%;
+    border: 1px solid @field-border;
+
+    &:focus {
+      border-color: @color-main;
+    }
+
+    &--invalid {
+      border: 1px solid @danger;
+      background-color: @danger--light;
+
+      &:focus {
+        border-color: @danger;
+      }
+    }
+  }
+
+  &__close {
+    position: absolute;
+    display: block;
+    font-size: 25px;
+    text-align: center;
+    line-height: 27px;
+    top: -12px;
+    right: -12px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #fff;
+    transform: rotate(45deg);
+    color: @gray;
+    border: 1px solid @gray--light;
+    cursor: pointer;
+  }
+
+}
