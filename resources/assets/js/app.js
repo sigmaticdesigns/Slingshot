@@ -53,10 +53,15 @@ $(function() {
             },
             error: function (jqXhr, json, errorThrown)
             {
+                if (401 == jqXhr.status) {
+                    window.location = '/auth/login';
+                    return;
+                }
                 removeAllErrors();
                 $("#loading-msg").hide();
 
-                if (!$.isEmptyObject(jqXhr.responseJSON)) {
+                if (!$.isEmptyObject(jqXhr.responseJSON))
+                {
                     var errorMessages = [],
                         errorMessage = '<strong>Whoops!</strong> There were some problems with your input.<br>';
 

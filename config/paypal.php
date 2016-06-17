@@ -8,8 +8,8 @@
 
 return array(
 	// set your paypal credential
-	'client_id' => env('PAYPAL_CLIENT_ID', 'AWmQUGvwO6yeya37NdiUynWG2KkkcdyiiMmUjqDxLpBHcKBnWtaxseJdqVSdLfcfAE0GOyGiQxUUU7ND'),
-	'secret' => env('PAYPAL_SECRET', 'EF3Snn6nLSC-khdjTScWPFPL-9_WxqrLQWx-rptxrNjwToHgn1pe6DtkmFu22FAideJf7yCWdFEgZL8g'),
+	'client_id' => env('PAYPAL_CLIENT_ID', 'AQwg27anqI-eC0pZJ2SeI0Ig0IYWzORL6nBXoGi6tJOI9YMr72hM5i5AoOotTYgV8pdmP4QdZITwlAFD'),
+	'secret' => env('PAYPAL_SECRET', 'EJjYxmLT9nXNz3-24DGkIb_wL6B4aVng_ScxgIVrZ7R4Qrb_e84Tm1ftmzpiXCjIphu4P9qrBiicL1bw'),
 
 	/**
 	 * SDK configuration

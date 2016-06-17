@@ -979,6 +979,16 @@ select::-ms-expand
 {
     background-color: #df2209;
 }
+.btn--pledge
+{
+    font-size: 18px;
+
+    width: 45%;
+}
+.btn--pledge:hover
+{
+    background-color: #9ed53f;
+}
 .page-header
 {
     min-height: 75px;
@@ -2558,7 +2568,7 @@ select::-ms-expand
 }
 .tab--story
 {
-    display: none;
+    display: block;
 }
 .tab--comments
 {
@@ -2566,7 +2576,7 @@ select::-ms-expand
 }
 .tab--backers
 {
-    display: block;
+    display: none;
 }
 .tabs__nav
 {
@@ -2591,7 +2601,7 @@ select::-ms-expand
 {
     color: #8db34b;
 }
-.story__cont
+.story p
 {
     font-size: 16px;
 
@@ -2601,12 +2611,8 @@ select::-ms-expand
 
     color: #333;
 }
-.story__image
-{
-    width: 100%;
-    margin-bottom: 35px;
-}
-.story__header
+.story h2,
+.story h3
 {
     font-weight: 600;
 
@@ -2614,6 +2620,11 @@ select::-ms-expand
 
     text-align: left;
     text-transform: uppercase;
+}
+.story img
+{
+    width: 100%;
+    margin-bottom: 35px;
 }
 .comments
 {
@@ -2893,4 +2904,196 @@ select::-ms-expand
 .my-projects__item:hover
 {
     background-color: #e7e7e7;
+}
+.static-page
+{
+    padding-bottom: 50px;
+}
+.static-page__banner
+{
+    display: table;
+
+    width: 100%;
+    min-height: 341px;
+    margin-bottom: 30px;
+
+    text-align: center;
+
+    background: #e7e7e7 url('../img/text-page_bg.jpg') no-repeat;
+}
+.static-page__banner h1
+{
+    font-size: 50px;
+
+    display: table-cell;
+
+    width: 700px;
+    height: 100%;
+    margin: 0 auto;
+    margin-bottom: 8px;
+    padding-right: 20px;
+    padding-left: 20px;
+
+    vertical-align: middle;
+
+    color: #fff;
+    text-shadow: 1px 0 0 rgba(0, 0, 0, .5), 1px 0 10px rgba(0, 0, 0, .75);
+}
+.static-page__content
+{
+    min-width: 900px;
+    max-width: 1172px;
+    margin: 0 auto;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.static-page__content:after
+{
+    display: table;
+    clear: both;
+
+    content: '';
+}
+.static-page__content h2
+{
+    font-size: 35px;
+    line-height: 35px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #2a2a2a;
+}
+.static-page__content p
+{
+    font-size: 16px;
+    line-height: 20px;
+
+    margin-bottom: 36px;
+}
+.pay
+{
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+
+    display: block;
+
+    width: 100%;
+    min-height: 100%;
+
+    background-color: rgba(0, 0, 0, .3);
+}
+.pay__container
+{
+    position: fixed;
+    top: 20%;
+    left: 50%;
+
+    width: 428px;
+    margin-left: -214px;
+    padding-top: 18px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    padding-left: 24px;
+
+    border-radius: 7px;
+    background-color: #fff;
+}
+.pay__title
+{
+    font-size: 40px;
+
+    margin-bottom: 20px;
+
+    color: #000;
+}
+.pay__option-wrap
+{
+    margin-bottom: 10px;
+}
+.pay__option
+{
+    display: inline-block;
+
+    margin-right: 10px;
+
+    vertical-align: middle;
+}
+.pay__option-label
+{
+    display: inline-block;
+
+    width: 51px;
+    height: 32px;
+
+    vertical-align: middle;
+
+    background-image: url('../img/spritesheet.png');
+    background-repeat: no-repeat;
+}
+.pay__option-label--paypal
+{
+    background-position: -634px -3px;
+}
+.pay__option-label--master
+{
+    background-position: -577px -3px;
+}
+.pay__summ
+{
+    font-size: 0;
+
+    margin-top: 50px;
+}
+.pay__summ-field
+{
+    font-size: 18px;
+
+    width: 45%;
+    height: 45px;
+    margin-right: 10%;
+    padding-right: 10px;
+    padding-left: 10px;
+
+    border: 1px solid #e7e7e7;
+}
+.pay__summ-field:focus
+{
+    border-color: #8db34b;
+}
+.pay__summ-field--invalid
+{
+    border: 1px solid #f86956;
+    background-color: #ffeaea;
+}
+.pay__summ-field--invalid:focus
+{
+    border-color: #f86956;
+}
+.pay__close
+{
+    font-size: 25px;
+    line-height: 27px;
+
+    position: absolute;
+    top: -12px;
+    right: -12px;
+
+    display: block;
+
+    width: 30px;
+    height: 30px;
+
+    cursor: pointer;
+    transform: rotate(45deg);
+    text-align: center;
+
+    color: #828587;
+    border: 1px solid #a4a8a8;
+    border-radius: 50%;
+    background-color: #fff;
 }

@@ -12,7 +12,8 @@
 */
 
 /*admin panel*/
-Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin'], function ()
+{
 
 	Route::group(['middleware' => config('admin.filter.guest')], function ()
 	{
@@ -96,3 +97,19 @@ Route::resource('projects', 'ProjectsController');
 
 /* Display page */
 Route::get('{page}', 'PagesController@show');
+
+
+Route::group(['middleware' => 'auth'], function()
+{
+	Route::resource('payments', 'PaymentsController');
+	// Add this route for checkout or submit form to pass the item into paypal
+	Route::post('payment', array(
+		'as' => 'payment',
+		'uses' => 'PaymentsController@postPayment',
+	));
+	// this is after make the payment, PayPal redirect back to your site
+	Route::get('payment/status', array(
+		'as' => 'payment.status',
+		'uses' => 'PaymentsController@getPaymentStatus',
+	));
+});

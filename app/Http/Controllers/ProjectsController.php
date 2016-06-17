@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Payment;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use App\Project;
@@ -101,7 +102,11 @@ class ProjectsController extends Controller
     {
         $project = Project::findOrFail($id);
 
-        return view('projects.show', compact('project'));
+//	    TODO: refact
+	    $backers = Payment::project($project->id)->latest()->get();
+//	    dd($backers);
+
+        return view('projects.show', compact('project', 'backers'));
     }
 
 

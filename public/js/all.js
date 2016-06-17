@@ -4505,10 +4505,15 @@ $(function() {
             },
             error: function (jqXhr, json, errorThrown)
             {
+                if (401 == jqXhr.status) {
+                    window.location = '/auth/login';
+                    return;
+                }
                 removeAllErrors();
                 $("#loading-msg").hide();
 
-                if (!$.isEmptyObject(jqXhr.responseJSON)) {
+                if (!$.isEmptyObject(jqXhr.responseJSON))
+                {
                     var errorMessages = [],
                         errorMessage = '<strong>Whoops!</strong> There were some problems with your input.<br>';
 
@@ -4725,6 +4730,8 @@ Listing = {
 $(function() {
     if($('div[data-content="project"]').length) {
         $('div.tabs__nav a').on('click', Project.openTab);
+        $('#btn-back').on('click', Project.payWindow);
+        $('span.pay__close').on('click', function(){$("#pay-popup").hide();});
     }
 
     //$("div[data-content=projects-list]").on('click', 'ul.pagination a', Listing.paginate);
@@ -4742,6 +4749,12 @@ var Project = {
 
         $('div.tab').hide();
         $('div[data-content=' + content + ']').show();
+    },
+    payWindow: function(e)
+    {
+        e.preventDefault();
+        console.log('pay window');
+        $("#pay-popup").show();
     }
 }
 //slider
