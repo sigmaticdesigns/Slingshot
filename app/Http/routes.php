@@ -113,3 +113,4 @@ Route::group(['middleware' => 'auth'], function()
 		'uses' => 'PaymentsController@getPaymentStatus',
 	));
 });
+Route::resource('comments', 'CommentsController');
