@@ -49,7 +49,7 @@
                 <div class="tabs">
                     <div class="tabs__nav">
                         <a href="#" class="tabs__nav-item tabs__nav-item--active" data-value="story">Story</a>
-                        <a href="#" class="tabs__nav-item" data-value="comments">Comments<span class="comments-num">(0)</span></a>
+                        <a href="#" class="tabs__nav-item" data-value="comments">Comments<span class="comments-num">({!! $comments->count() !!})</span></a>
                         <a href="#" class="tabs__nav-item" data-value="backers">Backers<span class="backers-num">({!! $backers->count() !!})</span></a>
                     </div>
 
@@ -65,15 +65,22 @@
                     {{--Comments--}}
                     <div class="tab tab--comments" data-content="comments" style="display:none;">
                         <div class="comments">
-                            <div class="comments__num"><span class="comments-num">0</span> Comments</div>
-                            <div class="comments__no-contrib">You must Contribute to this campaign to post a comment.</div>
+                            <div class="comments__num"><span class="comments-num">{!! $comments->count() !!}</span> Comments</div>
 
-                            <form action="/" method="POST" class="comments__form">
-                                <div class="comments__img"><img src="img/img-user.jpg" height="47" width="47" alt="Author image"></div>
-                                <textarea name="comment" id="comment" cols="30" rows="10" placeholder="Add a comment..." class="comments__field"></textarea>
-                            </form>
+                            @if (Auth::check() && \App\User::find(Auth::user()->id)->backer($project->id))
+                                {!! Form::open(['route' => 'comments.store', 'id' => 'form-comment', 'class' => 'comments__form', 'data-callback' => 'commentResponse']) !!}
+                                    {!! Form::hidden('project_id', $project->id) !!}
+                                    <div class="comments__img">
+                                        <img src="{{ \App\User::find(Auth::user()->id)->avatar() }}" height="47" width="47" alt="Author image">
+                                    </div>
+                                    <textarea name="message" id="comment" cols="30" rows="10" placeholder="Add a comment..." class="comments__field"></textarea>
+                                    {!! Form::submit('add', ['class' => 'btn btn--pledge']) !!}
+                                {!! Form::close() !!}
+                            @else
+                                <div class="comments__no-contrib" style="display:block;">You must Contribute to this campaign to post a comment.</div>
+                            @endif
 
-
+                            @include('comments.index')
 
                         </div>
                     </div>
@@ -84,7 +91,9 @@
                             @foreach($backers as $backer)
                             <div class="backers__item">
                                 <div class="backers__item-block">
-                                    <div class="backers__img"><img src="img/img-user.jpg" width="40" height="40" alt="Backer image"></div>
+                                    <div class="backers__img">
+                                        <img src="{!! $backer->user->avatar() !!}" width="40" height="40" alt="Backer image">
+                                    </div>
                                     <div class="backers__name">{!! $backer->user->name !!}</div>
                                     <div class="backers__time">{!! $backer->created_at !!}</div>
                                 </div>

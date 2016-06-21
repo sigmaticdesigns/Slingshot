@@ -100,4 +100,19 @@ class User extends Model implements AuthenticatableContract,
 	{
 		return $this->hasMany('App\Project');
 	}
+
+	public function payments()
+	{
+		return $this->hasMany('App\Payment');
+	}
+
+	public function backer($projectId)
+	{
+		return $this->payments()->where('project_id', $projectId)->count();
+	}
+
+	public function comments()
+	{
+		return $this->hasMany('App\Comment');
+	}
 }

@@ -22,10 +22,10 @@ class CreateCommentRequest extends Request
     public function rules()
     {
         return [
-			'user_id' => 'required',
+//			'user_id' => 'required',
 			'project_id' => 'required',
 			'message' => 'required',
-			'parent_id' => 'required',
+//			'parent_id' => 'required',
 		];
     }
 

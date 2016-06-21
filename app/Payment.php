@@ -19,7 +19,7 @@ class Payment extends Model
 	}
 
 	/**
-	 * Get the user that owns the project.
+	 * Get the user that contribute the project.
 	 */
 	public function user()
 	{

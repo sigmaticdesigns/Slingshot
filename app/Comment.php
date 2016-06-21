@@ -18,6 +18,11 @@ class Comment extends Model
 	 */
 	public function response()
 	{
-		return $this->hasOne('app\Comments', 'parent_id');
+		return $this->hasOne('App\Comments', 'parent_id');
+	}
+
+	public function author()
+	{
+		return $this->belongsTo('App\User', 'user_id');
 	}
 }

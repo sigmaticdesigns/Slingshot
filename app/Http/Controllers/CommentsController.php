@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use App\Comment;
 use App\Http\Requests\Comments\CreateCommentRequest;
@@ -11,10 +12,12 @@ use App\Http\Requests\Comments\UpdateCommentRequest;
 
 class CommentsController extends Controller
 {
-    public function __construct()
-    {
-        //
-    }
+	protected $user;
+
+	public function __construct(Guard $auth)
+	{
+		$this->user = $auth->user();
+	}
 
     /**
      * Display a listing of the resource.
@@ -47,9 +50,12 @@ class CommentsController extends Controller
      */
     public function store(CreateCommentRequest $request)
     {
-        $comment = Comment::create($request->all());
+        $data = $request->all();
+	    $data['user_id'] = $this->user->id;
+	    $comment = Comment::create($data);
 
-        return redirect()->route('comments.index');
+	    $returnHTML = view('comments.item', compact('comment'))->render();
+	    return response()->json( array('success' => true, 'html' => $returnHTML) );
     }
 
     /**

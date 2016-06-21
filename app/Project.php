@@ -81,6 +81,16 @@ class Project extends Model
 	}
 
 	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 *
+	 * Get all comments
+	 */
+	public function comments()
+	{
+		return $this->hasMany('App\Comment')->orderBy('created_at', 'desc');
+	}
+
+	/**
 	 * filter only active approved projects
 	 */
 	public function scopeActive($query)

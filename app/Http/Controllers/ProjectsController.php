@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Category;
+use App\Comment;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Payment;
@@ -105,8 +106,12 @@ class ProjectsController extends Controller
 //	    TODO: refact
 	    $backers = Payment::project($project->id)->latest()->get();
 //	    dd($backers);
+//	    $comments = $project->comments()->with('author');
+	    $comments = $project->comments()->with('author')->get();
+//	    $comments = Comment::where('project_id', $project->id)->with('author')->get();
+//	    dd($comments);
 
-        return view('projects.show', compact('project', 'backers'));
+        return view('projects.show', compact('project', 'backers', 'comments'));
     }
 
 

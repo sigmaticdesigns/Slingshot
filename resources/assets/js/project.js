@@ -3,10 +3,15 @@
  */
 
 $(function() {
-    if($('div[data-content="project"]').length) {
+    if($('div[data-content="project"]').length)
+    {
         $('div.tabs__nav a').on('click', Project.openTab);
         $('#btn-back').on('click', Project.payWindow);
         $('span.pay__close').on('click', function(){$("#pay-popup").hide();});
+
+        window.commentResponse = function(response) {
+            Comment.post(response);
+        }
     }
 
     //$("div[data-content=projects-list]").on('click', 'ul.pagination a', Listing.paginate);
@@ -29,5 +34,17 @@ var Project = {
     {
         e.preventDefault();
         $("#pay-popup").show();
+    }
+}
+
+var Comment = {
+    post: function(response)
+    {
+        console.log(response);
+        if (response.html) {
+            $('div[data-content="cooments"]').prepend(response.html);
+            $('textarea#comment').val('');
+        }
+
     }
 }
