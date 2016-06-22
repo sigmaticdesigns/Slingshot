@@ -26,6 +26,11 @@ class PaymentRequest extends Request
         return [
             'amount' => 'required|numeric|min:1',
 	        'project_id' => 'required|numeric',
+	        'cardholder'    => 'required_if:pay-method,credit_card',
+	        'cardnumber'    => 'required_if:pay-method,credit_card|digits:16',
+	        'card-month'    => 'required_if:pay-method,credit_card',
+	        'card-year'    => 'required_if:pay-method,credit_card',
+	        'cvn'           => 'required_if:pay-method,credit_card|numeric',
         ];
     }
 }

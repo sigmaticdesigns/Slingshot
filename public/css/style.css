@@ -762,6 +762,7 @@ input
 }
 button
 {
+    border: none;
     outline: none;
 }
 textarea
@@ -1945,6 +1946,10 @@ select::-ms-expand
     padding-right: 20px;
     padding-left: 20px;
 }
+.fields-group--pay
+{
+    padding: 0;
+}
 .fields-group__upload
 {
     display: block;
@@ -2033,6 +2038,19 @@ select::-ms-expand
 
     resize: none;
 }
+.fields-group__field--summ
+{
+    height: 45px;
+}
+.fields-group__field--cvn
+{
+    display: inline-block;
+
+    width: 70px;
+    margin-right: 10px;
+
+    vertical-align: top;
+}
 .fields-group__text-wrap
 {
     position: relative;
@@ -2057,7 +2075,7 @@ select::-ms-expand
 }
 .fields-group__error label
 {
-    display: none;
+    display: block;
 
     margin-bottom: 10px;
 }
@@ -2112,6 +2130,14 @@ select::-ms-expand
 {
     border-color: #8db34b;
 }
+.fields-group__select-wrap--card
+{
+    float: left;
+    overflow: inherit;
+
+    width: 25%;
+    margin-right: 30px;
+}
 .fields-group__select
 {
     font-size: 15px;
@@ -2129,6 +2155,113 @@ select::-ms-expand
 .fields-group__select:focus
 {
     outline: none;
+}
+.fields-group__card
+{
+    display: none;
+
+    margin-top: 20px;
+}
+.fields-group__pay-option
+{
+    display: inline-block;
+
+    margin-right: 10px;
+    margin-bottom: 50px;
+
+    vertical-align: top;
+}
+.fields-group__pay-label
+{
+    display: inline-block;
+
+    width: 51px;
+    height: 32px;
+    margin-right: 30px;
+
+    vertical-align: middle;
+
+    background-image: url('../img/spritesheet.png');
+    background-repeat: no-repeat;
+}
+.fields-group__pay-label--paypal
+{
+    background-position: -634px -3px;
+}
+.fields-group__pay-label--master
+{
+    background-position: -577px -3px;
+}
+.fields-group__card-wrap
+{
+    margin-bottom: 30px;
+}
+.fields-group__card-wrap:after
+{
+    display: table;
+    clear: both;
+
+    content: '';
+}
+.fields-group__summ
+{
+    font-size: 0;
+}
+.fields-group__summ-wrap
+{
+    display: inline-block;
+
+    width: 45%;
+    height: 45px;
+    margin-right: 10%;
+
+    vertical-align: top;
+}
+.fields-group__tip
+{
+    position: absolute;
+    z-index: 10;
+    top: -110px;
+    left: 0;
+
+    display: none;
+
+    width: 200px;
+    padding: 10px;
+
+    color: #fff;
+    background-color: #333;
+}
+.fields-group__tip-btn
+{
+    line-height: 20px;
+
+    position: relative;
+
+    display: inline-block;
+
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+
+    cursor: pointer;
+    text-align: center;
+    vertical-align: top;
+
+    border-radius: 50%;
+    background-color: #e7e7e7;
+}
+.fields-group__tip-btn:hover .fields-group__tip
+{
+    display: block;
+}
+.fields-group__cvn-wrap
+{
+    position: relative;
+}
+#master:checked ~ .fields-group__card
+{
+    display: block;
 }
 .paginator
 {
@@ -2990,14 +3123,14 @@ select::-ms-expand
 .pay__container
 {
     position: fixed;
-    top: 20%;
+    top: 10%;
     left: 50%;
 
     width: 428px;
     margin-left: -214px;
     padding-top: 18px;
     padding-right: 25px;
-    padding-bottom: 25px;
+    padding-bottom: 40px;
     padding-left: 24px;
 
     border-radius: 7px;
@@ -3010,69 +3143,6 @@ select::-ms-expand
     margin-bottom: 20px;
 
     color: #000;
-}
-.pay__option-wrap
-{
-    margin-bottom: 10px;
-}
-.pay__option
-{
-    display: inline-block;
-
-    margin-right: 10px;
-
-    vertical-align: middle;
-}
-.pay__option-label
-{
-    display: inline-block;
-
-    width: 51px;
-    height: 32px;
-
-    vertical-align: middle;
-
-    background-image: url('../img/spritesheet.png');
-    background-repeat: no-repeat;
-}
-.pay__option-label--paypal
-{
-    background-position: -634px -3px;
-}
-.pay__option-label--master
-{
-    background-position: -577px -3px;
-}
-.pay__summ
-{
-    font-size: 0;
-
-    margin-top: 50px;
-}
-.pay__summ-field
-{
-    font-size: 18px;
-
-    width: 45%;
-    height: 45px;
-    margin-right: 10%;
-    padding-right: 10px;
-    padding-left: 10px;
-
-    border: 1px solid #e7e7e7;
-}
-.pay__summ-field:focus
-{
-    border-color: #8db34b;
-}
-.pay__summ-field--invalid
-{
-    border: 1px solid #f86956;
-    background-color: #ffeaea;
-}
-.pay__summ-field--invalid:focus
-{
-    border-color: #f86956;
 }
 .pay__close
 {

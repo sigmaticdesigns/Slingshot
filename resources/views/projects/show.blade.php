@@ -118,26 +118,96 @@
 
 
 
-
     <div class="pay" style="display:none;" id="pay-popup">
         <div class="pay__container">
             <div class="pay__title">Pay now</div>
-            {!! Form::open(['route' => 'payment']) !!}
+            {!! Form::open(['route' => 'payment', 'class' => 'fields-group fields-group--pay']) !!}
                 {!! Form::hidden('project_id', $project->id) !!}
-                <div class="pay__option-wrap">
-                    <input type="radio" name="pay-method" id="paypal" value="paypal" class="pay__option">
-                    <label class="pay__option-label pay__option-label--paypal" for="paypal"></label>
+
+                <input type="radio" name="pay-method" id="paypal" value="paypal" class="fields-group__pay-option" checked>
+                <label class="fields-group__pay-label fields-group__pay-label--paypal" for="paypal"></label>
+
+
+
+                <input type="radio" name="pay-method" id="master" value="master" class="fields-group__pay-option">
+                <label class="fields-group__pay-label fields-group__pay-label--master" for="master"></label>
+
+
+
+                <div class="fields-group__card">
+                    <input type="text" name="cardholder" id="cardholder" value="" placeholder="Name" class="fields-group__field">
+                    <div class="fields-group__error">
+                        <label for="cardholder"></label>
+                    </div>
+
+                    <input type="text" name="cardnumber" id="cardnumber" value="" placeholder="Card number" class="fields-group__field">
+                    <div class="fields-group__error">
+                        <label for="cardnumber"></label>
+                    </div>
+
+                    <div class="fields-group__card-wrap">
+                        <div class="fields-group__select-wrap fields-group__select-wrap--card">
+                            <select name="card-month" class="fields-group__select" id="card-month">
+                                <option disabled selected>Month</option>
+                                <option value="1">01</option>
+                                <option value="2">02</option>
+                                <option value="3">03</option>
+                                <option value="4">04</option>
+                                <option value="5">05</option>
+                                <option value="6">06</option>
+                                <option value="7">07</option>
+                                <option value="8">08</option>
+                                <option value="9">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                            <div class="fields-group__error">
+                                <label for="card-month">Choose month</label>
+                            </div>
+                        </div>
+
+                        <div class="fields-group__select-wrap fields-group__select-wrap--card">
+                            <select name="card-year" class="fields-group__select" id="card-year">
+                                <option disabled selected>Year</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2026">2026</option>
+                            </select>
+                            <div class="fields-group__error">
+                                <label for="card-year">Choose year</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fields-group__cvn-wrap">
+                        <input type="text" name="cvn" id="cvn" value="" placeholder="CVN" maxlength="4" class="fields-group__field fields-group__field--cvn">
+                        <div class="fields-group__tip-btn">?
+                            <div class="fields-group__tip">The 3 or 4 digit number om the back of a Visa, Discover and MasterCard or in the front of an American Express card</div>
+                        </div>
+                        <div class="fields-group__error">
+                            <label for="cvn">Incorrect number</label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="pay__option-wrap">
-                    <input type="radio" name="pay-method" id="master" value="credit_card" class="pay__option">
-                    <label class="pay__option-label pay__option-label--master" for="master"></label>
-                </div>
 
-
-                <div class="pay__summ">
-                    <input type="text" name="amount" id="amount" value="" placeholder="Pledge amount" class="pay__summ-field">
-                    {{--<a href="" class="btn btn--pledge">Pledge</a>--}}
+                <div class="fields-group__summ">
+                    <div class="fields-group__summ-wrap">
+                        <input type="text" name="amount" id="summ" value="" placeholder="Pledge amount" class="fields-group__field fields-group__field--summ">
+                        <div class="fields-group__error">
+                            <label for="summ">Incorrect pledge</label>
+                        </div>
+                    </div>
                     {!! Form::submit('Pledge', ['class' => 'btn btn--pledge']) !!}
                 </div>
             {!! Form::close() !!}

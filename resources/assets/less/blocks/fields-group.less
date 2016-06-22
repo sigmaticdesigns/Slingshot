@@ -2,6 +2,10 @@
   padding-left: 20px;
   padding-right: 20px;
 
+  &--pay {
+    padding: 0;
+  }
+
   &__upload {
     display: block;
     overflow: hidden;
@@ -74,6 +78,17 @@
       padding-top: 5px;
       height: 80px;
     }
+
+    &--summ {
+      height: 45px;
+    }
+
+    &--cvn {
+      width: 70px;
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 10px;
+    }
   }
 
   &__text-wrap {
@@ -95,7 +110,7 @@
     min-height: 30px;
 
     label {
-      display: none;
+      display: block;
       margin-bottom: 10px;
     }
   }
@@ -139,6 +154,13 @@
     &:hover {
       border-color: @color-main;
     }
+
+    &--card {
+      width: 25%;
+      margin-right: 30px;
+      float: left;
+      overflow: inherit;
+    }
   }
 
   &__select {
@@ -157,4 +179,92 @@
       outline: none;
     }
   }
+
+  &__card {
+    margin-top: 20px;
+    display: none;
+  }
+
+  &__pay-option {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+    margin-bottom: 50px;
+  }
+
+  &__pay-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 30px;
+    width: 51px;
+    height: 32px;
+    background-image: url("../img/spritesheet.png");
+    background-repeat: no-repeat;
+
+    &--paypal {
+      background-position: -634px -3px;
+    }
+
+    &--master {
+      background-position: -577px -3px;
+    }
+  }
+
+
+  &__card-wrap {
+    .clearfix;
+    margin-bottom: 30px;
+  }
+
+  &__summ {
+    font-size: 0;
+  }
+
+  &__summ-wrap {
+    display: inline-block;
+    vertical-align: top;
+    width: 45%;
+    height: 45px;
+    margin-right: 10%;
+  }
+
+  &__tip {
+    position: absolute;
+    display: none;
+    top: -110px;
+    left: 0px;
+    width: 200px;
+    padding: 10px;
+    background-color: @gray--darken;
+    color: #fff;
+    z-index: 10;
+  }
+
+  &__tip-btn {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    margin-top: 10px;
+    text-align: center;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: @gray--lighten;
+    cursor: pointer;
+
+    &:hover {
+      .fields-group__tip {
+        display: block;
+      }
+    }
+  }
+
+  &__cvn-wrap {
+    position: relative;
+  }
+}
+
+#master:checked ~ .fields-group__card {
+  display: block;
 }

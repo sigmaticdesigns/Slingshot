@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use PayPal\Api\Amount;
+use PayPal\Api\CreditCard;
+use PayPal\Api\FundingInstrument;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
@@ -45,10 +47,28 @@ class PaymentsController extends Controller
 
 		$userAmount = $request->input('amount');
 		$method = $request->input('pay-method', 'paypal');
-		$method = 'paypal';
+//		$method = 'paypal';
 
 		$payer = new Payer();
-		$payer->setPaymentMethod($method);
+		if ('credit_card' == $method) {
+			$card = new CreditCard();
+			$card->setType("visa")
+				->setNumber("4669424246660779")
+				->setExpireMonth("11")
+				->setExpireYear("2019")
+				->setCvv2("012")
+				->setFirstName("Joe")
+				->setLastName("Shopper");
+
+			$fi = new FundingInstrument();
+			$fi->setCreditCard($card);
+
+			$payer->setPaymentMethod("credit_card")
+				->setFundingInstruments([$fi]);
+		}
+		else {
+			$payer->setPaymentMethod('paypal');
+		}
 
 		$item = new Item();
 		$item->setName($project->name) // item name
@@ -81,7 +101,8 @@ class PaymentsController extends Controller
 
 		try {
 			$payment->create($this->_apiContext);
-		} catch (\PayPal\Exception\PPConnectionException $ex) {
+		}
+		catch (\PayPal\Exception\PPConnectionException $ex) {
 			if (\Config::get('app.debug')) {
 				echo "Exception: " . $ex->getMessage() . PHP_EOL;
 				$err_data = json_decode($ex->getData(), true);
@@ -89,6 +110,10 @@ class PaymentsController extends Controller
 			} else {
 				die('Some error occur, sorry for inconvenient');
 			}
+		}
+
+		if ('credit_card' == $method) {
+			return $this->processPayment($payment, $project);
 		}
 
 		foreach($payment->getLinks() as $link) {
@@ -110,6 +135,13 @@ class PaymentsController extends Controller
 			return Redirect::away($redirect_url);
 		}
 
+		if ('credit_card' == $method) {
+			return redirect()->route('payment.status');
+		}
+
+		if ($request->ajax()) {
+			return response()->json(['success' => false, 'message' => "Unknown error occurred."]);
+		}
 		return Redirect::route('project.view', $project->id)
 			->with('error', 'Unknown error occurred');
 	}
@@ -138,32 +170,38 @@ class PaymentsController extends Controller
 		$execution->setPayerId(Input::get('PayerID'));
 		//Execute the payment
 		$result = $payment->execute($execution, $this->_apiContext);
+		return $this->processPayment($result, $project);
+	}
 
-//		dump($result->getTransactions()[0]->getAmount()->getTotal());
-//		dd($result);
-//		echo '<pre>';print_r($result);echo '</pre>';exit; // DEBUG RESULT, remove it later
-
+	private function processPayment(Payment $payment, Project $project)
+	{
 		$paymentItem = PaymentModel::create([
 			'project_id'    => $project->id,
 			'user_id'       => $this->user->id,
-			'amount'        => $result->getTransactions()[0]->getAmount()->getTotal(),
+			'amount'        => $payment->getTransactions()[0]->getAmount()->getTotal(),
 			'method'        => 'paypal',
-			'response'      => var_export($result, true),
+			'response'      => var_export($payment, true),
 		]);
 
-
-		if ($result->getState() == 'approved') { // payment made
+		if ($payment->getState() == 'approved') { // payment made
 			$paymentItem->is_paid = 1;
 			$paymentItem->save();
 
 			$project->purse = PaymentModel::pursed($project->id);
 			$project->save();
 
-			return Redirect::route('projects.show', $projectId)
+			if (request()->ajax()) {
+				\Session::flash('success.message', "Thank you! Project has been successfully backed.");
+				return response()->json(['success' => true, 'redirect' => route('projects.show', $project->id)]);
+			}
+			return Redirect::route('projects.show', $project->id)
 				->with('success.message', 'Thank you! Project has been successfully backed.');
 		}
 
-		return Redirect::route('projects.show', $projectId)
+		if (request()->ajax()) {
+			return response()->json(['success' => false, 'message' => "Payment failed."]);
+		}
+		return Redirect::route('projects.show', $project->id)
 			->with('error.message', 'Payment failed');
 	}
 
