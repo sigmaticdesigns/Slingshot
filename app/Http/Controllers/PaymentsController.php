@@ -62,7 +62,7 @@ class PaymentsController extends Controller
 				], 422);
 			}
 			$card = new CreditCard();
-			$card->setType("visa")
+			$card->setType($CreditCardType)
 				->setNumber($request->input('cardnumber'))
 				->setExpireMonth($request->input('expire-month'))
 				->setExpireYear($request->input('expire-year'))
@@ -117,18 +117,24 @@ class PaymentsController extends Controller
 		catch (PayPalConnectionException $ex)
 		{
 			$errorResponse = [];
-			$errData = json_decode($ex->getData(), true);
-			if (!empty($errData['name']) && $errData['name'] == 'VALIDATION_ERROR') {
-				if ('payer.funding_instruments[0].credit_card.number' == $errData['details'][0]['field']) {
-					$errorResponse = ['cardnumber' => [$errData['details'][0]['issue']]];
-				}
-				else {
-					$errorResponse = ['cardnumber' => ['Validation Error']];
+
+			if ('credit_card' == $method)
+			{
+				$errData = json_decode($ex->getData(), true);
+				if (!empty($errData['name']) && $errData['name'] == 'VALIDATION_ERROR') {
+					if ('payer.funding_instruments[0].credit_card.number' == $errData['details'][0]['field']) {
+						$errorResponse = ['cardnumber' => [$errData['details'][0]['issue']]];
+					} else {
+						$errorResponse = ['cardnumber' => ['Validation Error']];
+					}
+				} else {
+					$errorResponse = ['cardnumber' => ['Some error occur, sorry for inconvenient']];
 				}
 			}
 			else {
-				$errorResponse = ['cardnumber' => ['Some error occur, sorry for inconvenient']];
+				$errorResponse = ['message' => ['Some error occur, sorry for inconvenient']];
 			}
+
 			if ($errorResponse) {
 				$errorResponse['success'] = false;
 				return response()->json($errorResponse, 422);

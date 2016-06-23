@@ -18,7 +18,7 @@
 <body>
 <header class="page-header">
     <div class="container">
-        <div class="logo"><a href="/"><span>SLING</span>-SHOT</a></div>
+        <div class="logo"><a href="/"><span>SLING</span>SHOT</a></div>
         <nav class="main-nav">
             <ul class="main-nav__list">
                 <li class="main-nav__item"><a href="{!! url('how-it-works') !!}">How it works</a></li>
