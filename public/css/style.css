@@ -2159,8 +2159,6 @@ select::-ms-expand
 .fields-group__card
 {
     display: none;
-
-    margin-top: 20px;
 }
 .fields-group__pay-option
 {
@@ -3128,7 +3126,7 @@ select::-ms-expand
 
     width: 428px;
     margin-left: -214px;
-    padding-top: 18px;
+    padding-top: 5px;
     padding-right: 25px;
     padding-bottom: 40px;
     padding-left: 24px;
@@ -3140,7 +3138,7 @@ select::-ms-expand
 {
     font-size: 40px;
 
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 
     color: #000;
 }

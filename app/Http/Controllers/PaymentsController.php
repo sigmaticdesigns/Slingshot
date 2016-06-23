@@ -23,6 +23,7 @@ use PayPal\Api\PaymentExecution;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Exception\PayPalConnectionException;
 use PayPal\Rest\ApiContext;
 
 class PaymentsController extends Controller
@@ -50,21 +51,31 @@ class PaymentsController extends Controller
 //		$method = 'paypal';
 
 		$payer = new Payer();
-		if ('credit_card' == $method) {
+		if ('credit_card' == $method)
+		{
+			/*Validate Credit card*/
+			$CreditCardType = $this->cardType($request->input('cardnumber'));
+			if (!$CreditCardType) {
+				return response()->json([
+					'success' => false,
+					'cardnumber' => ["Only: Visa, MasterCard, Discover, American Express"]
+				], 422);
+			}
 			$card = new CreditCard();
 			$card->setType("visa")
-				->setNumber("4669424246660779")
-				->setExpireMonth("11")
-				->setExpireYear("2019")
-				->setCvv2("012")
-				->setFirstName("Joe")
-				->setLastName("Shopper");
+				->setNumber($request->input('cardnumber'))
+				->setExpireMonth($request->input('expire-month'))
+				->setExpireYear($request->input('expire-year'))
+				->setCvv2($request->input('cvn'))
+				->setFirstName($request->input('firstname'))
+				->setLastName($request->input('lastname'));
 
 			$fi = new FundingInstrument();
 			$fi->setCreditCard($card);
 
 			$payer->setPaymentMethod("credit_card")
 				->setFundingInstruments([$fi]);
+
 		}
 		else {
 			$payer->setPaymentMethod('paypal');
@@ -99,13 +110,32 @@ class PaymentsController extends Controller
 			->setRedirectUrls($redirectUrls)
 			->setTransactions([$transaction]);
 
+
 		try {
 			$payment->create($this->_apiContext);
 		}
-		catch (\PayPal\Exception\PPConnectionException $ex) {
+		catch (PayPalConnectionException $ex)
+		{
+			$errorResponse = [];
+			$errData = json_decode($ex->getData(), true);
+			if (!empty($errData['name']) && $errData['name'] == 'VALIDATION_ERROR') {
+				if ('payer.funding_instruments[0].credit_card.number' == $errData['details'][0]['field']) {
+					$errorResponse = ['cardnumber' => [$errData['details'][0]['issue']]];
+				}
+				else {
+					$errorResponse = ['cardnumber' => ['Validation Error']];
+				}
+			}
+			else {
+				$errorResponse = ['cardnumber' => ['Some error occur, sorry for inconvenient']];
+			}
+			if ($errorResponse) {
+				$errorResponse['success'] = false;
+				return response()->json($errorResponse, 422);
+			}
+
 			if (\Config::get('app.debug')) {
 				echo "Exception: " . $ex->getMessage() . PHP_EOL;
-				$err_data = json_decode($ex->getData(), true);
 				exit;
 			} else {
 				die('Some error occur, sorry for inconvenient');
@@ -203,6 +233,44 @@ class PaymentsController extends Controller
 		}
 		return Redirect::route('projects.show', $project->id)
 			->with('error.message', 'Payment failed');
+	}
+
+	/**
+	 * Return credit card type if number is valid
+	 * @return string
+	 * @param $number string
+	 **/
+	protected function cardType($number)
+	{
+		$number=preg_replace('/[^\d]/','',$number);
+		if (preg_match('/^3[47][0-9]{13}$/',$number))
+		{
+			return 'amex';
+		}
+		elseif (preg_match('/^3(?:0[0-5]|[68][0-9])[0-9]{11}$/',$number))
+		{
+			return false;
+		}
+		elseif (preg_match('/^6(?:011|5[0-9][0-9])[0-9]{12}$/',$number))
+		{
+			return 'discover';
+		}
+		elseif (preg_match('/^(?:2131|1800|35\d{3})\d{11}$/',$number))
+		{
+			return false;
+		}
+		elseif (preg_match('/^5[1-5][0-9]{14}$/',$number))
+		{
+			return 'mastercard';
+		}
+		elseif (preg_match('/^4[0-9]{12}(?:[0-9]{3})?$/',$number))
+		{
+			return 'visa';
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 }

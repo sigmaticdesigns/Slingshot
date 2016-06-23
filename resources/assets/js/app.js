@@ -20,7 +20,7 @@ $(function() {
             $('.fields-group__field--invalid', $form).removeClass('fields-group__field--invalid');
             //$('.text-danger', $form).remove();
             //$('.bad', $form).removeClass('bad').addClass('not-bad');
-            $('label[for]').hide();
+            $('div.fields-group__error label[for]').hide();
         }
 
         /* Set request */

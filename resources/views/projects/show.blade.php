@@ -129,15 +129,20 @@
 
 
 
-                <input type="radio" name="pay-method" id="master" value="master" class="fields-group__pay-option">
+                <input type="radio" name="pay-method" id="master" value="credit_card" class="fields-group__pay-option">
                 <label class="fields-group__pay-label fields-group__pay-label--master" for="master"></label>
 
 
 
                 <div class="fields-group__card">
-                    <input type="text" name="cardholder" id="cardholder" value="" placeholder="Name" class="fields-group__field">
+                    <input type="text" name="firstname" id="firstname" value="" placeholder="First Name" class="fields-group__field">
                     <div class="fields-group__error">
-                        <label for="cardholder"></label>
+                        <label for="firstname"></label>
+                    </div>
+
+                    <input type="text" name="lastname" id="lastname" value="" placeholder="Last Name" class="fields-group__field">
+                    <div class="fields-group__error">
+                        <label for="lastname"></label>
                     </div>
 
                     <input type="text" name="cardnumber" id="cardnumber" value="" placeholder="Card number" class="fields-group__field">
@@ -147,7 +152,7 @@
 
                     <div class="fields-group__card-wrap">
                         <div class="fields-group__select-wrap fields-group__select-wrap--card">
-                            <select name="card-month" class="fields-group__select" id="card-month">
+                            <select name="expire-month" class="fields-group__select" id="expire-month">
                                 <option disabled selected>Month</option>
                                 <option value="1">01</option>
                                 <option value="2">02</option>
@@ -163,12 +168,12 @@
                                 <option value="12">12</option>
                             </select>
                             <div class="fields-group__error">
-                                <label for="card-month">Choose month</label>
+                                <label for="expire-month"></label>
                             </div>
                         </div>
 
                         <div class="fields-group__select-wrap fields-group__select-wrap--card">
-                            <select name="card-year" class="fields-group__select" id="card-year">
+                            <select name="expire-year" class="fields-group__select" id="expire-year">
                                 <option disabled selected>Year</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
@@ -184,7 +189,7 @@
                                 <option value="2026">2026</option>
                             </select>
                             <div class="fields-group__error">
-                                <label for="card-year">Choose year</label>
+                                <label for="expire-year"></label>
                             </div>
                         </div>
                     </div>
@@ -195,7 +200,7 @@
                             <div class="fields-group__tip">The 3 or 4 digit number om the back of a Visa, Discover and MasterCard or in the front of an American Express card</div>
                         </div>
                         <div class="fields-group__error">
-                            <label for="cvn">Incorrect number</label>
+                            <label for="cvn"></label>
                         </div>
                     </div>
                 </div>
@@ -205,7 +210,7 @@
                     <div class="fields-group__summ-wrap">
                         <input type="text" name="amount" id="summ" value="" placeholder="Pledge amount" class="fields-group__field fields-group__field--summ">
                         <div class="fields-group__error">
-                            <label for="summ">Incorrect pledge</label>
+                            <label for="summ"></label>
                         </div>
                     </div>
                     {!! Form::submit('Pledge', ['class' => 'btn btn--pledge']) !!}
