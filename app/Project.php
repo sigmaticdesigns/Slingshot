@@ -12,6 +12,9 @@ class Project extends Model
     const STATUS_DECLINED = 'declined';
     const STATUS_APPROVED = 'approved';
 
+	const STATUS_FINISHED = 'finished';
+	const STATUS_FAILED = 'failed';
+
 
 	protected $fillable = [
 		'name',
@@ -88,6 +91,11 @@ class Project extends Model
 	public function comments()
 	{
 		return $this->hasMany('App\Comment')->orderBy('created_at', 'desc');
+	}
+
+	public function payments()
+	{
+		return $this->hasMany('App\Payment');
 	}
 
 	/**

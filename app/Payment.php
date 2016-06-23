@@ -4,12 +4,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-    protected $fillable = [
+    const STATUS_REFUNDED = 'refunded';
+    const STATUS_DO_REFUND = 'do_refund';
+
+	protected $fillable = [
 		'project_id',
 		'user_id',
 		'amount',
 		'method',
 		'is_paid',
+		'sale_id',
 		'response',
 	];
 

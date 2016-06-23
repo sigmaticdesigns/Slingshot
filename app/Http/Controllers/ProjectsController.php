@@ -11,7 +11,14 @@ use App\Payment;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use App\Project;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
+use PayPal\Api\Amount;
+use PayPal\Api\Refund;
+use PayPal\Api\Sale;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Exception\PayPalConnectionException;
+use PayPal\Rest\ApiContext;
 
 
 class ProjectsController extends Controller

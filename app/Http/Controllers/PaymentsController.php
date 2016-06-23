@@ -149,7 +149,7 @@ class PaymentsController extends Controller
 		}
 
 		if ('credit_card' == $method) {
-			return $this->processPayment($payment, $project);
+			return $this->processPayment($payment, $project, $method);
 		}
 
 		foreach($payment->getLinks() as $link) {
@@ -205,19 +205,33 @@ class PaymentsController extends Controller
 		$execution = new PaymentExecution();
 		$execution->setPayerId(Input::get('PayerID'));
 		//Execute the payment
-		$result = $payment->execute($execution, $this->_apiContext);
+		try {
+			$result = $payment->execute($execution, $this->_apiContext);
+		}
+		catch (PayPalConnectionException $ex) {
+			if (\Config::get('app.debug')) {
+				echo "Exception: " . $ex->getMessage() . PHP_EOL;
+				$errData = json_decode($ex->getData(), true);
+				dd($errData);
+				exit;
+			} else {
+				die('Some error occur, sorry for inconvenient');
+			}
+		}
 		return $this->processPayment($result, $project);
 	}
 
-	private function processPayment(Payment $payment, Project $project)
+	private function processPayment(Payment $payment, Project $project, $method = 'paypal')
 	{
 		$paymentItem = PaymentModel::create([
 			'project_id'    => $project->id,
 			'user_id'       => $this->user->id,
 			'amount'        => $payment->getTransactions()[0]->getAmount()->getTotal(),
-			'method'        => 'paypal',
+			'method'        => $method,
 			'response'      => var_export($payment, true),
+			'sale_id'       => $payment->getTransactions()[0]->getRelatedResources()[0]->getSale()->getId()
 		]);
+
 
 		if ($payment->getState() == 'approved') { // payment made
 			$paymentItem->is_paid = 1;
