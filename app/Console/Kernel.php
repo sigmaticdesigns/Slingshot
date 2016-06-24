@@ -10,6 +10,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Config;
 use PayPal\Api\Amount;
 use PayPal\Api\Refund;
+use PayPal\Api\Sale;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 
@@ -55,8 +56,18 @@ class Kernel extends ConsoleKernel
 				    $project->save();
 
 				    /*refund money*/
-				    $project->payments()->update(['status' => Payment::STATUS_DO_REFUND]);
+				    $project->payments()->where('is_paid', 1)->update(['status' => Payment::STATUS_DO_REFUND]);
 			    }
+		    }
+		    /*Half deadline*/
+		    $projects = Project::active()->where('half_deadline', '>=', Carbon::now())->whereRaw('purse < budget/2')->get();
+		    foreach ($projects as $project)
+		    {
+			    $project->status = Project::STATUS_FAILED;
+			    $project->save();
+
+			    /*refund money*/
+			    $project->payments()->where('is_paid', 1)->update(['status' => Payment::STATUS_DO_REFUND]);
 		    }
 
 		    $payments = Payment::where('status', Payment::STATUS_DO_REFUND)->get();
