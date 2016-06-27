@@ -37,6 +37,15 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
+	/**
+	 * The attributes that should be casted to native types.
+	 *
+	 * @var array
+	 */
+	protected $casts = [
+		'links' => 'array',
+	];
+
     const STATUS_ACTIVE = 'active';
     const STATUS_BANNED = 'banned';
 

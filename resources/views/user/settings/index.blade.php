@@ -49,11 +49,11 @@
             <div class="profile__links">
                 <div class="profile__links-title">Outside links</div>
                 <ul>
-                    <li class="profile__links-item"><a href="">http://www.my-site.com</a></li>
-                    <li class="profile__links-item"><a href="">http://www.twitter.com/my-page</a></li>
-                    <li class="profile__links-item"><a href="">http://www.facebook.com/my-fanpage</a></li>
+                    @foreach($user->links as $link)
+                    <li class="profile__links-item"><a href="{{ $link }}" target="_blank">{{ $link }}</a></li>
+                    @endforeach
                 </ul>
-                <a href="" class="btn btn--profile">Add custom link</a>
+                <a href="{{ url('user/settings/links') }}" class="btn btn--profile">Add custom link</a>
             </div>
         </div>
     </div>

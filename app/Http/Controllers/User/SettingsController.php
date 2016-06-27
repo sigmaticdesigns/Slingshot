@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Requests\User\LinksRequest;
 use App\User;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
@@ -28,7 +29,8 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return view('user.settings.index');
+	    $user = User::findOrFail($this->user->id);
+        return view('user.settings.index', compact('user'));
     }
 
 
@@ -151,6 +153,25 @@ class SettingsController extends Controller
 	public function getAvatar()
 	{
 		return view('user.settings.avatar');
+	}
+
+	public function getLinks()
+	{
+		return view('user.settings.links');
+	}
+
+	public function postLinks(LinksRequest $request)
+	{
+		$link = $request->input('link');
+		$user = User::findOrFail($this->user->id);
+		$links = $user->links;
+		$links[] = $link;
+		$user->links = $links;
+		$user->save();
+		\Session::flash('success.message', "Your Settings has been successfully updated.");
+		if ($request->ajax()) {
+			return response()->json(['success' => true, 'redirect' => url('user/settings')]);
+		}
 	}
 
 
