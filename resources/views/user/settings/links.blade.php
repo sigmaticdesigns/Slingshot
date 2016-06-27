@@ -11,7 +11,7 @@
 
                 {!! Form::text('link', null, ['class' => 'fields-group__field', 'placeholder' => 'Outside Link']) !!}
                 <div class="fields-group__error">
-                    {!! Form::label('link', ' ') !!}
+                    {!! Form::label('link', '') !!}
                 </div>
 
                     {!! Form::submit('Save', ['class' => 'btn btn--form-submit']) !!}

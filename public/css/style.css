@@ -2075,7 +2075,7 @@ select::-ms-expand
 }
 .fields-group__error label
 {
-    display: block;
+    display: none;
 
     margin-bottom: 10px;
 }
