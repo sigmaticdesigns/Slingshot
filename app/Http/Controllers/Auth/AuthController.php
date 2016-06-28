@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mailers\AppMailer;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -65,6 +66,34 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+	/**
+	 * Handle a registration request for the application.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function postRegister(Request $request, AppMailer $mailer)
+	{
+		$validator = $this->validator($request->all());
+
+		if ($validator->fails()) {
+			$this->throwValidationException(
+				$request, $validator
+			);
+		}
+
+		$user = $this->create($request->all());
+		Auth::login($user);
+
+		$user->token = str_random(30);
+		$user->save();
+		$mailer->sendEmailTo($user, 'registration-email');
+		\Session::flash('success.message', 'Please confirm your email address.');
+
+
+		return redirect($this->redirectPath());
+	}
 
     /**
      * Handle a login request to the application.

@@ -124,4 +124,27 @@ class User extends Model implements AuthenticatableContract,
 	{
 		return $this->hasMany('App\Comment');
 	}
+
+	/**
+	 * Confirm the user.
+	 *
+	 * @return void
+	 */
+	public function confirmEmail()
+	{
+//		$this->verified = true;
+		$this->token = null;
+
+		$this->save();
+	}
+
+	public function getEmailVerifiedAttribute()
+	{
+		if ($this->token) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 }

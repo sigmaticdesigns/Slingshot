@@ -73,6 +73,7 @@ Route::controllers([
 	'auth'     => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+get('email/confirm/{token}', 'Auth\EmailController@getConfirm');
 
 
 Route::get('profile/{id}', 'ProfileController@showProfile');

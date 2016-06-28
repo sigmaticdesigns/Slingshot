@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'admin@slingshot.darklab.com', 'name' => 'Admin'],
+    'from' => ['address' => 'admin@slingshot.com', 'name' => 'SlingShot'],
 
     /*
     |--------------------------------------------------------------------------

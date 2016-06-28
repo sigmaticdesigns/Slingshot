@@ -23,6 +23,9 @@
                         {{--<li class="profile__info-item">City</li>--}}
                         {{--<li class="profile__info-item">Postal code</li>--}}
                         <li class="profile__info-item">{!! Auth::user()->email !!}</li>
+                        @if (!$user->emailVerified)
+                            not verified
+                        @endif
                         {{--<li class="profile__info-item">Laguage - English</li>--}}
                     </ul>
                     <a href="{{ url('user/settings/about-me') }}" class="btn btn--profile">Edit profile</a>
@@ -49,9 +52,11 @@
             <div class="profile__links">
                 <div class="profile__links-title">Outside links</div>
                 <ul>
-                    @foreach($user->links as $link)
+                    @if ($user->links)
+                    @foreach ($user->links as $link)
                     <li class="profile__links-item"><a href="{{ $link }}" target="_blank">{{ $link }}</a></li>
                     @endforeach
+                    @endif
                 </ul>
                 <a href="{{ url('user/settings/links') }}" class="btn btn--profile">Add custom link</a>
             </div>

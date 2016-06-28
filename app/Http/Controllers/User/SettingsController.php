@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Requests\User\LinksRequest;
+use App\Mailers\AppMailer;
 use App\User;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
@@ -171,6 +172,14 @@ class SettingsController extends Controller
 		\Session::flash('success.message', "Your Settings has been successfully updated.");
 		if ($request->ajax()) {
 			return response()->json(['success' => true, 'redirect' => url('user/settings')]);
+		}
+	}
+
+	public function getConfirmEmail(AppMailer $mailer)
+	{
+		$mailer->sendEmailConfirmationTo(User::findOrFail($this->user->id));
+		if (request()->ajax()) {
+			return response()->json(['success' => true, 'success.message' => 'Verification email has been send']);
 		}
 	}
 
