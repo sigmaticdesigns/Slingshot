@@ -50,14 +50,14 @@
             </div>
 
             <div class="profile__links">
+                @if ($user->links)
                 <div class="profile__links-title">Outside links</div>
                 <ul>
-                    @if ($user->links)
                     @foreach ($user->links as $link)
                     <li class="profile__links-item"><a href="{{ $link }}" target="_blank">{{ $link }}</a></li>
                     @endforeach
-                    @endif
                 </ul>
+                @endif
                 <a href="{{ url('user/settings/links') }}" class="btn btn--profile">Add custom link</a>
             </div>
         </div>
