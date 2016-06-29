@@ -179,7 +179,7 @@ class SettingsController extends Controller
 	{
 		$mailer->sendEmailConfirmationTo(User::findOrFail($this->user->id));
 		if (request()->ajax()) {
-			return response()->json(['success' => true, 'success.message' => 'Verification email has been send']);
+			return response()->json(['success' => true, 'message' => 'Verification email has been send']);
 		}
 	}
 

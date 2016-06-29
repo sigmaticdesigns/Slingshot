@@ -2425,7 +2425,7 @@ select::-ms-expand
 }
 .profile__edit
 {
-    font-size: 20px;
+    font-size: 18px;
 
     display: inline-block;
 
@@ -2451,6 +2451,31 @@ select::-ms-expand
 .profile__info-item--name
 {
     text-transform: uppercase;
+}
+.profile__info-label
+{
+    font-size: 13px;
+
+    display: inline-block;
+    display: none;
+
+    vertical-align: top;
+
+    color: #8db34b;
+}
+.profile__info-link
+{
+    font-size: 13px;
+
+    display: block;
+
+    text-decoration: underline;
+
+    color: #f86956;
+}
+.profile__info-link:hover
+{
+    color: #fa9487;
 }
 .profile__social
 {

@@ -26,7 +26,12 @@
 	<div class="form-group">
 	    {!! Form::label('slug', 'Slug:', ['class' => 'col-md-2 control-label']) !!}
 	    <div class="col-sm-9">
+            @if (isset($model) && $model->id < 5)
+                {{ $model->slug }}
+            @else
+
 	        {!! Form::text('slug', null, ['class' => 'form-control']) !!}
+            @endif
 	    </div>
 	</div>
 

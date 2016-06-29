@@ -32,7 +32,9 @@
 							{!! Form::open(['method' => 'DELETE', 'route' => ['admin.letters.destroy', $letter->id]]) !!}
 							<a href="{!! route('admin.letters.show', $letter->id) !!}" class="btn btn-sm btn-default" title="View" data-toggle="tooltip"><i class="glyphicon glyphicon-eye-open"></i></a>
 							<a href="{!! route('admin.letters.edit', $letter->id) !!}" class="btn btn-sm btn-default" title="Edit" data-toggle="tooltip"><i class="glyphicon glyphicon-edit"></i></a>
+                            @if($letter->id > 5)
 							<button type="submit" class="btn btn-sm btn-default" title="Delete" data-toggle="tooltip"><i class="glyphicon glyphicon-trash"></i></button>
+                            @endif
 							{!! Form::close() !!}
 						</div>
 					</td>

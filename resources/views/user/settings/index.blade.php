@@ -11,7 +11,9 @@
             <div class="profile__wrap">
                 <div class="profile__image">
                     <div class="profile__image-box">
+                        @if ($user->avatar)
                         <img src="{{ \App\User::find(Auth::user()->id)->image() }}" width="258" height="258" alt="My profile image">
+                        @endif
                     </div>
                     <a href="{{ url('user/settings/avatar') }}" class="btn btn--profile">Edit image</a>
                 </div>
@@ -22,10 +24,13 @@
                         {{--<li class="profile__info-item">Country</li>--}}
                         {{--<li class="profile__info-item">City</li>--}}
                         {{--<li class="profile__info-item">Postal code</li>--}}
-                        <li class="profile__info-item">{!! Auth::user()->email !!}</li>
-                        @if (!$user->emailVerified)
-                            not verified
+                        <li class="profile__info-item">{!! Auth::user()->email !!}
+                        @if ($user->emailVerified)
+                            <span class="profile__info-label">*Email confirmed</span>
+                        @else
+                            <a href="#" class="profile__info-link" style="display: block;" id="confirm-email">Confirm your email</a>
                         @endif
+                        </li>
                         {{--<li class="profile__info-item">Laguage - English</li>--}}
                     </ul>
                     <a href="{{ url('user/settings/about-me') }}" class="btn btn--profile">Edit profile</a>

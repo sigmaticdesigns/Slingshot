@@ -38,7 +38,7 @@
   &__edit {
     display: inline-block;
     vertical-align: top;
-    font-size: @font-size + 7;
+    font-size: @font-size + 5;
     .make-column(1);
     min-height: 333px;
   }
@@ -54,6 +54,25 @@
 
     &--name {
       text-transform: uppercase;
+    }
+  }
+
+  &__info-label {
+    display: inline-block;
+    vertical-align: top;
+    font-size: @font-size;
+    color: @color-main;
+    display: none;
+  }
+
+  &__info-link {
+    display: block;
+    font-size: @font-size;
+    color: @danger;
+    text-decoration: underline;
+
+    &:hover {
+      color: lighten(@danger, 10%);
     }
   }
 

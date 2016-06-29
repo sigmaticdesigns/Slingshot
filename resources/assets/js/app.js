@@ -100,6 +100,8 @@ $(function() {
     if ($('input[name=avatar]').length) {
         initImageUploadForm('avatar', 258, 258, 'Your Profile Picture');
     }
+
+    $('a#confirm-email').on('click', sendEmailConfirmLink);
 });
 
 
@@ -171,4 +173,15 @@ function initImageUploadForm(fileFieldId, imgWidth, imgHeight, alt)
         imgBox.removeChild(imgToUpload);
     });
 
+}
+
+function sendEmailConfirmLink(e)
+{
+    e.preventDefault();
+    $(this).hide();
+    $.get('/user/settings/confirm-email', {}, function (r) {
+        if (r.success && r.message) {
+            toastr["success"](r.message);
+        }
+    }, 'json');
 }
