@@ -1,8 +1,8 @@
 <?php
 
+use App\Page;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use Pingpong\Admin\Entities\Article;
 
 class PagesTableSeeder extends Seeder
 {
@@ -13,46 +13,41 @@ class PagesTableSeeder extends Seeder
      */
     public function run()
     {
-	    Article::create([
-		    'type'  => 'page',
-		    'user_id'   => 1,
-		    'category_id'   => 1,
+	    Page::create([
 		    'title'     => 'About us',
 		    'slug'      => Str::slug('About us'),
+		    'section'   => 'about',
+		    'template'  => 'html',
 		    'body'      => 'SlingShot helps artists, musicians, filmmakers, designers, and other creators find the resources and support they need to make their ideas a reality. To date, tens of thousands of creative projects — big and small — have come to life with the support of the SlingShot community. ',
 	    ]);
 
-	    Article::create([
-		    'type'  => 'page',
-		    'user_id'   => 1,
-		    'category_id'   => 1,
+	    Page::create([
 		    'title'     => 'How it works',
 		    'slug'      => Str::slug('How it works'),
+		    'section'   => 'about',
+		    'template'  => 'view',
 		    'body'      => 'How it works page content',
 	    ]);
 
-	    Article::create([
-		    'type'  => 'page',
-		    'user_id'   => 1,
-		    'category_id'   => 1,
+	    Page::create([
 		    'title'     => 'Privacy Policy',
 		    'slug'      => Str::slug('Privacy Policy'),
+		    'section'   => 'about',
+		    'template'  => 'view',
 		    'body'      => 'Privacy Policy page content',
 	    ]);
 
-	    Article::create([
-		    'type'  => 'page',
-		    'user_id'   => 1,
-		    'category_id'   => 1,
+	    Page::create([
 		    'title'     => 'Terms of Use',
 		    'slug'      => Str::slug('Terms of Use'),
+		    'section'   => 'about',
+		    'template'  => 'view',
 		    'body'      => 'Terms of Use page content',
 	    ]);
 
-	    Article::create([
-		    'type'  => 'page',
-		    'user_id'   => 1,
-		    'category_id'   => 2,
+	    Page::create([
+		    'section'   => 'help',
+		    'template'  => 'view',
 		    'title'     => 'FAQ',
 		    'slug'      => Str::slug('FAQ'),
 		    'body'      => '<b>What are the basics?</b>b>
@@ -68,10 +63,9 @@ A creator is the person or team behind the project idea, working to bring it to 
 Backers are folks who pledge money to join creators in bringing projects to life.',
 	    ]);
 
-	    Article::create([
-		    'type'  => 'page',
-		    'user_id'   => 1,
-		    'category_id'   => 2,
+	    Page::create([
+		    'section'   => 'help',
+		    'template'  => 'view',
 		    'title'     => 'Creator Handbook',
 		    'slug'      => Str::slug('Creator Handbook'),
 		    'body'      => 'Your project can be anything that you want to create and share with others. It could be a book, a film, a piece of hardware... pretty much anything you dream up can find a home on Kickstarter. Just keep your project focused, with a clear end goal, and you’ll be good.',

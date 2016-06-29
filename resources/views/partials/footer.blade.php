@@ -27,7 +27,7 @@
         <div class="footer-menu__about">
             <div class="footer-menu__title">About us</div>
             <ul class="footer-menu__list">
-                @foreach(\App\Page::menu(1) as $page)
+                @foreach(\App\Page::menu('about') as $page)
                     <a href="{{ url($page->slug) }}">{!! $page->title !!}</a><br>
                     <li class="footer-menu__item">
                         <a href="{{ url($page->slug) }}">{!! $page->title !!}</a>
@@ -39,7 +39,7 @@
         <div class="footer-menu__help">
             <div class="footer-menu__title">Help</div>
             <ul class="footer-menu__list">
-                @foreach(\App\Page::menu(2) as $page)
+                @foreach(\App\Page::menu('help') as $page)
                     <a href="{{ url($page->slug) }}">{!! $page->title !!}</a><br>
                     <li class="footer-menu__item">
                         <a href="{{ url($page->slug) }}">{!! $page->title !!}</a>

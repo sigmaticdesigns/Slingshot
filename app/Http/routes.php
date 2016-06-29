@@ -30,7 +30,8 @@ Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin
 		]);
 	});
 
-	Route::group(['middleware' => config('admin.filter.admin')], function () {
+	Route::group(['middleware' => config('admin.filter.admin')], function ()
+	{
 		Route::resource('projects', 'ProjectsController', [
 			'names' => [
 				'index' => 'admin.projects.index',
@@ -55,6 +56,18 @@ Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin
 				'update' => 'admin.letters.update',
 				'edit' => 'admin.letters.edit',
 				'destroy' => 'admin.letters.destroy',
+			],
+		]);
+
+		Route::resource('pages', 'PagesController', [
+			'names' => [
+				'index' => 'admin.pages.index',
+				'create' => 'admin.pages.create',
+				'store' => 'admin.pages.store',
+				'show' => 'admin.pages.show',
+				'update' => 'admin.pages.update',
+				'edit' => 'admin.pages.edit',
+				'destroy' => 'admin.pages.destroy',
 			],
 		]);
 	});

@@ -1,20 +1,19 @@
-<?php
-
-namespace App;
-
+<?php namespace App;
+   
 use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'articles';
+    protected $fillable = [
+		'title',
+		'slug',
+		'section',
+		'template',
+		'body',
+	];
 
-	public function scopeMenu($query, $category = 1)
+	public function scopeMenu($query, $section = 'about')
 	{
-		return $query->where('type', 'page')->where('category_id', $category)->select(['title', 'slug'])->get();
+		return $query->where('section', $section)->select(['title', 'slug'])->get();
 	}
 }

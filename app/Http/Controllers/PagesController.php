@@ -11,24 +11,12 @@ use App\Http\Controllers\Controller;
 class PagesController extends Controller
 {
 
-	protected $repository;
 
 	public function __construct()
 	{
-		$this->repository = $this->getRepository();
 	}
 
-	/**
-	 * Get repository instance.
-	 *
-	 * @return mixed
-	 */
-	public function getRepository()
-	{
 
-		$repository = 'Pingpong\Admin\Repositories\Pages\PageRepository';
-		return app($repository);
-	}
     /**
      * Display a listing of the resource.
      *
@@ -49,9 +37,16 @@ class PagesController extends Controller
      */
     public function show($slug = '')
     {
-	    $page = $this->repository->getPage()->where('slug', $slug)->first();
+
+	    $page = Page::where('slug', $slug)->first();
 	    if ($page) {
-		    return view('page', compact('page'));
+
+		    if ('html' == $page->template) {
+			    return view('pages.html', compact('page'));
+		    }
+		    else {
+			    return view('pages.template', compact('page'));
+		    }
 	    }
 	    else {
 		    return view('404');

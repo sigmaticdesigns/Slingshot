@@ -37,17 +37,19 @@ class Payout
 		$senderBatchHeader->setSenderBatchId(uniqid())
 			->setEmailSubject("You have a Payout!");
 
+		$currency = new Currency();
+		$currency->setCurrency('USD')
+			->setValue($project->budget);
+
+
 		// #### Sender Item
 		// Please note that if you are using single payout with sync mode, you can only pass one Item in the request
 		$senderItem = new PayoutItem();
 		$senderItem->setRecipientType('Email')
 			->setNote('Thanks for your patronage!')
 			->setReceiver($user->email)
-			->setSenderItemId("2014031400023")
-			->setAmount(new Currency('{
-                        "value":"1.0",
-                        "currency":"USD"
-                    }'));
+			->setSenderItemId($project->id)
+			->setAmount($currency);
 		$payout->setSenderBatchHeader($senderBatchHeader)
 			->addItem($senderItem);
 // For Sample Purposes Only.
