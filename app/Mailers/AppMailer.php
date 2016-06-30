@@ -121,7 +121,7 @@ class AppMailer
 		$vars = [
 			'{name}' 			    => $userData->name,
 			'{email}' 				=> $userData->email,
-			'{url(/auth/login)}'	=> url('/auth/login'),
+			'{login_link}'	        => url('/auth/login'),
 			'{email_verify_link}'   => url("email/confirm/{$userData->token}")
 		];
 		$result = str_replace(array_keys($vars), $vars, $letter->content);

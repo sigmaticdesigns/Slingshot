@@ -26,12 +26,16 @@
                         {{--<li class="profile__info-item">Postal code</li>--}}
                         <li class="profile__info-item">{!! Auth::user()->email !!}
                         @if ($user->emailVerified)
-                            <span class="profile__info-label">*Email confirmed</span>
+                            <span class="profile__info-label" style="display: block;">*Email confirmed</span>
+                            @if ($user->paypal_confirmed)
+                                    <span class="profile__info-label" style="display: block;">*PayPal confirmed</span>
+                            @else
+                                <a href="{!! url('user/settings/confirm-paypal') !!}" class="profile__info-link" style="display: block;">Confirm PayPal Account</a>
+                            @endif
                         @else
                             <a href="#" class="profile__info-link" style="display: block;" id="confirm-email">Confirm your email</a>
                         @endif
                         </li>
-                        {{--<li class="profile__info-item">Laguage - English</li>--}}
                     </ul>
                     <a href="{{ url('user/settings/about-me') }}" class="btn btn--profile">Edit profile</a>
                 </div>

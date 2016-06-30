@@ -56,6 +56,18 @@
         </div>
     </div>
     {!! Form::close() !!}
+
+
+        <div class="form-group">
+            <div class="col-sm-9">
+                You can use this variable:<br>
+                {name} - User Name<br>
+                {email} - User Email<br>
+                {login_link} - Link to Login page<br>
+                {email_verify_link} - Link to email verification<br>
+            </div>
+        </div>
+
 </div>
 
 

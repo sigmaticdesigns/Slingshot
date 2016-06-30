@@ -44,6 +44,7 @@ class User extends Model implements AuthenticatableContract,
 	 */
 	protected $casts = [
 		'links' => 'array',
+		'paypal_confirmed'  => 'boolean'
 	];
 
     const STATUS_ACTIVE = 'active';
