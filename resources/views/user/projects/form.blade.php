@@ -19,6 +19,11 @@
     </div>
 
 
+    {!! Form::url('video', null, ['class' => 'fields-group__field', 'placeholder' => 'Project video(youtube, vimeo)']) !!}
+    <div class="fields-group__error">
+        {!! Form::label('video', '') !!}
+    </div>
+
 
 	{!! Form::text('name', null, ['class' => 'fields-group__field', 'placeholder' => 'Project name']) !!}
 	<div class="fields-group__error">
