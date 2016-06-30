@@ -106,6 +106,33 @@ class ProjectsController extends Controller
 	    $comments = $project->comments()->with('author')->get();
 //	    $comments = Comment::where('project_id', $project->id)->with('author')->get();
 //	    dd($comments);
+		if ($project->video)
+		{
+			$videoId = null;
+			if (substr_count($project->video, 'youtube')) {
+				parse_str(parse_url($project->video, PHP_URL_QUERY), $tmp);
+				if (!empty($tmp['v'])) {
+					$videoId = $tmp['v'];
+				}
+				if ($videoId) {
+					$project->video = [
+						'type'	=> 'youtube',
+						'id'	=> $videoId
+					];
+				}
+			}
+			else if (substr_count($project->video, 'vimeo')) {
+				if(preg_match("/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/", $project->video, $output_array)) {
+					$videoId = $output_array[5];
+				}
+				if ($videoId) {
+					$project->video = [
+						'type'	=> 'vimeo',
+						'id'	=> $videoId
+					];
+				}
+			}
+		}
 
         return view('projects.show', compact('project', 'backers', 'comments'));
     }

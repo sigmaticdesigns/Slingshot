@@ -8,8 +8,17 @@
         <div class="project__container">
             <div class="project__header">
                 <div class="project-video">
-                    @if ($project->files->first())
-                        <img src="{!! $project->files->first()->path !!}" alt="">
+                    @if ($project->video)
+                        @if ('youtube' == $project->video['type'])
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{!! $project->video['id'] !!}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                        @endif
+                        @if ('vimeo' == $project->video['type'])
+                                <iframe src="https://player.vimeo.com/video/{!! $project->video['id'] !!}?title=0&byline=0&portrait=0" width="560" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        @endif
+                    @else
+                        @if ($project->files->first())
+                            <img src="{!! $project->files->first()->path !!}" alt="">
+                        @endif
                     @endif
                 </div>
                 <div class="project-card">

@@ -68,7 +68,7 @@ class ProjectsController extends Controller
 	    $data['deadline'] = Carbon::createFromFormat("m/d/Y", $data['deadline']);
 	    $data['half_deadline'] = Carbon::createFromFormat("m/d/Y", $data['half_deadline']);
 		$project = Project::create($data);
-	    $data['file_id'] = $this->_uploadFile($data, null, $project);
+	    $this->_uploadFile($data, null, $project);
 
 		\Session::flash('success.message', "Project has been successfully created. And waiting for approving.");
 		if ($request->ajax()) {

@@ -30,6 +30,8 @@ class CreateProjectRequest extends Request
 			'file' => 'required|image',
 			'deadline' => 'required|date|after:today',
 			'half_deadline' => 'required|date|after:today|before:deadline',
+
+			'video'	=> 'url'
 		];
     }
 

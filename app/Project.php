@@ -27,7 +27,8 @@ class Project extends Model
 		'body',
 		'file_id',
 		'deadline',
-		'half_deadline'
+		'half_deadline',
+		'video'
 	];
 
 	/**
