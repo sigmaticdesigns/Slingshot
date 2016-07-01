@@ -28,7 +28,6 @@
 	    <div class="col-sm-9">
             @if (isset($model) && $model->id < 5)
                 {{ $model->slug }}
-                {!! Form::text('slug', null, ['class' => 'form-control']) !!}
             @else
 
 	        {!! Form::text('slug', null, ['class' => 'form-control']) !!}
