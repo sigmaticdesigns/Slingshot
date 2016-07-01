@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'admin@slingshot.com', 'name' => 'SlingShot'],
+    'from' => ['address' => 'test@slingshotfunding.com', 'name' => 'SlingShot'],
 
     /*
     |--------------------------------------------------------------------------
