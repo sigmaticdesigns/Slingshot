@@ -33,7 +33,7 @@
                             <div class="campaign-card__bar-scale" style="width: {!! $project->progress() !!}%"></div>
                         </div>
                         <div class="campaign-card__container">
-                            <div class="campaign-card__location">Berlin, DE</div>
+                            {{--<div class="campaign-card__location">Berlin, DE</div>--}}
                             <div class="campaign-card__timer">{!! $project->daysLeft() !!} days left</div>
                         </div>
                     </div>

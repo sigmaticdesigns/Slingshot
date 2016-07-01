@@ -34,4 +34,19 @@ class Payment extends Model
 	{
 		return $query->where('project_id', $projectId)->where('is_paid', 1);
 	}
+
+	public function getCurrentStatusAttribute()
+	{
+		$result = '';
+		switch ($this->status)
+		{
+			case self::STATUS_DO_REFUND:
+				$result = 'Will be refunded';
+				break;
+			case self::STATUS_REFUNDED:
+				$result = 'Refunded';
+				break;
+		}
+		return $result;
+	}
 }

@@ -58,7 +58,7 @@
 		<div class="small-box bg-yellow">
 			<div class="inner">
 				<h3>
-					{!! page()->count() !!}
+					{!! \App\Page::count() !!}
 				</h3>
 
 				<p>

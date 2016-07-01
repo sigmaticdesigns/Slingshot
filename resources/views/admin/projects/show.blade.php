@@ -74,6 +74,21 @@
                 <td><b>Created At</b></td>
                 <td>{!! $project->created_at !!}</td>
             </tr>
+            <tr>
+                <td><b>Payments</b></td>
+                <td>
+                    <table class="table table-stripped table-bordered">
+                    @foreach($backers as $payment)
+                        <tr>
+                            <td>{!! $payment->user->name !!}</td>
+                            <td>${!! $payment->amount !!}</td>
+                            <td>{!! $payment->currentStatus !!}</td>
+                        </tr>
+                    @endforeach
+                    </table>
+
+                </td>
+            </tr>
         </table>
     </div>
 @stop

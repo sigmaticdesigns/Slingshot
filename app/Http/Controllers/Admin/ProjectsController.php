@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Payment;
 use Illuminate\Http\Request;
 use App\Project;
 use App\Http\Requests\Admin\Projects\CreateProjectRequest;
@@ -71,7 +72,9 @@ class ProjectsController extends Controller
     {
         $project = Project::findOrFail($id);
 
-        return view('admin.projects.show', compact('project'));
+	    $backers = Payment::project($project->id)->latest()->get();
+
+        return view('admin.projects.show', compact('project', 'backers'));
     }
 
     /**

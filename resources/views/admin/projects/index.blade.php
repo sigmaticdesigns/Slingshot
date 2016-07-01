@@ -21,6 +21,7 @@
 			<th>Category</th>
 			{{--<th>Country</th>--}}
 			<th>Budget</th>
+			<th>Funding</th>
 
 			<th>Created At</th>
 			<th class="text-center">Action</th>
@@ -35,6 +36,7 @@
 					<td>{!! $project->category->name !!}</td>
 					{{--<td>{!! $project->country_id !!}</td>--}}
 					<td>{!! $project->budget !!}</td>
+					<td>${!! $project->purse !!}</td>
 
 					<td>{!! $project->created_at !!}</td>
 					<td class="text-center">
