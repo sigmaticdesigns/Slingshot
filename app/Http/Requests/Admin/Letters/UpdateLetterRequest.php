@@ -24,7 +24,7 @@ class UpdateLetterRequest extends Request
 	    $id = $this->route()->getParameter('letters');
 	    return [
 			'name' => 'required',
-			'slug' => 'required|unique:letters,slug,' . $id,
+//			'slug' => 'required|unique:letters,slug,' . $id,
 			'subject' => 'required',
 			'content' => 'required',
 		];
