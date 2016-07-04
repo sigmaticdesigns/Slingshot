@@ -10,6 +10,7 @@ namespace App\Mailers;
 
 
 use App\Letter;
+use App\Project;
 use App\User;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Support\Facades\Config;
@@ -102,6 +103,19 @@ class AppMailer
 		$this->deliver();
 	}
 
+	public function sendEmailAboutProjectTo(User $user, Project $project, $slug)
+	{
+		$letter = Letter::where('slug', $slug)->firstOrFail();
+		$messageContent = $this->parseProjectData($letter, $user, $project);
+
+		$this->subject = $letter->subject;
+		$this->to = $user->email;
+		$this->view = 'emails.template';
+		$this->data = compact('user', 'messageContent', 'letter');
+
+		$this->deliver();
+	}
+
 	/**
 	 * Deliver the email.
 	 *
@@ -121,6 +135,19 @@ class AppMailer
 		$vars = [
 			'{name}' 			    => $userData->name,
 			'{email}' 				=> $userData->email,
+			'{login_link}'	        => url('/auth/login'),
+			'{email_verify_link}'   => url("email/confirm/{$userData->token}")
+		];
+		$result = str_replace(array_keys($vars), $vars, $letter->content);
+		return $result;
+	}
+
+	private function parseProjectData($letter, $userData, Project $project)
+	{
+		$vars = [
+			'{name}' 			    => $userData->name,
+			'{email}' 				=> $userData->email,
+			'{project_name}'        => $project->name,
 			'{login_link}'	        => url('/auth/login'),
 			'{email_verify_link}'   => url("email/confirm/{$userData->token}")
 		];

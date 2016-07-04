@@ -2,8 +2,11 @@
 
 namespace App\Console;
 
+use App\Mailers\ProjectMailer;
 use App\Payment;
+use App\Payments\Payout;
 use App\Project;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -38,6 +41,8 @@ class Kernel extends ConsoleKernel
 
 	    $schedule->call(function ()
 	    {
+		    $mailer = new ProjectMailer();
+
 		    $paypal_conf = Config::get('paypal');
 		    $apiContext = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
 		    $apiContext->setConfig($paypal_conf['settings']);
@@ -50,6 +55,13 @@ class Kernel extends ConsoleKernel
 			    {
 				    $project->status = Project::STATUS_FINISHED;
 				    $project->save();
+				    /*Project finished*/
+				    $user = User::findOrFail($project->user_id);
+				    if ($user->paypal_confirmed) {
+					    /*send money to project starter*/
+					    $payout = new Payout();
+					    $payout->sendMoney($user, $project);
+				    }
 			    }
 			    else {
 				    $project->status = Project::STATUS_FAILED;
@@ -80,7 +92,8 @@ class Kernel extends ConsoleKernel
 			    $refund = new Refund();
 			    $refund->setAmount($amount);
 
-			    if ($payment->sale_id) {
+			    if ($payment->sale_id)
+			    {
 				    $saleId = $payment->sale_id;
 				    $sale = new Sale();
 				    $sale->setId($saleId);
@@ -91,9 +104,14 @@ class Kernel extends ConsoleKernel
 				    catch (PayPalConnectionException $ex) {
 
 				    }
-				    if ('completed' == $res->getState()) {
+				    if ('completed' == $res->getState())
+				    {
 					    $payment->status = Payment::STATUS_REFUNDED;
 					    $payment->save();
+					    /*send email to backer*/
+					    $user = User::findOrFail($payment->user_id);
+					    $project = Project::findOrFail($payment->project_id);
+					    $mailer->sendRefundEmail($user, $project);
 				    }
 			    }
 		    }
