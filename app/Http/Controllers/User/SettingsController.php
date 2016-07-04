@@ -117,11 +117,11 @@ class SettingsController extends Controller
 		    $user->update($request->all());
 	    }
 
+	    \Session::flash('success.message', "Your Settings has been successfully updated.");
 	    if ($request->ajax()) {
-		    return response()->json(['success' => true, 'message' => "Your Settings has been successfully updated."]);
+		    return response()->json(['success' => true, 'redirect' => url('user/settings')]);
 	    }
 	    else {
-		    \Session::flash('success.message', "Your Settings has been successfully updated.");
 		    return redirect()->back()->withInput();
 	    }
     }

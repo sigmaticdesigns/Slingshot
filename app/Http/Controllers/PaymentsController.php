@@ -45,6 +45,9 @@ class PaymentsController extends Controller
 	{
 		$projectId = $request->input('project_id');
 		$project = Project::findOrFail($projectId);
+		if ($project->status != Project::STATUS_APPROVED) {
+			return response()->json(['success' => false, 'error.message' => "Project is not active"]);
+		}
 
 		$userAmount = $request->input('amount');
 		$method = $request->input('pay-method', 'paypal');

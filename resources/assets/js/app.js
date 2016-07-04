@@ -40,6 +40,9 @@ $(function() {
                     if (typeof response.message != 'undefined' && response.message) {
                         toastr["success"](response.message);
                     }
+                    if (typeof response['error.message'] != 'undefined' && response['error.message']) {
+                        toastr["error"](response['error.message']);
+                    }
 
                     if (typeof response.redirect != 'undefined' && response.redirect) {
                         window.location = response.redirect;

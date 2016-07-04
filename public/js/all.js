@@ -4492,6 +4492,9 @@ $(function() {
                     if (typeof response.message != 'undefined' && response.message) {
                         toastr["success"](response.message);
                     }
+                    if (typeof response['error.message'] != 'undefined' && response['error.message']) {
+                        toastr["error"](response['error.message']);
+                    }
 
                     if (typeof response.redirect != 'undefined' && response.redirect) {
                         window.location = response.redirect;
@@ -4744,7 +4747,7 @@ $(function() {
     if($('div[data-content="project"]').length)
     {
         $('div.tabs__nav a').on('click', Project.openTab);
-        $('#btn-back').on('click', Project.payWindow);
+        $('a[data-action="back-project"]').on('click', Project.payWindow);
         $('span.pay__close').on('click', function(){$("#pay-popup").hide();});
 
         window.commentResponse = function(response) {

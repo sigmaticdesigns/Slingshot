@@ -6,7 +6,7 @@ $(function() {
     if($('div[data-content="project"]').length)
     {
         $('div.tabs__nav a').on('click', Project.openTab);
-        $('#btn-back').on('click', Project.payWindow);
+        $('a[data-action="back-project"]').on('click', Project.payWindow);
         $('span.pay__close').on('click', function(){$("#pay-popup").hide();});
 
         window.commentResponse = function(response) {

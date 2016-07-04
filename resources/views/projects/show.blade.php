@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="project-card__wrap">
-                        <a href="#" class="btn btn--back" id="btn-back">Back this project</a>
+                        <a href="#" class="btn btn--back" id="btn-back" data-action="back-project">Back this project</a>
                         <div class="project-card__remind">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="11" height="11" viewBox="0 0 11 11" class="project-card__remind-star">
                                 <path d="M10.522,3.749 L7.492,3.447 C7.301,3.429 7.136,3.301 7.058,3.109 L5.973,0.341 C5.799,-0.116 5.183,-0.116 5.009,0.341 L3.933,3.109 C3.863,3.301 3.690,3.429 3.499,3.447 L0.469,3.749 C0.018,3.794 -0.165,4.388 0.174,4.708 L2.457,6.819 C2.605,6.956 2.665,7.157 2.622,7.357 L1.936,10.318 C1.832,10.784 2.309,11.167 2.709,10.921 L5.235,9.358 C5.400,9.258 5.600,9.258 5.765,9.358 L8.291,10.921 C8.690,11.167 9.168,10.793 9.064,10.318 L8.386,7.357 C8.343,7.157 8.404,6.956 8.551,6.819 L10.835,4.708 C11.164,4.388 10.973,3.794 10.522,3.749 Z" class="cls-1"/>
@@ -66,7 +66,7 @@
                     <div class="tab tab--story" data-content="story" style="display:block;">
                         <div class="story">
                             {!! $project->body !!}
-                            <a href="#" class="btn btn--story" id="btn-back">Back this project</a>
+                            <a href="#" class="btn btn--story" id="btn-back" data-action="back-project">Back this project</a>
                         </div>
                     </div>
 
