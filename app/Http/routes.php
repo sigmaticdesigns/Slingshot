@@ -96,6 +96,14 @@ Route::group(['domain' => 'admin.' . config('app.domain'), 'namespace' => 'Admin
 				'destroy' => 'admin.categories.destroy',
 			],
 		]);
+
+		Route::resource('payments', 'PaymentsController', [
+			'only' => ['show', 'index'],
+			'names' => [
+				'index' => 'admin.payments.index',
+				'show' => 'admin.payments.show',
+			],
+		]);
 	});
 
 });

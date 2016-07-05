@@ -62,3 +62,5 @@ $leftMenu->dropdown('Email templates', function ($sub) {
 	$sub->route('admin.letters.index', 'All templates', [], 1);
 	$sub->route('admin.letters.create', 'Add New', [], 2);
 }, 9, ['icon' => 'fa fa-envelope']);
+
+$leftMenu->route('admin.payments.index', 'Payments', [], 11, ['icon' => 'fa fa-rocket']);
