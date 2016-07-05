@@ -96,10 +96,10 @@ class User extends Model implements AuthenticatableContract,
 	/**
 	 * Set the password to be hashed when saved
 	 */
-	public function setPasswordAttribute($password)
-	{
-		$this->attributes['password'] = \Hash::make($password);
-	}
+//	public function setPasswordAttribute($password)
+//	{
+//		$this->attributes['password'] = \Hash::make($password);
+//	}
 
 	/**
 	 * Get all user's projects

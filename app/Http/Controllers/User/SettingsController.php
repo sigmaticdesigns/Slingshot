@@ -148,7 +148,7 @@ class SettingsController extends Controller
 			}
 		}
 
-		$this->user->password = $data['password'];
+		$this->user->password = bcrypt($data['password']);
 		$this->user->save();
 
 		\Session::flash('success.message', "Your password has been successfully changed.");
