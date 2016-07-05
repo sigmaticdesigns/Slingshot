@@ -4781,7 +4781,7 @@ var Project = {
 var Comment = {
     post: function(response)
     {
-        console.log(response);
+        //console.log(response);
         if (response.html) {
             $('div[data-content="cooments"]').prepend(response.html);
             $('textarea#comment').val('');
