@@ -12,15 +12,13 @@
 */
 
 /*admin panel*/
-Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin'], function ()
+Route::group(['domain' => 'admin.' . config('app.domain'), 'namespace' => 'Admin'], function ()
 {
+
+//	dd(config('app.domain'));
 
 	Route::group(['middleware' => config('admin.filter.guest')], function ()
 	{
-		Route::get('/', function () {
-			return view('welcome');
-		});
-
 		Route::resource('login', '\Pingpong\Admin\Controllers\LoginController', [
 			'only' => ['index', 'store'],
 			'names' => [
@@ -30,8 +28,11 @@ Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin
 		]);
 	});
 
-	Route::group(['middleware' => config('admin.filter.admin')], function ()
+	Route::group(['middleware' => config('admin.filter.auth')], function ()
 	{
+		Route::get('/admin', ['as' => 'admin.home', 'uses' => '\Pingpong\Admin\Controllers\SiteController@index']);
+		Route::get('/logout', ['as' => 'admin.logout', 'uses' => '\Pingpong\Admin\Controllers\SiteController@logout']);
+
 		Route::resource('projects', 'ProjectsController', [
 			'names' => [
 				'index' => 'admin.projects.index',
@@ -68,6 +69,31 @@ Route::group(['prefix' => config('admin.prefix', 'admin'), 'namespace' => 'Admin
 				'update' => 'admin.pages.update',
 				'edit' => 'admin.pages.edit',
 				'destroy' => 'admin.pages.destroy',
+			],
+		]);
+
+		Route::resource('users', '\Pingpong\Admin\Controllers\UsersController', [
+			'except' => 'show',
+			'names' => [
+				'index' => 'admin.users.index',
+				'create' => 'admin.users.create',
+				'store' => 'admin.users.store',
+				'show' => 'admin.users.show',
+				'update' => 'admin.users.update',
+				'edit' => 'admin.users.edit',
+				'destroy' => 'admin.users.destroy',
+			],
+		]);
+		Route::resource('categories', '\Pingpong\Admin\Controllers\CategoriesController', [
+			'except' => 'show',
+			'names' => [
+				'index' => 'admin.categories.index',
+				'create' => 'admin.categories.create',
+				'store' => 'admin.categories.store',
+				'show' => 'admin.categories.show',
+				'update' => 'admin.categories.update',
+				'edit' => 'admin.categories.edit',
+				'destroy' => 'admin.categories.destroy',
 			],
 		]);
 	});

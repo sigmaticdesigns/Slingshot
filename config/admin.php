@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'prefix' => 'admin',
+    'prefix' => 'admin-backend',
     'filter' => [
         'auth' => [
             Pingpong\Admin\Middleware\Authenticate::class,

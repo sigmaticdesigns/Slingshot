@@ -28,8 +28,9 @@ return [
     |
     */
 
-    'model' => Pingpong\Admin\Entities\User::class,
-//    'model' => App\User::class,
+
+//    'model' => Pingpong\Admin\Entities\User::class,
+    'model' => (isset($_SERVER['HTTP_HOST']) && substr_count($_SERVER['HTTP_HOST'], 'admin.')) ? Pingpong\Admin\Entities\User::class : App\User::class,
 
     /*
     |--------------------------------------------------------------------------

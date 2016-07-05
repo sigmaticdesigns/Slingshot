@@ -28,6 +28,8 @@ return [
 
     'url' => 'http://localhost',
 
+	'domain' => str_replace(['admin.', 'wwww.'], '', isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
