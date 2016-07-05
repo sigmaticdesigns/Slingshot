@@ -47,9 +47,9 @@
                         </div>
                         <div class="project-card__social">
                             <a href="https://www.facebook.com/sharer/sharer.php?u={!! url('projects.show', $project->id) !!}" target="_blank" class="project-card__social-btn project-card__social-btn--fb">Facebook</a>
-                            <a href="https://twitter.com/home?status={!! $project->name !!}%0A{!! url('projects.show', $project->id) !!}" class="project-card__social-btn project-card__social-btn--tw">Twitter</a>
-                            <a href="https://plus.google.com/share?url={!! url('projects.show', $project->id) !!}" class="project-card__social-btn project-card__social-btn--google">Google plus</a>
-                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={!! url('projects.show', $project->id) !!}&title={!! $project->name !!}" class="project-card__social-btn project-card__social-btn--in">Linkedin</a>
+                            <a href="https://twitter.com/home?status={!! $project->name !!}%0A{!! url('projects.show', $project->id) !!}" target="_blank" class="project-card__social-btn project-card__social-btn--tw">Twitter</a>
+                            <a href="https://plus.google.com/share?url={!! url('projects.show', $project->id) !!}" target="_blank" class="project-card__social-btn project-card__social-btn--google">Google plus</a>
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={!! url('projects.show', $project->id) !!}&title={!! $project->name !!}" target="_blank" class="project-card__social-btn project-card__social-btn--in">Linkedin</a>
                         </div>
                     </div>
                 </div>
