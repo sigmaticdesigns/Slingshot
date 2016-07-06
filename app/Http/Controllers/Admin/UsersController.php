@@ -32,4 +32,28 @@ class UsersController extends \Pingpong\Admin\Controllers\UsersController
 		$result = ['result' => 1, 'status' => $status];
 		return response()->json($result);
 	}
+
+	/**
+	 * Display the specified user.
+	 *
+	 * @param int $id
+	 *
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		try {
+			$user = User::findOrFail($id);
+
+			return $this->view('users.show', compact('user'));
+		} catch (ModelNotFoundException $e) {
+			return $this->redirectNotFound();
+		}
+	}
+
+	public function postSendMessage(Request $request)
+	{
+		$userId = $request->input('user_id');
+		return $this->redirect('users.show', $userId);
+	}
 }

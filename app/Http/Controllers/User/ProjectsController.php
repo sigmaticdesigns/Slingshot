@@ -89,7 +89,7 @@ class ProjectsController extends Controller
     {
         $project = Project::findOrFail($id);
 
-	    $backers = Payment::project($project->id)->latest()->get();
+	    $backers = Payment::backers($project->id)->latest()->get();
 	    $comments = $project->comments()->with('author')->get();
 
 	    if ($project->video)

@@ -72,7 +72,7 @@ class ProjectsController extends Controller
     {
         $project = Project::findOrFail($id);
 
-	    $backers = Payment::project($project->id)->latest()->get();
+	    $backers = Payment::backers($project->id)->latest()->get();
 
         return view('admin.projects.show', compact('project', 'backers'));
     }

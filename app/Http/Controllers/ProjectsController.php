@@ -100,7 +100,7 @@ class ProjectsController extends Controller
         $project = Project::findOrFail($id);
 
 //	    TODO: refact
-	    $backers = Payment::project($project->id)->latest()->get();
+	    $backers = Payment::backers($project->id)->latest()->get();
 //	    dd($backers);
 //	    $comments = $project->comments()->with('author');
 	    $comments = $project->comments()->with('author')->get();

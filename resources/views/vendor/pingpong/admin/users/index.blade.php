@@ -30,7 +30,9 @@
 				<td>{!! $user->email !!}</td>
 				<td>{!! $user->created_at !!}</td>
 				<td class="text-center">
-					<a href="{!! route('admin.users.edit', $user->id) !!}">Edit</a>
+					<a href="{!! route('admin.users.show', $user->id) !!}">View</a>
+					&middot;
+                    <a href="{!! route('admin.users.edit', $user->id) !!}">Edit</a>
 					&middot;
 					@include('admin::partials.modal', ['data' => $user, 'name' => 'users'])
 

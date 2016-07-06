@@ -14,7 +14,7 @@
             <h1 class="promo__title">Thousands of inspiring projects</h1>
             <p class="promo__content">Ready To Promote Your New Business? The European languages are members
                 of the same family. Their separate existence is a myth.</p>
-            <a href="" class="promo__btn btn">Take a look</a>
+            <a href="{!! route('projects.index') !!}" class="promo__btn btn">Take a look</a>
         </div>
     </section>
     <div class="container">

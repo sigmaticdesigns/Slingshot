@@ -30,7 +30,7 @@ Route::group(['domain' => 'admin.' . config('app.domain'), 'namespace' => 'Admin
 
 	Route::group(['middleware' => config('admin.filter.auth')], function ()
 	{
-		Route::get('/admin', ['as' => 'admin.home', 'uses' => '\Pingpong\Admin\Controllers\SiteController@index']);
+		Route::get('/admin-backend', ['as' => 'admin.home', 'uses' => '\Pingpong\Admin\Controllers\SiteController@index']);
 		Route::get('/logout', ['as' => 'admin.logout', 'uses' => '\Pingpong\Admin\Controllers\SiteController@logout']);
 
 		Route::resource('projects', 'ProjectsController', [
@@ -47,6 +47,7 @@ Route::group(['domain' => 'admin.' . config('app.domain'), 'namespace' => 'Admin
 
 		Route::post('project/set-status', 'ProjectsController@postSetStatus');
 		Route::post('user/set-status', 'UsersController@postSetStatus');
+		Route::post('user/send-message', 'UsersController@postSendMessage');
 
 		Route::resource('letters', 'LettersController', [
 			'names' => [
@@ -72,8 +73,7 @@ Route::group(['domain' => 'admin.' . config('app.domain'), 'namespace' => 'Admin
 			],
 		]);
 
-		Route::resource('users', '\Pingpong\Admin\Controllers\UsersController', [
-			'except' => 'show',
+		Route::resource('users', 'UsersController', [
 			'names' => [
 				'index' => 'admin.users.index',
 				'create' => 'admin.users.create',

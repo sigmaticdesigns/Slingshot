@@ -5,7 +5,6 @@
         <div class="panel-heading">
             Show Payment
             <div class="panel-nav pull-right" style="margin-top: -7px;">
-                <a href="{!! route('admin.payments.edit', $payment->id) !!}" class="btn btn-default">Edit</a>
                 <a href="{!! route('admin.payments.index') !!}" class="btn btn-default">Back</a>
             </div>
         </div>
@@ -17,8 +16,8 @@
 
 			
             <tr>
-                <td><b>Project_id</b></td>
-                <td>{!! $payment->project_id !!}</td>
+                <td><b>Project</b></td>
+                <td>{!! $payment->project->name !!}</td>
             </tr>			
             <tr>
                 <td><b>User_id</b></td>
@@ -38,7 +37,7 @@
             </tr>			
             <tr>
                 <td><b>Status</b></td>
-                <td>{!! $payment->status !!}</td>
+                <td>{!! $payment->currentStatus !!}</td>
             </tr>
 
             <tr>

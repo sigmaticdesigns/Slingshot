@@ -27,11 +27,11 @@
 			
             <tr>
                 <td><b>Name</b></td>
-                <td>{!! $project->name !!}</td>
+                <td><a href="{!! route('projects.show', $project->id) !!}">{!! $project->name !!}</a></td>
             </tr>			
             <tr>
                 <td><b>User</b></td>
-                <td>{!! $project->user->name !!}</td>
+                <td><a href="{!! route('admin.users.show', $project->user->id) !!}">{!! $project->user->name !!}</a></td>
             </tr>			
             <tr>
                 <td><b>Status</b></td>
@@ -47,11 +47,11 @@
             {{--</tr>			--}}
             <tr>
                 <td><b>Funding goal</b></td>
-                <td>{!! $project->budget !!}</td>
+                <td>${!! $project->budget !!}</td>
             </tr>
             <tr>
                 <td><b>Pledged</b></td>
-                <td>{!! $project->purse !!}</td>
+                <td>${!! $project->purse !!}</td>
             </tr>
             <tr>
                 <td><b>Short Description</b></td>
@@ -80,7 +80,7 @@
                     <table class="table table-stripped table-bordered">
                     @foreach($backers as $payment)
                         <tr>
-                            <td>{!! $payment->user->name !!}</td>
+                            <td><a href="{!! route('admin.users.show', $payment->user->id) !!}">{!! $payment->user->name !!}</a></td>
                             <td>${!! $payment->amount !!}</td>
                             <td>{!! $payment->currentStatus !!}</td>
                         </tr>

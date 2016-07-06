@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Payment;
 use App\Http\Requests\Admin\Payments\CreatePaymentRequest;
 use App\Http\Requests\Admin\Payments\UpdatePaymentRequest;
+use Illuminate\Support\Facades\DB;
 
 class PaymentsController extends Controller
 {
@@ -21,9 +22,22 @@ class PaymentsController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $payments = Payment::latest()->paginate(20);
+        if ($request->get('status')) {
+	        $payments = Payment::whereNull('status')->with(['project', 'user'])->latest()->paginate(20);
+        }
+        elseif ($request->get('group')) {
+	        $payments = Payment::select('*', DB::raw('SUM(amount) as `amount`'))
+		        ->whereNull('status')
+		        ->groupBy('user_id')
+		        ->orderBy('amount', 'desc')
+		        ->with(['project', 'user'])
+		        ->paginate(20);
+        }
+	    else {
+		    $payments = Payment::with(['project', 'user'])->latest()->paginate(20);
+	    }
 
         $no = $payments->firstItem();
 
