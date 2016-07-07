@@ -10,10 +10,10 @@
                 <div class="project-video">
                     @if ($project->video)
                         @if ('youtube' == $project->video['type'])
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{!! $project->video['id'] !!}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/{!! $project->video['id'] !!}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
                         @endif
                         @if ('vimeo' == $project->video['type'])
-                                <iframe src="https://player.vimeo.com/video/{!! $project->video['id'] !!}?title=0&byline=0&portrait=0" width="560" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                <iframe src="https://player.vimeo.com/video/{!! $project->video['id'] !!}?title=0&byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                         @endif
                     @else
                         @if ($project->files->first())
@@ -83,7 +83,7 @@
                                         <img src="{{ \App\User::find(Auth::user()->id)->avatar() }}" height="47" width="47" alt="Author image">
                                     </div>
                                     <textarea name="message" id="comment" cols="30" rows="10" placeholder="Add a comment..." class="comments__field"></textarea>
-                                    {!! Form::submit('add', ['class' => 'btn btn--pledge']) !!}
+                                    {!! Form::submit('add', ['class' => 'btn btn--comment']) !!}
                                 {!! Form::close() !!}
                             @else
                                 <div class="comments__no-contrib" style="display:block;">You must Contribute to this campaign to post a comment.</div>

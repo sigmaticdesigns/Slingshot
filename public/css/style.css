@@ -994,6 +994,17 @@ select::-ms-expand
 {
     background-color: #9ed53f;
 }
+.btn--comment
+{
+    width: 100px;
+    margin-left: 100px;
+
+    border: none;
+}
+.btn--comment:hover
+{
+    background-color: #9ed53f;
+}
 .page-header
 {
     min-height: 75px;
@@ -2634,11 +2645,16 @@ select::-ms-expand
     float: left;
 
     width: 48.2%;
-    min-height: 297px;
+    height: 297px;
     margin-right: 3.4%;
 
     background-image: url('../img/bg_video.png');
     background-repeat: no-repeat;
+}
+iframe
+{
+    width: 100%;
+    height: 297px;
 }
 .project-card
 {
@@ -2879,6 +2895,7 @@ select::-ms-expand
 
     width: 90%;
     height: 48px;
+    margin-bottom: 20px;
     padding-right: 8px;
     padding-left: 8px;
 
