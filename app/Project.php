@@ -15,12 +15,16 @@ class Project extends Model
 	const STATUS_FINISHED = 'finished';
 	const STATUS_FAILED = 'failed';
 
+	const TYPE_PROFIT = 'profit';
+	const TYPE_NON_PROFIT = 'non_profit';
+
 
 	protected $fillable = [
 		'name',
 		'user_id',
 		'status',
 		'category_id',
+		'type',
 		'country_id',
 		'budget',
 		'description',
@@ -105,5 +109,20 @@ class Project extends Model
 	public function scopeActive($query)
 	{
 		return $query->where('status', self::STATUS_APPROVED);
+	}
+
+	public function getProjectTypeAttribute()
+	{
+		$result = '';
+		switch ($this->type)
+		{
+			case self::TYPE_PROFIT:
+				$result = 'Profit Project';
+				break;
+			case self::TYPE_NON_PROFIT:
+				$result = 'Non Profit Project';
+				break;
+		}
+		return $result;
 	}
 }

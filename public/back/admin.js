@@ -12,7 +12,7 @@ if ($('[data-content="projects"]').length)
             var status = $(this).data('status');
             var statusTd = $(this).closest('tr').find('td[data-type=status]');
 
-            $.post('/admin/project/set-status', {id: id, status: status}, function (response)
+            $.post('/project/set-status', {id: id, status: status}, function (response)
             {
                 if (!$.isEmptyObject(response) && typeof response.result != 'undefined' && response.result)
                 {
@@ -37,7 +37,7 @@ if ($('[data-content="users"]').length)
             var status = $(this).data('status');
             var statusTd = $(this).closest('tr').find('td[data-type=status]');
 
-            $.post('/admin/user/set-status', {id: id, status: status}, function (response)
+            $.post('/user/set-status', {id: id, status: status}, function (response)
             {
                 if (!$.isEmptyObject(response) && typeof response.result != 'undefined' && response.result)
                 {

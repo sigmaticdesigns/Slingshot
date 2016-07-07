@@ -30,6 +30,7 @@ Route::group(['domain' => 'admin.' . config('app.domain'), 'namespace' => 'Admin
 
 	Route::group(['middleware' => config('admin.filter.auth')], function ()
 	{
+		Route::get('/', ['as' => 'admin.home', 'uses' => '\Pingpong\Admin\Controllers\SiteController@index']);
 		Route::get('/admin-backend', ['as' => 'admin.home', 'uses' => '\Pingpong\Admin\Controllers\SiteController@index']);
 		Route::get('/logout', ['as' => 'admin.logout', 'uses' => '\Pingpong\Admin\Controllers\SiteController@logout']);
 

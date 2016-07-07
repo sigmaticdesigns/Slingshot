@@ -50,6 +50,18 @@
 
 	@if (!isset($model))
 
+        <div class="fields-group__radio-wrap">
+            {!! Form::radio('type', 'profit', true, ['class' => 'fields-group__project-type', 'id' => 'profit']) !!}
+            {!! Form::label('profit', 'Profit project', ['class' => 'fields-group__type-label']) !!}
+        </div>
+
+        <div class="fields-group__radio-wrap">
+            {!! Form::radio('type', 'non_profit', false, ['class' => 'fields-group__project-type', 'id' => 'non_profit']) !!}
+            {!! Form::label('non_profit', 'Non Profit project', ['class' => 'fields-group__type-label']) !!}
+        </div>
+
+        <div class="fields-group__error"></div>
+
 		{!! Form::text('deadline', null, ['class' => 'fields-group__field fields-group__field--date', 'placeholder' => "Project deadline date", 'data-pmu-format' => 'm/d/Y']) !!}
 		<div class="fields-group__error">
 			{!! Form::label('deadline', '') !!}

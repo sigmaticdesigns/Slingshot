@@ -40,7 +40,11 @@
             <tr>
                 <td><b>Category</b></td>
                 <td>{!! $project->category->name !!}</td>
-            </tr>			
+            </tr>
+            <tr>
+                <td><b>Type</b></td>
+                <td>{!! $project->projectType !!}</td>
+            </tr>
             {{--<tr>--}}
                 {{--<td><b>Country_id</b></td>--}}
                 {{--<td>{!! $project->country_id !!}</td>--}}

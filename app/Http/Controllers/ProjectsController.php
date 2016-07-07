@@ -68,6 +68,12 @@ class ProjectsController extends Controller
 				case 'recommended':
 					$projectsModel->orderByRaw("RAND()");
 					break;
+				case 'profit':
+					$projectsModel->where('type', 'profit');
+					break;
+				case 'non_profit':
+					$projectsModel->where('type', 'non_profit');
+					break;
 			}
 		}
 		if (Input::has('search')) {
