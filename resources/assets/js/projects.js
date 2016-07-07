@@ -4,6 +4,7 @@
 $(function() {
     $('li.campaigns-category__item a').on('click', Listing.categoryFilter);
     $('div.campaigns__wrap a').on('click', Listing.sortFilter);
+    $('div.campaigns__type a').on('click', Listing.typeFilter);
 
     if($('div[data-ref="projects"]').length) {
         Listing.setRefToProjects();
@@ -18,6 +19,7 @@ Listing = {
     _ref: 'home',
     _categoryId: 0,
     _sort: '',
+    _type: '',
     categoryFilter: function(e)
     {
         e.preventDefault();
@@ -49,6 +51,20 @@ Listing = {
         $el.addClass('campaigns__filtre-item--active');
         Listing._filter(data);
     },
+    typeFilter: function(e)
+    {
+        e.preventDefault();
+        var $el = $(this);
+        var data = {type: $el.data('value')};
+
+        Listing._type = $el.data('value');
+        /*reset category selection*/
+        Listing._categoryId = 0;
+        $('div.campaigns__type a.campaigns__filtre-item--active').removeClass('campaigns__filtre-item--active');
+        $('a.campaigns-category__item--active').removeClass('campaigns-category__item--active');
+
+        Listing._filter(data);
+    },
     paginate: function(e)
     {
         e.preventDefault();
@@ -66,11 +82,20 @@ Listing = {
         if (Listing._sort) {
             data.sort = Listing._sort;
         }
+        if (Listing._type) {
+            data.type = Listing._type;
+        }
         Listing._filter(data);
     },
     _filter: function(data)
     {
         data.ref = Listing._ref;
+
+        if (Listing._type) {
+            data.type = Listing._type;
+            $('a[data-value=' + Listing._type +']').addClass('campaigns__filtre-item--active');
+        }
+
         if ($('input[name=search]').val()) {
             data.search = $('input[name=search]').val();
         }

@@ -48,7 +48,7 @@ class Kernel extends ConsoleKernel
 		    $apiContext->setConfig($paypal_conf['settings']);
 
 		    /*expire projects*/
-		    $projects = Project::active()->where('deadline', '>=', Carbon::now())->get();
+		    $projects = Project::active()->where('deadline', '<=', Carbon::now())->get();
 		    foreach ($projects as $project)
 		    {
 			    if ($project->purse >= $project->budget)
@@ -72,7 +72,7 @@ class Kernel extends ConsoleKernel
 			    }
 		    }
 		    /*Half deadline*/
-		    $projects = Project::active()->where('half_deadline', '>=', Carbon::now())->whereRaw('purse < budget/2')->get();
+		    $projects = Project::active()->where('half_deadline', '<=', Carbon::now())->whereRaw('purse < budget/2')->get();
 		    foreach ($projects as $project)
 		    {
 			    $project->status = Project::STATUS_FAILED;

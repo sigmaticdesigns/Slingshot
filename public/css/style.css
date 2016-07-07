@@ -1387,7 +1387,12 @@ select::-ms-expand
 {
     float: left;
 
-    width: 555px;
+    width: 55%;
+    margin-right: 13%;
+}
+.campaigns__type
+{
+    float: left;
 }
 .campaigns__filtre-item
 {
@@ -1415,6 +1420,10 @@ select::-ms-expand
     text-transform: none;
 
     color: #8db34b;
+}
+.campaigns__filtre-item--type
+{
+    font-weight: 600;
 }
 .campaigns__filtre-item--active
 {

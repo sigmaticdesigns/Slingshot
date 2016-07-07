@@ -25,9 +25,10 @@
                     {{--<a href="" class="campaigns__filtre-item" data-value="recommended">Recommended for you</a>--}}
                     <a href="" class="campaigns__filtre-item" data-value="trending">Trending</a>
                     <a href="" class="campaigns__filtre-item" data-value="ending">Ending soon</a>
-
-                    <a href="#" class="campaigns__filtre-item" data-value="profit">Profit</a>
-                    <a href="#" class="campaigns__filtre-item" data-value="non_profit">Non profit</a>
+                </div>
+                <div class="campaigns__type">
+                    <a href="" class="campaigns__filtre-item campaigns__filtre-item--type" data-value="profit">Profit</a>
+                    <a href="" class="campaigns__filtre-item campaigns__filtre-item--type" data-value="non_profit">Non profit</a>
                 </div>
                 <a href="{!! route('projects.index') !!}" class="campaigns__filtre-item campaigns__filtre-item--see-all">See all</a>
             </div>

@@ -67,7 +67,12 @@ class ProjectsController extends Controller
 					break;
 				case 'recommended':
 					$projectsModel->orderByRaw("RAND()");
-					break;
+					break;}
+		}
+		if (Input::has('type'))
+		{
+			switch (Input::get('type'))
+			{
 				case 'profit':
 					$projectsModel->where('type', 'profit');
 					break;
