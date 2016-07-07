@@ -14,7 +14,7 @@
         {!! Form::label('file', '') !!}
     </div>
 
-    <div class="fields-group__img-box" style="width: 256px;height: 187px;">
+    <div class="fields-group__img-box">
         <span class="fields-group__img-close">+</span>
     </div>
 
