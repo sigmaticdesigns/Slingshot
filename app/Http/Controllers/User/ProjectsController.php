@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Category;
 use App\File as FileModel;
+use App\Mailers\AppMailer;
 use App\Payment;
 use App\User;
 
@@ -58,7 +59,7 @@ class ProjectsController extends Controller
      *
      * @return Response
      */
-    public function store(CreateProjectRequest $request)
+    public function store(CreateProjectRequest $request, AppMailer $mailer)
     {
 		$data = $request->all();
 //	    file upload
@@ -70,6 +71,11 @@ class ProjectsController extends Controller
 	    $data['half_deadline'] = Carbon::createFromFormat("m/d/Y", $data['half_deadline']);
 		$project = Project::create($data);
 	    $this->_uploadFile($data, null, $project);
+
+	    /*Email notification for new projects to be sent to system admin*/
+	    $admin = User::findOrFail(1);
+	    $mailer->sendEmailTo($admin, 'new-project-created');
+
 
 		\Session::flash('success.message', "Project has been successfully created. And waiting for approving.");
 		if ($request->ajax()) {
