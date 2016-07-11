@@ -105,6 +105,17 @@ Route::group(['domain' => 'admin.' . config('app.domain'), 'namespace' => 'Admin
 				'show' => 'admin.payments.show',
 			],
 		]);
+
+		Route::resource('messages', 'MessagesController', [
+			'names' => [
+				'index' => 'admin.messages.index',
+				'create' => 'admin.messages.create',
+				'store' => 'admin.messages.store',
+				'show' => 'admin.messages.show',
+				'destroy' => 'admin.messages.destroy',
+				],
+		]);
+		Route::get('messages/user/{id}', 'MessagesController@user');
 	});
 
 });
@@ -138,6 +149,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user', 'namespace' => 'User']
 	Route::controllers([
 		'settings'     => 'SettingsController',
 	]);
+	Route::resource('messages', 'MessagesController');
 });
 
 Route::get('projects/list', 'ProjectsController@getList');

@@ -32,7 +32,11 @@
 				<tr data-id="{{ $project->id }}">
 					<td class="text-center">{!! $no !!}</td>
 					<td>{!! $project->name !!}</td>
-					<td>{!! $project->user->name !!}</td>
+					<td>
+                        <a href="{!! route('admin.users.show', $project->user->id) !!}">
+                        {!! $project->user->name !!}
+                        </a>
+                    </td>
 					<td data-type="status">{!! $project->status !!}</td>
 					<td>{!! $project->category->name !!}</td>
 					{{--<td>{!! $project->country_id !!}</td>--}}

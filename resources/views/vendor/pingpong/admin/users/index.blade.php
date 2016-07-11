@@ -34,9 +34,11 @@
 					&middot;
                     <a href="{!! route('admin.users.edit', $user->id) !!}">Edit</a>
 					&middot;
+                    @if ($user->id != 1)
 					@include('admin::partials.modal', ['data' => $user, 'name' => 'users'])
 
 					&middot;
+
 					<a href="javascript:void(0)"
 					   class="btn btn-danger btn-sm ban" {{ \App\User::STATUS_ACTIVE == $user->status ? '' : 'style=display:none' }}
 					   data-action="set-status" data-status="{!! \App\User::STATUS_BANNED !!}">
@@ -46,6 +48,8 @@
 					   class="btn btn-success btn-sm unban" {{ \App\User::STATUS_BANNED == $user->status ? '' : 'style=display:none' }}
 					   data-action="set-status" data-status="{!! \App\User::STATUS_ACTIVE !!}">
 						<span class="glyphicon glyphicon-ok-circle"></span>&nbsp;Unban</a>
+
+                    @endif
 
 
 				</td>

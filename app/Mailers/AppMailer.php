@@ -10,6 +10,7 @@ namespace App\Mailers;
 
 
 use App\Letter;
+use App\Message;
 use App\Project;
 use App\User;
 use Illuminate\Contracts\Mail\Mailer;
@@ -114,6 +115,21 @@ class AppMailer
 		$this->data = compact('user', 'messageContent', 'letter');
 
 		$this->deliver();
+	}
+
+	public function sendSimpleEmailTo($userId, Message $message)
+	{
+		$user = User::findOrFail($userId);
+		$messageContent = $message->message;
+
+		$this->subject = $message->subject;
+		$this->to = $user->email;
+		$this->view = 'emails.template';
+		$letter = $message;
+		$this->data = compact('user', 'messageContent', 'letter');
+
+		$this->deliver();
+
 	}
 
 	/**

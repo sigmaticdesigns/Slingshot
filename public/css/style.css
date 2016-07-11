@@ -1051,7 +1051,7 @@ select::-ms-expand
 {
     float: left;
 
-    width: 320px;
+    width: 380px;
 }
 .main-nav__list
 {
@@ -1078,7 +1078,7 @@ select::-ms-expand
 
     color: #666;
 }
-.main-nav__item:nth-child(3n)
+.main-nav__item:nth-child(4n)
 {
     margin-right: 0;
 }
