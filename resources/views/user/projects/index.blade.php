@@ -35,11 +35,15 @@
                         <td>{!! $project->created_at !!}</td>
                         <td>{!! $project->deadline !!}</td>
                         <td>
+                            @if (0 == $project->purse)
                             {!! Form::open(['method' => 'DELETE', 'route' => ['user.projects.destroy', $project->id], 'data-no-ajax' => true]) !!}
+                            @endif
                             <a href="{!! route('user.projects.show', $project->id) !!}" class="btn btn--preview">Preview</a>
                             <a href="{!! route('user.projects.edit', $project->id) !!}" class="btn btn--edit">Edit</a>
+                            @if (0 == $project->purse)
                             <button type="submit" class="btn btn--delete" title="Delete">Delete</button>
                             {!! Form::close() !!}
+                            @endif
                         </td>
                     </tr>
                 <?php $no++; ?>

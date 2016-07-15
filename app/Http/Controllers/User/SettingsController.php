@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Requests\User\EmailRequest;
 use App\Http\Requests\User\LinksRequest;
 use App\Mailers\AppMailer;
 use App\User;
@@ -158,6 +159,27 @@ class SettingsController extends Controller
 		}
 		return redirect()->back();
 
+	}
+
+	public function getChangeEmail()
+	{
+		return view('user.settings.email');
+	}
+
+	public function postChangeEmail(EmailRequest $request, AppMailer $mailer)
+	{
+		$this->user->email = $request->input('email');
+		$this->user->token = str_random(30);
+		$this->user->paypal_confirmed = 0;
+		$this->user->save();
+
+		$mailer->sendEmailConfirmationTo(User::findOrFail($this->user->id));
+
+		\Session::flash('success.message', "Your email has been successfully changed. Verification email has been send. Please confirm your email");
+		if ($request->ajax()) {
+			return response()->json(['success' => true, 'redirect' => url('user/settings')]);
+		}
+		return redirect()->back();
 	}
 
 	public function getAboutMe()

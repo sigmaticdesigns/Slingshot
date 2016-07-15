@@ -93,7 +93,13 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-        $project = Project::findOrFail($id);
+        try {
+	        $project = Project::where('user_id', $this->user->id)->findOrFail($id);
+        }
+        catch (\Exception $e) {
+	        return redirect()
+		        ->back()->withErrors('You don\'t have permissions!');
+        }
 
 	    $backers = Payment::backers($project->id)->latest()->get();
 	    $comments = $project->comments()->with('author')->get();
@@ -137,7 +143,13 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
-        $project = Project::findOrFail($id);
+        try {
+	        $project = Project::where('user_id', $this->user->id)->findOrFail($id);
+        }
+        catch (\Exception $e) {
+	        return redirect()
+		        ->back()->withErrors('You don\'t have permissions!');
+        }
 		$categoryList = Category::all(['id', 'name'])->pluck('name', 'id')->toArray();
     
         return view('user.projects.edit', compact('project', 'categoryList'));
@@ -181,10 +193,18 @@ class ProjectsController extends Controller
      */
     public function destroy($id)
     {
-        $project = Project::findOrFail($id);
+        try {
+	        $project = Project::where('user_id', $this->user->id)->findOrFail($id);
+        }
+        catch (\Exception $e) {
+	        return redirect()
+		        ->back()->withErrors('You don\'t have permissions!');
+        }
         
-        $project->delete();
-    
+        if (0 == $project->purse) {
+	        $project->delete();
+        }
+
         return redirect()->route('user.projects.index');
     }
 

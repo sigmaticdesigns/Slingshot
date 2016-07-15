@@ -35,6 +35,10 @@
                         @else
                             <a href="#" class="profile__info-link" style="display: block;" id="confirm-email">Confirm your email</a>
                         @endif
+
+                        </li>
+                        <li>
+                            <a href="{{ url('user/settings/change-email') }}" class="btn btn--profile">Change email</a>
                         </li>
                     </ul>
                     <a href="{{ url('user/settings/about-me') }}" class="btn btn--profile">Edit profile</a>
