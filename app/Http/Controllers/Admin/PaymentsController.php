@@ -24,16 +24,20 @@ class PaymentsController extends Controller
      */
     public function index(Request $request)
     {
+	    $showProject = true;
         if ($request->get('status')) {
 	        $payments = Payment::whereNull('status')->with(['project', 'user'])->latest()->paginate(20);
         }
-        elseif ($request->get('group')) {
+        elseif ($request->get('group'))
+        {
 	        $payments = Payment::select('*', DB::raw('SUM(amount) as `amount`'))
 		        ->whereNull('status')
 		        ->groupBy('user_id')
 		        ->orderBy('amount', 'desc')
 		        ->with(['project', 'user'])
 		        ->paginate(20);
+
+	        $showProject = false;
         }
 	    else {
 		    $payments = Payment::with(['project', 'user'])->latest()->paginate(20);
@@ -41,7 +45,7 @@ class PaymentsController extends Controller
 
         $no = $payments->firstItem();
 
-        return view('admin.payments.index', compact('payments', 'no'));
+        return view('admin.payments.index', compact('payments', 'no', 'showProject'));
     }
 
 

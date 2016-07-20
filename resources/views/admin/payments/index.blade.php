@@ -12,35 +12,39 @@
 	<table class="table table-stripped table-bordered">
 		<thead>
 			<th class="text-center">#</th>
+            @if ($showProject)
 			<th>Project</th>
+            @endif
 			<th>User</th>
 			<th>Amount</th>
 			<th>Method</th>
 			<th>Status</th>
 
 			<th>Created At</th>
-			<th class="text-center">Action</th>
+			{{--<th class="text-center">Action</th>--}}
 		</thead>
 		<tbody>
 			@foreach ($payments as $payment)
 				<tr>
 					<td class="text-center">{!! $no !!}</td>
+                    @if ($showProject)
 					<td><a href="{!! route('admin.projects.show', $payment->project->id) !!}">{!! $payment->project->name !!}</a></td>
+                    @endif
 					<td><a href="{!! route('admin.users.show', $payment->user->id) !!}">{!! $payment->user->name !!}</a></td>
 					<td>{!! $payment->amount !!}</td>
 					<td>{!! $payment->methodName !!}</td>
 					<td>{!! $payment->currentStatus !!}</td>
 		
 					<td>{!! $payment->created_at !!}</td>
-					<td class="text-center">
-						<div class="btn-group">
+					{{--<td class="text-center">--}}
+						{{--<div class="btn-group">--}}
 
 							{{--<a href="{!! route('admin.payments.show', $payment->id) !!}" class="btn btn-sm btn-default" title="View" data-toggle="tooltip"><i class="glyphicon glyphicon-eye-open"></i></a>--}}
 
 
 
-						</div>
-					</td>
+						{{--</div>--}}
+					{{--</td>--}}
 				</tr>
 				<?php $no++; ?>
 			@endforeach

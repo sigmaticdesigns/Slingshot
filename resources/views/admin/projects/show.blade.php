@@ -63,7 +63,12 @@
             </tr>
             <tr>
                 <td><b>Full Description</b></td>
-                <td>{!! $project->body !!}</td>
+                <td>
+                    <a href="#" onclick="$('#project-description').show();$(this).hide();">Show full description</a>
+                    <div id="project-description" style="display: none;">
+                    {!! $project->body !!}
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td><b>Deadline</b></td>
