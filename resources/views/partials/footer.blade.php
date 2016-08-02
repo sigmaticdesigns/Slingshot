@@ -2,7 +2,7 @@
 <div class="main-footer__wrapper">
     <div class="rights">
         <div class="rights__logo"><a href="/">slingshot</a></div>
-        <div class="rights__cont">© 2016  All Rights Reserved</div>
+        <div class="rights__cont">© {!! date("Y") !!}  All Rights Reserved</div>
     </div>
     <div class="main-footer__middle-wrapper">
         <div class="footer-social">

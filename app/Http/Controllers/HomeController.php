@@ -21,7 +21,12 @@ class HomeController extends Controller
         $projects = Project::active()->with('image')->latest()->take(6)->get();
 		$categoryList = Category::orderBy('name')->get();
 
-        return view('home', compact('projects', 'categoryList'));
+	    $slider = option('index.slider');
+	    if ($slider) {
+		    $slider = json_decode($slider);
+	    }
+
+        return view('home', compact('projects', 'categoryList', 'slider'));
     }
 
     /**

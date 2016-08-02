@@ -65,3 +65,4 @@ $leftMenu->dropdown('Email templates', function ($sub) {
 
 $leftMenu->route('admin.payments.index', 'Payments', [], 11, ['icon' => 'fa fa-credit-card']);
 $leftMenu->route('admin.messages.index', 'Messages', [], 13, ['icon' => 'fa fa-envelope-o']);
+$leftMenu->route('admin.options.index', 'Home settings', [], 15, ['icon' => 'fa fa-pencil']);

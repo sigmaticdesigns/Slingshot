@@ -4,17 +4,22 @@
 
     <section class="promo">
         <div class="promo__slider">
-            <div class="promo__slide promo__slide--slide1"></div>
-            <div class="promo__slide promo__slide--slide2"></div>
-            <div class="promo__slide promo__slide--slide3"></div>
-            <div class="promo__slide promo__slide--slide4"></div>
-            <div class="promo__slide promo__slide--slide5"></div>
+            @if($slider)
+                @foreach($slider as $slide)
+                    <div class="promo__slide" style="background: url('{!! $slide !!}') no-repeat;"></div>
+                @endforeach
+            @else
+                <div class="promo__slide promo__slide--slide1"></div>
+                <div class="promo__slide promo__slide--slide2"></div>
+                <div class="promo__slide promo__slide--slide3"></div>
+                <div class="promo__slide promo__slide--slide4"></div>
+                <div class="promo__slide promo__slide--slide5"></div>
+            @endif
         </div>
         <div class="promo__wrap">
-            <h1 class="promo__title">Thousands of inspiring projects</h1>
-            <p class="promo__content">Ready To Promote Your New Business? The European languages are members
-                of the same family. Their separate existence is a myth.</p>
-            <a href="{!! route('projects.index') !!}" class="btn btn--promo">Take a look</a>
+            <h1 class="promo__title">{!! option('index.title') !!}</h1>
+            <p class="promo__content">{!! option('index.content') !!}</p>
+            <a href="{!! url(option('index.link')) !!}" class="btn btn--promo">Take a look</a>
         </div>
     </section>
     <div class="container">

@@ -116,6 +116,10 @@ Route::group(['domain' => 'admin.' . config('app.domain'), 'namespace' => 'Admin
 				],
 		]);
 		Route::get('messages/user/{id}', 'MessagesController@user');
+
+//		Route::controller('options', 'OptionsController');
+		Route::get('options', ['as' => 'admin.options.index', 'uses' => 'OptionsController@getIndex']);
+		Route::post('options', ['as' => 'admin.options.update', 'uses' => 'OptionsController@updateSettings']);
 	});
 
 });
