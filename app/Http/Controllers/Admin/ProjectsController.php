@@ -139,4 +139,20 @@ class ProjectsController extends Controller
 		return response()->json($result);
 	}
 
+	public function postSetPromo(Request $request)
+	{
+		$status = intval($request->input('status'));
+		$id = (int) $request->input('id');
+		$project = Project::findOrFail($id);
+		if ($status) {
+			$project->promo = Project::PROMO_TRENDING;
+		}
+		else {
+			$project->promo = null;
+		}
+		$project->save();
+		$result = ['result' => 1, 'status' => $status];
+		return response()->json($result);
+	}
+
 }

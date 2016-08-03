@@ -48,6 +48,9 @@
 					<td class="text-center">
 						<div class="btn-group">
 							{!! Form::open(['method' => 'DELETE', 'route' => ['admin.projects.destroy', $project->id]]) !!}
+                            <label>
+                                {!! Form::checkbox('promo', 'trending', 'trending' == $project->promo, ['data-content' => 'promo']) !!}Trending
+                            </label>
 							<a href="{!! route('admin.projects.show', $project->id) !!}" class="btn btn-sm btn-default" title="View" data-toggle="tooltip"><i class="glyphicon glyphicon-eye-open"></i></a>
 							<a href="{!! route('admin.projects.edit', $project->id) !!}" class="btn btn-sm btn-default" title="Edit" data-toggle="tooltip"><i class="glyphicon glyphicon-edit"></i></a>
 							<button type="submit" class="btn btn-sm btn-default" title="Delete" data-toggle="tooltip"><i class="glyphicon glyphicon-trash"></i></button>

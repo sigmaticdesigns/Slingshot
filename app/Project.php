@@ -18,6 +18,8 @@ class Project extends Model
 	const TYPE_PROFIT = 'profit';
 	const TYPE_NON_PROFIT = 'non_profit';
 
+	const PROMO_TRENDING = 'trending';
+
 
 	protected $fillable = [
 		'name',

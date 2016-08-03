@@ -47,6 +47,7 @@ Route::group(['domain' => 'admin.' . config('app.domain'), 'namespace' => 'Admin
 		]);
 
 		Route::post('project/set-status', 'ProjectsController@postSetStatus');
+		Route::post('project/set-promo', 'ProjectsController@postSetPromo');
 		Route::post('user/set-status', 'UsersController@postSetStatus');
 		Route::post('user/send-message', 'UsersController@postSendMessage');
 

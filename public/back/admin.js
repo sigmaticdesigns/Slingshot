@@ -24,6 +24,18 @@ if ($('[data-content="projects"]').length)
                 }
             }, 'json');
         });
+
+        $('input[data-content=promo]').on('ifChecked', function(event){
+            setProjectPromo($(this), 1);
+        });
+        $('input[data-content=promo]').on('ifUnchecked', function(event){
+            setProjectPromo($(this), 0);
+        });
+        function setProjectPromo($ptr, status)
+        {
+            var $this = $ptr.closest('tr'), id = $this.data('id');
+            $.post('/project/set-promo', {id: id, status: status});
+        }
     })();
 }
 

@@ -57,10 +57,10 @@ class ProjectsController extends Controller
 			switch (Input::get('sort'))
 			{
 				case 'popular':
-					$projectsModel->orderBy('created_at', 'desc');
+					$projectsModel->orderBy('purse', 'desc');
 					break;
 				case 'trending':
-					$projectsModel->orderBy('purse', 'desc');
+					$projectsModel->where('promo', Project::PROMO_TRENDING);
 					break;
 				case 'ending':
 					$projectsModel->orderBy('deadline');
