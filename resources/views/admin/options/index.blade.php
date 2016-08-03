@@ -65,21 +65,37 @@
 
         <div class="tab-pane" id="logo">
             <h3></h3>
-            {!! Form::open() !!}
+            {!! Form::open(['files' => true]) !!}
             <div class="form-group">
-                {!! Form::label('site.logo.first', 'Site Logo (first part):') !!}
+                {!! Form::label('site.logo.first', 'Site Logo first part(green):') !!}
                 {!! Form::text('site.logo.first', option('site.logo.first'), ['class' => 'form-control']) !!}
                 {!! $errors->first('site.logo.first', '<div class="text-danger">:message</div>') !!}
             </div>
             <div class="form-group">
-                {!! Form::label('site.logo.second', 'Site Logo (second part):') !!}
+                {!! Form::label('site.logo.second', 'Site Logo second part(black):') !!}
                 {!! Form::text('site.logo.second', option('site.logo.second'), ['class' => 'form-control']) !!}
                 {!! $errors->first('site.logo.second', '<div class="text-danger">:message</div>') !!}
             </div>
             <div class="form-group">
-                {!! Form::label('logo', 'Upload image:') !!}
-                {!! Form::file('logo') !!}
-                {!! $errors->first('logo', '<div class="text-danger">:message</div>') !!}
+                @if(option('site.logo'))
+                    {!! Form::label('site_logo', 'Current Site Logo:') !!}<br>
+                    <img src="{!! option('site.logo') !!}">
+                    <br>
+                @endif
+                {!! Form::label('site_logo', 'Upload New Logo:') !!}
+                {!! Form::file('site_logo') !!}
+                {!! $errors->first('site_logo', '<div class="text-danger">:message</div>') !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('site_logo_type', 'Select Logo display type:') !!}
+                <div class="radio">
+                    <label>
+                    {!! Form::radio('site_logo_type', 'text', 'text' == option('site.logo.type')) !!} Text
+                    </label>
+                    <label>
+                    {!! Form::radio('site_logo_type', 'image', 'image' == option('site.logo.type')) !!} Image
+                    </label>
+                </div>
             </div>
             <div class="form-group">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

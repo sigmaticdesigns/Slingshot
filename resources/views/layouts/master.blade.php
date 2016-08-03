@@ -17,7 +17,11 @@
 <header class="page-header">
     <div class="container">
         <div class="logo"><a href="/">
-                <span>{!! option('site.logo.first') !!}</span>{!! option('site.logo.second') !!}
+                @if ('image' == option('site.logo.type'))
+                    <img src="{!! option('site.logo') !!}">
+                @else
+                <span>{!! option('site.logo.first', 'SLING') !!}</span>{!! option('site.logo.second', 'SHOT') !!}
+                @endif
             </a></div>
         <nav class="main-nav">
             <ul class="main-nav__list">

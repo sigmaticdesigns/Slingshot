@@ -61,9 +61,9 @@ class OptionsController extends Controller
 		}
 
 		/*upload site logo*/
-		if (Input::hasFile('logo'))
+		if (Input::hasFile('site_logo'))
 		{
-			$image = Input::file('logo');
+			$image = Input::file('site_logo');
 			$filename = time() . '.' . $image->getClientOriginalExtension();
 
 			$publicDirName = '/static/uploads/logo/' . date("Y") . '/' . date("m");
@@ -74,6 +74,8 @@ class OptionsController extends Controller
 
 			$path = $dirName . '/' . $filename;
 			\Image::make($image->getRealPath())->fit(149, 39)->save($path);
+
+			$settings['site.logo'] = $publicDirName . '/' . $filename;
 		}
 
 		foreach ($settings as $key => $value)
