@@ -17,7 +17,7 @@
 <header class="page-header">
     <div class="container">
         <div class="logo"><a href="/">
-                <span>SLING</span>SHOT
+                <span>{!! option('site.logo.first') !!}</span>{!! option('site.logo.second') !!}
             </a></div>
         <nav class="main-nav">
             <ul class="main-nav__list">

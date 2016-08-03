@@ -77,6 +77,11 @@
                 {!! $errors->first('site.logo.second', '<div class="text-danger">:message</div>') !!}
             </div>
             <div class="form-group">
+                {!! Form::label('logo', 'Upload image:') !!}
+                {!! Form::file('logo') !!}
+                {!! $errors->first('logo', '<div class="text-danger">:message</div>') !!}
+            </div>
+            <div class="form-group">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
             {!! Form::close() !!}

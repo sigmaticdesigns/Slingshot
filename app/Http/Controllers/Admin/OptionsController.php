@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Pingpong\Admin\Entities\Option;
 
@@ -57,6 +58,22 @@ class OptionsController extends Controller
 				array_unshift($settings['index_slider'], $publicDirName . '/' . $filename);
 			}
 			$settings['index_slider'] = json_encode($settings['index_slider']);
+		}
+
+		/*upload site logo*/
+		if (Input::hasFile('logo'))
+		{
+			$image = Input::file('logo');
+			$filename = time() . '.' . $image->getClientOriginalExtension();
+
+			$publicDirName = '/static/uploads/logo/' . date("Y") . '/' . date("m");
+			$dirName = public_path($publicDirName);
+			if (!File::exists($dirName)) {
+				File::makeDirectory($dirName, 0755, true);
+			}
+
+			$path = $dirName . '/' . $filename;
+			\Image::make($image->getRealPath())->fit(149, 39)->save($path);
 		}
 
 		foreach ($settings as $key => $value)
