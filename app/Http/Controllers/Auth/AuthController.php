@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Mailers\AppMailer;
 use App\User;
+use Illuminate\Support\Facades\Input;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -26,6 +27,8 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
+	protected $redirectPath = '/';
 
     /**
      * Create a new authentication controller instance.
@@ -95,6 +98,23 @@ class AuthController extends Controller
 		return redirect($this->redirectPath());
 	}
 
+
+	/**
+	 * Show the application login form.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function getLogin()
+	{
+		if (view()->exists('auth.authenticate')) {
+			return view('auth.authenticate');
+		}
+
+		$redirectTo = Input::get('redirect_to', null);
+
+		return view('auth.login')->with('redirectTo', $redirectTo);
+	}
+
     /**
      * Handle a login request to the application.
      *
@@ -118,7 +138,11 @@ class AuthController extends Controller
         }
 
 
-        $credentials = $this->getCredentials($request);
+        if (Input::has('redirect_to')) {
+	        $this->redirectPath = Input::get('redirect_to');
+        }
+
+	    $credentials = $this->getCredentials($request);
 
 		$credentials['status'] = User::STATUS_ACTIVE;
 

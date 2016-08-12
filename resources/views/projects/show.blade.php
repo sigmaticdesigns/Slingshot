@@ -130,90 +130,9 @@
     <div class="pay" style="display:none;" id="pay-popup">
         <div class="pay__container">
             <div class="pay__title">Pay now</div>
-            {!! Form::open(['route' => 'payment', 'class' => 'fields-group fields-group--pay']) !!}
+            {!! Form::open(['route' => 'payment', 'class' => 'fields-group fields-group--pay', 'id' => 'payment-form', 'data-callback' => 'updateProjectPurse', 'data-no-ajax' => true]) !!}
                 {!! Form::hidden('project_id', $project->id) !!}
-
-                <input type="radio" name="pay-method" id="paypal" value="paypal" class="fields-group__pay-option" checked>
-                <label class="fields-group__pay-label fields-group__pay-label--paypal" for="paypal"></label>
-
-
-
-                <input type="radio" name="pay-method" id="master" value="credit_card" class="fields-group__pay-option">
-                <label class="fields-group__pay-label fields-group__pay-label--master" for="master"></label>
-
-
-
-                <div class="fields-group__card">
-                    <input type="text" name="firstname" id="firstname" value="" placeholder="First Name" class="fields-group__field">
-                    <div class="fields-group__error">
-                        <label for="firstname"></label>
-                    </div>
-
-                    <input type="text" name="lastname" id="lastname" value="" placeholder="Last Name" class="fields-group__field">
-                    <div class="fields-group__error">
-                        <label for="lastname"></label>
-                    </div>
-
-                    <input type="text" name="cardnumber" id="cardnumber" value="" placeholder="Card number" class="fields-group__field">
-                    <div class="fields-group__error">
-                        <label for="cardnumber"></label>
-                    </div>
-
-                    <div class="fields-group__card-wrap">
-                        <div class="fields-group__select-wrap fields-group__select-wrap--card">
-                            <select name="expire-month" class="fields-group__select" id="expire-month">
-                                <option disabled selected>Month</option>
-                                <option value="1">01</option>
-                                <option value="2">02</option>
-                                <option value="3">03</option>
-                                <option value="4">04</option>
-                                <option value="5">05</option>
-                                <option value="6">06</option>
-                                <option value="7">07</option>
-                                <option value="8">08</option>
-                                <option value="9">09</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                            </select>
-                            <div class="fields-group__error">
-                                <label for="expire-month"></label>
-                            </div>
-                        </div>
-
-                        <div class="fields-group__select-wrap fields-group__select-wrap--card">
-                            <select name="expire-year" class="fields-group__select" id="expire-year">
-                                <option disabled selected>Year</option>
-                                <option value="2016">2016</option>
-                                <option value="2017">2017</option>
-                                <option value="2018">2018</option>
-                                <option value="2019">2019</option>
-                                <option value="2020">2020</option>
-                                <option value="2021">2021</option>
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                                <option value="2026">2026</option>
-                                <option value="2026">2026</option>
-                            </select>
-                            <div class="fields-group__error">
-                                <label for="expire-year"></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="fields-group__cvn-wrap">
-                        <input type="text" name="cvn" id="cvn" value="" placeholder="CVN" maxlength="4" class="fields-group__field fields-group__field--cvn">
-                        <div class="fields-group__tip-btn">?
-                            <div class="fields-group__tip">The 3 or 4 digit number om the back of a Visa, Discover and MasterCard or in the front of an American Express card</div>
-                        </div>
-                        <div class="fields-group__error">
-                            <label for="cvn"></label>
-                        </div>
-                    </div>
-                </div>
-
+                {!! Form::hidden('stripeToken', null, ['id' => 'stripeToken']) !!}
 
                 <div class="fields-group__summ">
                     <div class="fields-group__summ-wrap">
@@ -222,10 +141,19 @@
                             <label for="summ"></label>
                         </div>
                     </div>
-                    {!! Form::submit('Pledge', ['class' => 'btn btn--pledge']) !!}
+                    <a class="btn btn--pledge" data-action="pay">Pledge</a>
                 </div>
             {!! Form::close() !!}
             <span class="pay__close">+</span>
         </div>
     </div>
+
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script type="application/javascript">
+        var stripeDataKey = '{!! config('services.stripe.key') !!}',
+                userEmail = '';
+    @if (Auth::check())
+            userEmail = '{!! Auth::user()->email !!}';
+    @endif
+</script>
 @stop

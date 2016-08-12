@@ -109,6 +109,8 @@ class ProjectsController extends Controller
     public function show($id)
     {
         $project = Project::findOrFail($id);
+//	    dd(Payment::where('project_id', $project->id)->sum('amount'));
+//	    dd(Payment::pursed($project->id));
 
 //	    TODO: refact
 	    $backers = Payment::backers($project->id)->latest()->get();
@@ -147,6 +149,11 @@ class ProjectsController extends Controller
 
         return view('projects.show', compact('project', 'backers', 'comments'));
     }
+
+	public function getBack()
+	{
+
+	}
 
 
 

@@ -155,6 +155,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user', 'namespace' => 'User']
 		'settings'     => 'SettingsController',
 	]);
 	Route::resource('messages', 'MessagesController');
+
 });
 
 Route::get('projects/list', 'ProjectsController@getList');
@@ -164,14 +165,22 @@ Route::resource('projects', 'ProjectsController');
 /* Display page */
 Route::get('{page}', 'PagesController@show');
 
-
 Route::group(['middleware' => 'auth'], function()
 {
+	Route::get('project/back', 'ProjectsController@getBack');
+
 	Route::resource('payments', 'PaymentsController');
+
 	// Add this route for checkout or submit form to pass the item into paypal
 	Route::post('payment', array(
 		'as' => 'payment',
 		'uses' => 'PaymentsController@postPayment',
+	));
+
+	// Add this route for checkout or submit form to pass the item into paypal
+	Route::post('paypal-payment', array(
+		'as' => 'paypal-payment',
+		'uses' => 'PaymentsController@postPayPalPayment',
 	));
 	// this is after make the payment, PayPal redirect back to your site
 	Route::get('payment/status', array(

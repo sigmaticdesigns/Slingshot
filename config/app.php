@@ -154,6 +154,8 @@ return [
 
 	    Pingpong\Generators\GeneratorsServiceProvider::class,
 
+	    \Laravel\Cashier\CashierServiceProvider::class,
+
     ],
 
     /*

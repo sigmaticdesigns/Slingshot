@@ -9,6 +9,7 @@ class Payment extends Model
 
 	const METHOD_PAYPAL         = 'paypal';
 	const METHOD_CREDIT_CARD    = 'credit_card';
+	const METHOD_STRIPE         = 'stripe';
 
 	protected $fillable = [
 		'project_id',
@@ -17,12 +18,13 @@ class Payment extends Model
 		'method',
 		'is_paid',
 		'sale_id',
+		'stripe_id',
 		'response',
 	];
 
 	public function scopePursed($query, $projectId)
 	{
-		return $query->where('project_id', $projectId)->where('is_paid', 1)->sum('amount');
+		return (float) $query->where('project_id', $projectId)->where('is_paid', 1)->sum('amount');
 	}
 
 	/**
@@ -63,6 +65,9 @@ class Payment extends Model
 				break;
 			case self::METHOD_CREDIT_CARD:
 				$result = 'Credit Card';
+				break;
+			case self::METHOD_STRIPE:
+				$result = 'Stripe';
 				break;
 		}
 		return $result;

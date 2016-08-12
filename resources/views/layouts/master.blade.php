@@ -90,7 +90,7 @@
 <script src="//code.jquery.com/jquery.js"></script>
 <!-- Bootstrap JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet">
+<link href="/css/toastr.min.css" rel="stylesheet">
 @yield('script')
 <script src="{{ asset('/js/all.js') }}"></script>
 

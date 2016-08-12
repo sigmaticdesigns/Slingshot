@@ -10,7 +10,8 @@
         "pingpong/admin": "^2.1",
         "pingpong/generators": "~2.1",
         "paypal/rest-api-sdk-php": " *",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "laravel/cashier": "^6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

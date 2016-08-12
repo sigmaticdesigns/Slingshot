@@ -4,6 +4,7 @@
     <div class="form-block">
         <h1 class="form-block__title">Log in</h1>
         {!! Form::open(['files' => true, 'url' => url('/auth/login'), 'data-no-ajax' => true, 'class' => 'fields-group']) !!}
+        {!! Form::hidden('redirect_to', $redirectTo) !!}
 
             {!! Form::email(
                 'email',

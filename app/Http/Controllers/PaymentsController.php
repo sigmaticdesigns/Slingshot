@@ -7,6 +7,7 @@ use App\Http\Requests\PaymentRequest;
 use App\Payment as PaymentModel;
 use App\Project;
 use Illuminate\Auth\Guard;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -25,6 +26,9 @@ use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Exception\PayPalConnectionException;
 use PayPal\Rest\ApiContext;
+use Stripe\Charge;
+use Stripe\Error\Card;
+use Stripe\Stripe;
 
 class PaymentsController extends Controller
 {
@@ -41,7 +45,73 @@ class PaymentsController extends Controller
 	    $this->user = $auth->user();
     }
 
-	public function postPayment(PaymentRequest $request)
+	/**
+	 * Stripe payments
+	*/
+	public function postPayment(Request $request)
+	{
+		$projectId = $request->input('project_id');
+		$project = Project::findOrFail($projectId);
+		if ($project->status != Project::STATUS_APPROVED) {
+			return response()->json(['success' => false, 'error.message' => "Project is not active"]);
+		}
+
+		$amount = floatval($request->input('amount')) * 100;
+
+		// Get the credit card details submitted by the form
+		$token = $request->input('stripeToken');
+		Stripe::setApiKey(config('services.stripe.secret'));
+
+		try {
+			$charge = Charge::create([
+				"amount" => $amount, // amount in cents, again
+				"currency" => "usd",
+				"source" => $token,
+				"description" => "Back the project: " . $project->name,
+				"metadata" => ["project_id" => $project->id]
+			]);
+
+			if ($charge->paid)
+			{
+				$payment = PaymentModel::create([
+					'project_id'    => $project->id,
+					'user_id'       => $this->user->id,
+					'amount'        => $charge->amount/100,
+					'is_paid'       => 1,
+					'method'        => PaymentModel::METHOD_STRIPE,
+					'response'      => var_export($charge->getLastResponse(), true),
+					'stripe_id'     => $charge->id
+				]);
+
+				$project->purse = PaymentModel::pursed($project->id);
+				$project->save();
+
+				if ($request->ajax()) {
+					return response()->json([
+						'success' => true,
+						'message' => "Thank you! Project has been successfully backed.",
+						'progress' => $project->progress(),
+						'purse' => $project->purse
+					]);
+				}
+
+				return Redirect::route('projects.show', $project->id)
+					->with('success.message', 'Thank you! Project has been successfully backed.');
+			}
+			dd($charge);
+		} catch(Card $e) {
+			if (request()->ajax()) {
+				return response()->json(['success' => false, 'message' => "Payment failed."]);
+			}
+			return Redirect::route('projects.show', $project->id)
+				->with('error.message', 'Payment failed');
+			dd($e);
+
+		}
+
+	}
+
+	public function postPayPalPayment(PaymentRequest $request)
 	{
 		$projectId = $request->input('project_id');
 		$project = Project::findOrFail($projectId);

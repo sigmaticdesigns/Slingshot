@@ -36,7 +36,10 @@ $(function() {
             success: function (response) {
                 removeAllErrors();
 
-                if (!$.isEmptyObject(response)) {
+                //console.log('app.js');
+                //console.log(response);
+                if (!$.isEmptyObject(response))
+                {
                     if (typeof response.message != 'undefined' && response.message) {
                         toastr["success"](response.message);
                     }
