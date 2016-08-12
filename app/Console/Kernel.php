@@ -16,6 +16,8 @@ use PayPal\Api\Refund;
 use PayPal\Api\Sale;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+use Stripe\Error\Base;
+use Stripe\Stripe;
 
 class Kernel extends ConsoleKernel
 {
@@ -43,9 +45,7 @@ class Kernel extends ConsoleKernel
 	    {
 		    $mailer = new ProjectMailer();
 
-		    $paypal_conf = Config::get('paypal');
-		    $apiContext = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
-		    $apiContext->setConfig($paypal_conf['settings']);
+		    Stripe::setApiKey(config('services.stripe.secret'));
 
 		    /*expire projects*/
 		    $projects = Project::active()->where('deadline', '<=', Carbon::now())->get();
@@ -85,26 +85,15 @@ class Kernel extends ConsoleKernel
 		    $payments = Payment::where('status', Payment::STATUS_DO_REFUND)->get();
 		    foreach ($payments as $payment)
 		    {
-			    $amount = new Amount();
-			    $amount->setCurrency('USD')
-				    ->setTotal($payment->amount);
-
-			    $refund = new Refund();
-			    $refund->setAmount($amount);
-
-			    if ($payment->sale_id)
+			    if ($payment->stripe_id)
 			    {
-				    $saleId = $payment->sale_id;
-				    $sale = new Sale();
-				    $sale->setId($saleId);
-
 				    try {
-					    $res = $sale->refund($refund, $apiContext);
+					    $re = \Stripe\Refund::create(['charge' => $payment->stripe_api]);
 				    }
-				    catch (PayPalConnectionException $ex) {
+				    catch (Base $ex) {
 
 				    }
-				    if ('completed' == $res->getState())
+				    if ('succeeded' == $re->status)
 				    {
 					    $payment->status = Payment::STATUS_REFUNDED;
 					    $payment->save();
