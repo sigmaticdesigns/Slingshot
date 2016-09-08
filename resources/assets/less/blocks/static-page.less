@@ -32,10 +32,40 @@
     }
   }
 
+  &__contacts {
+    .container;
+    font-size: 0;
+    margin-bottom: 100px;
+  }
+
+  &__contacts-title {
+    font-size: @font-size + 22;
+    font-weight: @font--bold;
+    color: @color-main;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  &__contacts-item {
+    display: inline-block;
+    vertical-align: top;
+    .make-column(1);
+    font-size: @font-size + 5;
+    margin-right: 6%;
+  }
+
+  &__contacts-name {
+    font-weight: @font--bold;
+  }
+
   &__promo {
     .container;
     .clearfix;
     margin-bottom: 100px;
+
+    &:last-child {
+      margin-bottom: 20px;
+    }
   }
 
   &__promo-picture {
@@ -45,6 +75,24 @@
     background: url("../img/text-page_laptop.jpg") no-repeat;
     background-size: contain;
     background-position: center;
+
+    &--helping {
+      float: right;
+      background-image: none;
+      margin-top: 70px;
+      background: url("../img/text-page_get.jpg") no-repeat;
+    }
+
+    &--do {
+      background-image: none;
+      background: url("../img/text-page_do.jpg") no-repeat;
+    }
+
+    &--more {
+      float: right;
+      background-image: none;
+      background: url("../img/text-page_more.jpg") no-repeat;
+    }
   }
 
   &__promo-cont {
@@ -71,6 +119,10 @@
   &__promo-text {
     font-size: @font-size + 3;
     line-height: 26px;
+
+    &--helping {
+      padding-right: 20px;
+    }
   }
 
   &__content {

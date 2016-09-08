@@ -3156,6 +3156,51 @@ iframe
     color: #fff;
     text-shadow: 1px 0 0 rgba(0, 0, 0, .5), 1px 0 10px rgba(0, 0, 0, .75);
 }
+.static-page__contacts
+{
+    font-size: 0;
+
+    min-width: 900px;
+    max-width: 1172px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.static-page__contacts:after
+{
+    display: table;
+    clear: both;
+
+    content: '';
+}
+.static-page__contacts-title
+{
+    font-size: 35px;
+    font-weight: 600;
+
+    margin-bottom: 40px;
+
+    text-transform: uppercase;
+
+    color: #8db34b;
+}
+.static-page__contacts-item
+{
+    font-size: 18px;
+
+    display: inline-block;
+
+    width: 22.4%;
+    margin-right: 3.4%;
+    margin-right: 6%;
+
+    vertical-align: top;
+}
+.static-page__contacts-name
+{
+    font-weight: 600;
+}
 .static-page__promo
 {
     min-width: 900px;
@@ -3179,6 +3224,10 @@ iframe
 
     content: '';
 }
+.static-page__promo:last-child
+{
+    margin-bottom: 20px;
+}
 .static-page__promo-picture
 {
     float: left;
@@ -3190,6 +3239,27 @@ iframe
     background: url('../img/text-page_laptop.jpg') no-repeat;
     background-position: center;
     background-size: contain;
+}
+.static-page__promo-picture--helping
+{
+    float: right;
+
+    margin-top: 70px;
+
+    background: url('../img/text-page_get.jpg') no-repeat;
+    background-image: none;
+}
+.static-page__promo-picture--do
+{
+    background: url('../img/text-page_do.jpg') no-repeat;
+    background-image: none;
+}
+.static-page__promo-picture--more
+{
+    float: right;
+
+    background: url('../img/text-page_more.jpg') no-repeat;
+    background-image: none;
 }
 .static-page__promo-cont
 {
@@ -3223,6 +3293,10 @@ iframe
 {
     font-size: 16px;
     line-height: 26px;
+}
+.static-page__promo-text--helping
+{
+    padding-right: 20px;
 }
 .static-page__content
 {
