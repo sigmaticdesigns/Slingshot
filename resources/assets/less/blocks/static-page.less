@@ -15,6 +15,11 @@
       background: @gray--lighten url("../img/text-page_main-bg.jpg") no-repeat center;
     }
 
+    &--faq {
+      background: @gray--lighten url("../img/project-img2.jpg") no-repeat center;
+      background-size: cover;
+    }
+
     h1,
     h2 {
       display: table-cell;
@@ -31,6 +36,40 @@
                    1px 0 10px rgba(0, 0, 0, 0.75);
     }
   }
+
+  &__blocks {
+    font-size: 0;
+    .container;
+    margin-bottom: 70px;
+  }
+
+  &__block-item {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 50px;
+    padding: 10px;
+    .make-column(2);
+
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+
+    &--colored {
+      background-color: lighten(@color-main, 40%);
+    }
+  }
+
+  &__block-title {
+    font-size: @font-size + 22;
+    font-weight: @font--bold;
+    color: @color-main;
+    margin-bottom: 20px;
+  }
+
+  &__block-cont {
+    font-size: @font-size + 5;
+  }
+
 
   &__contacts {
     .container;

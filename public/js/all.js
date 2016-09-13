@@ -4560,6 +4560,10 @@ $(function() {
     }
 
     $('a#confirm-email').on('click', sendEmailConfirmLink);
+
+    if ($('div.faq__title').length) {
+        staticPage();
+    }
 });
 
 
@@ -4642,6 +4646,20 @@ function sendEmailConfirmLink(e)
             toastr["success"](r.message);
         }
     }, 'json');
+}
+
+function staticPage()
+{
+    $('div.faq__title').on('click', function(){
+        var $answer = $(this).next('div.faq__answer');
+        $answer.toggle('fast');
+    });
+
+    $('li.how-to__item').on('click', function(){
+        $('img.how-to__img').hide();
+        var actImgId = $(this).data('id');
+        $('img.how-to__img[data-value="' + actImgId + '"]').show();
+    });
 }
 /**
  * Created by esabbath on 6/1/16.
