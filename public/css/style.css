@@ -3302,19 +3302,16 @@ iframe
     margin-top: 70px;
 
     background: url('../img/text-page_get.jpg') no-repeat;
-    background-image: none;
 }
 .static-page__promo-picture--do
 {
     background: url('../img/text-page_do.jpg') no-repeat;
-    background-image: none;
 }
 .static-page__promo-picture--more
 {
     float: right;
 
     background: url('../img/text-page_more.jpg') no-repeat;
-    background-image: none;
 }
 .static-page__promo-cont
 {
